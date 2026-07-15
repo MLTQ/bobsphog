@@ -17,6 +17,7 @@ from bobsphog.moe_checkpoint import ExpertSourceStats, ExpertWeights
 @dataclass(frozen=True)
 class GlmMoeSpec:
     num_layers: int
+    num_mtp_layers: int
     sparse_layers: tuple[int, ...]
     num_experts: int
     experts_per_token: int
@@ -39,6 +40,7 @@ class GlmMoeSpec:
             raise ValueError("checkpoint config contains no sparse MoE layers")
         return cls(
             num_layers=num_layers,
+            num_mtp_layers=int(config.get("num_nextn_predict_layers", 0)),
             sparse_layers=sparse_layers,
             num_experts=int(config["n_routed_experts"]),
             experts_per_token=int(config["num_experts_per_tok"]),
@@ -61,8 +63,12 @@ class GlmMoeSpec:
         return len(self.sparse_layers) * self.num_experts * self.expert_bytes()
 
     @property
-    def estimated_scaffold_bytes(self) -> int:
-        return self.checkpoint_bytes - self.routed_expert_bytes
+    def estimated_causal_scaffold_upper_bound_bytes(self) -> int:
+        checkpoint_expert_layers = len(self.sparse_layers) + self.num_mtp_layers
+        return (
+            self.checkpoint_bytes
+            - checkpoint_expert_layers * self.num_experts * self.expert_bytes()
+        )
 
 
 class GlmSafetensorCheckpointIndex:
@@ -169,6 +175,8 @@ class MappedGlmExpertSource:
             "experts_per_layer": self.spec.num_experts,
             "experts_per_token": self.spec.experts_per_token,
             "expert_bytes_bfloat16": self.spec.expert_bytes(),
-            "estimated_scaffold_bytes": self.spec.estimated_scaffold_bytes,
+            "estimated_causal_scaffold_upper_bound_bytes": (
+                self.spec.estimated_causal_scaffold_upper_bound_bytes
+            ),
             "checkpoint_bytes": self.spec.checkpoint_bytes,
         }

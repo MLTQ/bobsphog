@@ -11,7 +11,7 @@ safetensor entries without loading neighboring experts.
 ### `GlmMoeSpec`
 
 - **Does**: Reads model geometry, sparse-layer IDs, checkpoint bytes, and exact
-  BF16 expert/scaffold estimates from config and index metadata.
+  BF16 expert and causal-scaffold upper bounds from config and index metadata.
 
 ### `GlmSafetensorCheckpointIndex`
 
@@ -30,7 +30,7 @@ safetensor entries without loading neighboring experts.
 |-----------|---------|------------------|
 | GLM cache | `load(layer, expert)` returns packed gate/up plus down | Tensor order or shapes |
 | Cold residency | Only the requested expert tensors materialize | Loading an entire shard or expert layer |
-| Loader sizing | Sparse layers come from `mlp_layer_types` | Treating dense layers as pageable |
+| Loader sizing | Sparse layers come from `mlp_layer_types`; MTP experts are excluded | Treating dense/MTP layers as causal pages |
 | Metrics | One BF16 expert is exactly 72 MiB for GLM-5.2 | Dtype or model geometry changes |
 
 ## Notes
@@ -38,3 +38,7 @@ safetensor entries without loading neighboring experts.
 The official GLM-5.2 checkpoint stores experts individually rather than in the
 packed 3D tensors used by the Transformers runtime. Packing occurs one requested
 expert at a time in pinned host memory.
+
+The scaffold figure is an upper bound: it subtracts causal and MTP routed
+experts but still includes the MTP layer's smaller non-expert tensors, which the
+causal loader also ignores.

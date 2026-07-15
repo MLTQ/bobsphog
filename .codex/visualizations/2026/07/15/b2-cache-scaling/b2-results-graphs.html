@@ -1,0 +1,288 @@
+<div id="b2-results-graphs">
+  <style>
+    #b2-results-graphs {
+      color: var(--foreground);
+      display: grid;
+      gap: 28px;
+      width: 100%;
+    }
+    #b2-results-graphs .paired {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 28px;
+    }
+    #b2-results-graphs .chart {
+      min-width: 0;
+    }
+    #b2-results-graphs .chart-label {
+      font-weight: 500;
+      margin-bottom: 6px;
+    }
+    #b2-results-graphs .chart-note {
+      color: var(--muted-foreground);
+      margin-bottom: 10px;
+    }
+    #b2-results-graphs .plot {
+      display: block;
+      height: auto;
+      overflow: visible;
+      width: 100%;
+    }
+    #b2-results-graphs .plot text {
+      fill: var(--foreground);
+      font-family: inherit;
+      font-size: calc(var(--font-size-base) * 0.78);
+    }
+    #b2-results-graphs .plot .axis-label {
+      font-size: var(--font-size-base);
+      font-weight: 500;
+    }
+    #b2-results-graphs .plot .muted-label {
+      fill: var(--muted-foreground);
+    }
+    #b2-results-graphs .plot .grid-line {
+      stroke: color-mix(in srgb, var(--border) 68%, transparent);
+      stroke-width: 1;
+    }
+    #b2-results-graphs .plot .axis-line {
+      stroke: var(--border);
+      stroke-width: 1.25;
+    }
+    #b2-results-graphs .plot .series-1-stroke {
+      fill: none;
+      stroke: var(--viz-series-1);
+      stroke-width: 3;
+    }
+    #b2-results-graphs .plot .series-1-fill {
+      fill: var(--viz-series-1);
+    }
+    #b2-results-graphs .plot .series-1-area {
+      fill: color-mix(in srgb, var(--viz-series-1) 14%, transparent);
+    }
+    #b2-results-graphs .plot .series-2-fill {
+      fill: var(--viz-series-2);
+    }
+    #b2-results-graphs .plot .series-3-fill {
+      fill: var(--viz-series-3);
+    }
+    #b2-results-graphs .plot .series-4-fill {
+      fill: var(--viz-series-4);
+    }
+    #b2-results-graphs .plot .capacity-line {
+      stroke: var(--muted-foreground);
+      stroke-dasharray: 5 5;
+      stroke-width: 1;
+    }
+    #b2-results-graphs .legend {
+      align-items: center;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 4px;
+    }
+    #b2-results-graphs .legend-item {
+      align-items: center;
+      display: inline-flex;
+      gap: 6px;
+    }
+    #b2-results-graphs .swatch {
+      display: inline-block;
+      height: 10px;
+      width: 10px;
+    }
+    #b2-results-graphs .swatch.actual {
+      background: var(--viz-series-2);
+    }
+    #b2-results-graphs .swatch.oracle {
+      background: var(--viz-series-3);
+    }
+    @media (max-width: 620px) {
+      #b2-results-graphs .paired {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+
+  <div class="paired">
+    <section class="chart" aria-labelledby="frontier-label">
+      <div class="chart-label" id="frontier-label">Memory–speed frontier</div>
+      <div class="chart-note text-small">Vertical marks show the two reciprocal sweep measurements.</div>
+      <svg class="plot" viewBox="0 0 700 370" role="img" aria-labelledby="frontier-title frontier-desc">
+        <title id="frontier-title">Peak CUDA memory versus decode token rate</title>
+        <desc id="frontier-desc">Decode speed rises from about 0.53 tokens per second at 6.49 GiB to 0.74 tokens per second at 19.62 GiB.</desc>
+        <line class="grid-line" x1="65" y1="315" x2="670" y2="315" />
+        <line class="grid-line" x1="65" y1="222" x2="670" y2="222" />
+        <line class="grid-line" x1="65" y1="128" x2="670" y2="128" />
+        <line class="grid-line" x1="65" y1="35" x2="670" y2="35" />
+        <line class="axis-line" x1="65" y1="35" x2="65" y2="315" />
+        <line class="axis-line" x1="65" y1="315" x2="670" y2="315" />
+        <text class="muted-label" x="54" y="319" text-anchor="end">0.5</text>
+        <text class="muted-label" x="54" y="226" text-anchor="end">0.6</text>
+        <text class="muted-label" x="54" y="132" text-anchor="end">0.7</text>
+        <text class="muted-label" x="54" y="39" text-anchor="end">0.8</text>
+        <text class="muted-label" x="65" y="337" text-anchor="middle">6</text>
+        <text class="muted-label" x="238" y="337" text-anchor="middle">10</text>
+        <text class="muted-label" x="411" y="337" text-anchor="middle">14</text>
+        <text class="muted-label" x="584" y="337" text-anchor="middle">18</text>
+        <text class="muted-label" x="670" y="337" text-anchor="middle">20</text>
+        <text class="axis-label" x="368" y="365" text-anchor="middle">Peak CUDA allocation (GiB)</text>
+        <text class="axis-label" x="16" y="176" text-anchor="middle" transform="rotate(-90 16 176)">Decode token/s</text>
+
+        <polyline class="series-1-stroke" points="86,284 167,273 329,249 524,225 654,90" />
+        <line class="series-1-stroke" x1="86" y1="291" x2="86" y2="278" />
+        <circle class="series-1-fill" cx="86" cy="291" r="5" />
+        <circle class="series-1-fill" cx="86" cy="278" r="5" />
+        <line class="series-1-stroke" x1="167" y1="295" x2="167" y2="252" />
+        <circle class="series-1-fill" cx="167" cy="295" r="5" />
+        <circle class="series-1-fill" cx="167" cy="252" r="5" />
+        <line class="series-1-stroke" x1="329" y1="284" x2="329" y2="214" />
+        <circle class="series-1-fill" cx="329" cy="284" r="5" />
+        <circle class="series-1-fill" cx="329" cy="214" r="5" />
+        <line class="series-1-stroke" x1="524" y1="233" x2="524" y2="217" />
+        <circle class="series-1-fill" cx="524" cy="233" r="5" />
+        <circle class="series-1-fill" cx="524" cy="217" r="5" />
+        <circle class="series-1-fill" cx="654" cy="90" r="7" />
+        <text x="86" y="269" text-anchor="middle">320</text>
+        <text x="167" y="243" text-anchor="middle">640</text>
+        <text x="329" y="204" text-anchor="middle">1,280</text>
+        <text x="524" y="207" text-anchor="middle">2,048</text>
+        <text x="646" y="74" text-anchor="end">2,560 pages</text>
+        <text class="muted-label" x="646" y="104" text-anchor="end">0.740 token/s</text>
+      </svg>
+    </section>
+
+    <section class="chart" aria-labelledby="io-label">
+      <div class="chart-label" id="io-label">Decode I/O: reactive LRU vs future-aware retention</div>
+      <div class="legend text-small" aria-label="Series legend">
+        <span class="legend-item"><span class="swatch actual" aria-hidden="true"></span>Measured LRU</span>
+        <span class="legend-item"><span class="swatch oracle" aria-hidden="true"></span>Offline-optimal bound</span>
+      </div>
+      <svg class="plot" viewBox="0 0 700 370" role="img" aria-labelledby="io-title io-desc">
+        <title id="io-title">Decode transfer by cache capacity</title>
+        <desc id="io-desc">Measured LRU transfer declines from 19.60 gigabytes at 320 pages to 8.15 gigabytes at 2560 pages. Offline-optimal transfer reaches 4.65 gigabytes.</desc>
+        <line class="grid-line" x1="65" y1="315" x2="680" y2="315" />
+        <line class="grid-line" x1="65" y1="251" x2="680" y2="251" />
+        <line class="grid-line" x1="65" y1="188" x2="680" y2="188" />
+        <line class="grid-line" x1="65" y1="124" x2="680" y2="124" />
+        <line class="grid-line" x1="65" y1="60" x2="680" y2="60" />
+        <line class="axis-line" x1="65" y1="35" x2="65" y2="315" />
+        <line class="axis-line" x1="65" y1="315" x2="680" y2="315" />
+        <text class="muted-label" x="54" y="319" text-anchor="end">0</text>
+        <text class="muted-label" x="54" y="255" text-anchor="end">5</text>
+        <text class="muted-label" x="54" y="192" text-anchor="end">10</text>
+        <text class="muted-label" x="54" y="128" text-anchor="end">15</text>
+        <text class="muted-label" x="54" y="64" text-anchor="end">20</text>
+        <text class="axis-label" x="18" y="176" text-anchor="middle" transform="rotate(-90 18 176)">Transferred (GB)</text>
+
+        <rect class="series-2-fill" x="90" y="66" width="28" height="249" />
+        <rect class="series-3-fill" x="124" y="137" width="28" height="178" />
+        <text x="104" y="56" text-anchor="middle">19.60</text>
+        <text x="138" y="127" text-anchor="middle">14.00</text>
+        <rect class="series-2-fill" x="215" y="96" width="28" height="219" />
+        <rect class="series-3-fill" x="249" y="191" width="28" height="124" />
+        <text x="229" y="86" text-anchor="middle">17.22</text>
+        <text x="263" y="181" text-anchor="middle">9.75</text>
+        <rect class="series-2-fill" x="340" y="150" width="28" height="165" />
+        <rect class="series-3-fill" x="374" y="242" width="28" height="73" />
+        <text x="354" y="140" text-anchor="middle">12.95</text>
+        <text x="388" y="232" text-anchor="middle">5.73</text>
+        <rect class="series-2-fill" x="465" y="186" width="28" height="129" />
+        <rect class="series-3-fill" x="499" y="256" width="28" height="59" />
+        <text x="479" y="176" text-anchor="middle">10.15</text>
+        <text x="513" y="246" text-anchor="middle">4.65</text>
+        <rect class="series-2-fill" x="590" y="211" width="28" height="104" />
+        <rect class="series-3-fill" x="624" y="256" width="28" height="59" />
+        <text x="604" y="201" text-anchor="middle">8.15</text>
+        <text x="638" y="246" text-anchor="middle">4.65</text>
+        <text class="muted-label" x="121" y="339" text-anchor="middle">320</text>
+        <text class="muted-label" x="246" y="339" text-anchor="middle">640</text>
+        <text class="muted-label" x="371" y="339" text-anchor="middle">1,280</text>
+        <text class="muted-label" x="496" y="339" text-anchor="middle">2,048</text>
+        <text class="muted-label" x="621" y="339" text-anchor="middle">2,560</text>
+        <text class="axis-label" x="371" y="365" text-anchor="middle">Expert cache capacity (pages)</text>
+      </svg>
+    </section>
+  </div>
+
+  <section class="chart" aria-labelledby="union-label">
+    <div class="chart-label" id="union-label">The sequence working set grows far more slowly than the model</div>
+    <div class="chart-note text-small">Cumulative unique expert pages across the 15 measured decode forwards.</div>
+    <svg class="plot" viewBox="0 0 1100 390" role="img" aria-labelledby="union-title union-desc">
+      <title id="union-title">Cumulative decode working-set growth</title>
+      <desc id="union-desc">The cumulative expert-page union grows from 320 pages after the first decode forward to 2140 pages after the fifteenth, totaling 12.54 GiB.</desc>
+      <line class="grid-line" x1="60" y1="320" x2="1020" y2="320" />
+      <line class="grid-line" x1="60" y1="241" x2="1020" y2="241" />
+      <line class="grid-line" x1="60" y1="161" x2="1020" y2="161" />
+      <line class="grid-line" x1="60" y1="82" x2="1020" y2="82" />
+      <line class="axis-line" x1="60" y1="35" x2="60" y2="320" />
+      <line class="axis-line" x1="60" y1="320" x2="1020" y2="320" />
+      <line class="capacity-line" x1="60" y1="280" x2="1020" y2="280" />
+      <line class="capacity-line" x1="60" y1="241" x2="1020" y2="241" />
+      <line class="capacity-line" x1="60" y1="161" x2="1020" y2="161" />
+      <line class="capacity-line" x1="60" y1="66" x2="1020" y2="66" />
+      <text class="muted-label" x="1030" y="284">320</text>
+      <text class="muted-label" x="1030" y="245">640</text>
+      <text class="muted-label" x="1030" y="165">1,280</text>
+      <text class="muted-label" x="1030" y="70">2,048-page cache</text>
+      <text class="muted-label" x="49" y="324" text-anchor="end">0</text>
+      <text class="muted-label" x="49" y="245" text-anchor="end">640</text>
+      <text class="muted-label" x="49" y="165" text-anchor="end">1,280</text>
+      <text class="muted-label" x="49" y="86" text-anchor="end">1,920</text>
+      <text class="axis-label" x="18" y="176" text-anchor="middle" transform="rotate(-90 18 176)">Unique pages</text>
+      <path class="series-1-area" d="M60 280 L129 250 L197 228 L266 213 L334 196 L403 181 L471 167 L540 155 L609 144 L677 127 L746 108 L814 99 L883 88 L951 67 L1020 55 L1020 320 L60 320 Z" />
+      <polyline class="series-1-stroke" points="60,280 129,250 197,228 266,213 334,196 403,181 471,167 540,155 609,144 677,127 746,108 814,99 883,88 951,67 1020,55" />
+      <circle class="series-1-fill" cx="60" cy="280" r="5" />
+      <circle class="series-1-fill" cx="540" cy="155" r="5" />
+      <circle class="series-1-fill" cx="951" cy="67" r="5" />
+      <circle class="series-1-fill" cx="1020" cy="55" r="7" />
+      <text x="1008" y="39" text-anchor="end">2,140 pages = 12.54 GiB</text>
+      <text class="muted-label" x="60" y="343" text-anchor="middle">1</text>
+      <text class="muted-label" x="334" y="343" text-anchor="middle">5</text>
+      <text class="muted-label" x="677" y="343" text-anchor="middle">10</text>
+      <text class="muted-label" x="1020" y="343" text-anchor="middle">15</text>
+      <text class="axis-label" x="540" y="375" text-anchor="middle">Decode forward</text>
+    </svg>
+  </section>
+
+  <section class="chart" aria-labelledby="overlap-label">
+    <div class="chart-label" id="overlap-label">Adjacent tokens are poor working-set predictors</div>
+    <div class="chart-note text-small">Fraction of each token's 320 pages already present in the immediately previous token's working set.</div>
+    <svg class="plot" viewBox="0 0 1100 300" role="img" aria-labelledby="overlap-title overlap-desc">
+      <title id="overlap-title">Previous-token working-set recall</title>
+      <desc id="overlap-desc">Previous-token recall averages 37.6 percent and varies from 12.2 to 56.2 percent across fourteen transitions.</desc>
+      <line class="grid-line" x1="60" y1="230" x2="1020" y2="230" />
+      <line class="grid-line" x1="60" y1="162" x2="1020" y2="162" />
+      <line class="grid-line" x1="60" y1="93" x2="1020" y2="93" />
+      <line class="grid-line" x1="60" y1="25" x2="1020" y2="25" />
+      <line class="axis-line" x1="60" y1="25" x2="60" y2="230" />
+      <line class="axis-line" x1="60" y1="230" x2="1020" y2="230" />
+      <text class="muted-label" x="49" y="234" text-anchor="end">0%</text>
+      <text class="muted-label" x="49" y="166" text-anchor="end">20%</text>
+      <text class="muted-label" x="49" y="97" text-anchor="end">40%</text>
+      <text class="muted-label" x="49" y="29" text-anchor="end">60%</text>
+      <line class="capacity-line" x1="60" y1="102" x2="1020" y2="102" />
+      <text class="muted-label" x="1012" y="96" text-anchor="end">mean 37.6%</text>
+      <rect class="series-4-fill" x="67" y="148" width="34" height="82" />
+      <rect class="series-4-fill" x="141" y="103" width="34" height="127" />
+      <rect class="series-4-fill" x="215" y="90" width="34" height="140" />
+      <rect class="series-4-fill" x="289" y="129" width="34" height="101" />
+      <rect class="series-4-fill" x="363" y="81" width="34" height="149" />
+      <rect class="series-4-fill" x="437" y="59" width="34" height="171" />
+      <rect class="series-4-fill" x="511" y="76" width="34" height="154" />
+      <rect class="series-4-fill" x="585" y="91" width="34" height="139" />
+      <rect class="series-4-fill" x="659" y="98" width="34" height="132" />
+      <rect class="series-4-fill" x="733" y="188" width="34" height="42" />
+      <rect class="series-4-fill" x="807" y="38" width="34" height="192" />
+      <rect class="series-4-fill" x="881" y="77" width="34" height="153" />
+      <rect class="series-4-fill" x="955" y="187" width="34" height="43" />
+      <rect class="series-4-fill" x="1029" y="58" width="34" height="172" transform="translate(-43 0)" />
+      <text x="750" y="179" text-anchor="middle">12.2%</text>
+      <text x="824" y="30" text-anchor="middle">56.2%</text>
+      <text class="muted-label" x="84" y="252" text-anchor="middle">1→2</text>
+      <text class="muted-label" x="380" y="252" text-anchor="middle">5→6</text>
+      <text class="muted-label" x="750" y="252" text-anchor="middle">10→11</text>
+      <text class="muted-label" x="1003" y="252" text-anchor="middle">14→15</text>
+      <text class="axis-label" x="540" y="286" text-anchor="middle">Decode transition</text>
+    </svg>
+  </section>
+</div>

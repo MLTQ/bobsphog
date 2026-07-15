@@ -1,0 +1,2625 @@
+{
+  "config": {
+    "checkpoint": "/home/m/.cache/huggingface/hub/models--Qwen--Qwen3.6-35B-A3B/snapshots/995ad96eacd98c81ed38be0c5b274b04031597b0",
+    "trace": "outputs/b2-4090-warm-ascending.json",
+    "device": "cuda:0",
+    "cache_pages": [
+      1280,
+      2560
+    ],
+    "policies": [
+      "oracle_retention",
+      "oracle_token_prefetch"
+    ]
+  },
+  "gpu": "NVIDIA GeForce RTX 4090",
+  "trace": {
+    "prompt": "Explain why the sky appears blue during the day in clear, concise language.",
+    "layers": 40,
+    "output_tokens": 16,
+    "decode_forwards": 15,
+    "request_groups": 640
+  },
+  "runs": [
+    {
+      "policy": "oracle_retention",
+      "cache_pages": 1280,
+      "cache_capacity_bytes": 8053063680,
+      "expert_page_bytes": 6291456,
+      "load": {
+        "loaded_tensors": 613,
+        "loaded_bytes": 4896711936,
+        "touched_shards": 26,
+        "load_seconds": 4.41471634095069,
+        "total_model_construction_seconds": 4.7243405090412125
+      },
+      "peak_allocated_bytes": 13013256192,
+      "peak_fraction_of_checkpoint": 0.18098186980867795,
+      "prompt_tokens": 28,
+      "output_tokens": 16,
+      "time_to_first_token_seconds": 45.03217959601898,
+      "compute": {
+        "tokens": 15,
+        "seconds": 16.341155183850788,
+        "tokens_per_second": 0.9179277616079315,
+        "mean_seconds_per_token": 1.0894103455900526,
+        "median_seconds_per_token": 1.016044958960265,
+        "p95_seconds_per_token": 1.8199756839312613,
+        "minimum_seconds_per_token": 0.5801305660279468,
+        "maximum_seconds_per_token": 1.8199756839312613
+      },
+      "pipeline": {
+        "decode_forwards": 15,
+        "serial_seconds": 16.341155183850788,
+        "serial_tokens_per_second": 0.9179277616079315,
+        "compute_only_seconds": 16.341155183850788,
+        "compute_only_tokens_per_second": 0.9179277616079315,
+        "ideal_one_token_overlap_seconds": 16.341155183850788,
+        "ideal_one_token_overlap_tokens_per_second": 0.9179277616079315,
+        "prefetch_seconds": 0.0
+      },
+      "serial_end_to_end_seconds": 61.373334779869765,
+      "serial_end_to_end_output_tokens_per_second": 0.2606995376312506,
+      "ideal_overlap_end_to_end_seconds": 61.373334779869765,
+      "ideal_overlap_end_to_end_output_tokens_per_second": 0.2606995376312506,
+      "predicted_token_ids": [
+        760,
+        12515,
+        7701,
+        6105,
+        4016,
+        310,
+        264,
+        24057,
+        2512,
+        2972,
+        28232,
+        60845,
+        69377,
+        159034,
+        271,
+        8160
+      ],
+      "selected_token_ids": [
+        760,
+        12515,
+        7701,
+        6105,
+        4016,
+        310,
+        264,
+        24057,
+        2512,
+        2972,
+        28232,
+        60845,
+        69377,
+        159034,
+        271,
+        8160
+      ],
+      "selected_text": "The sky appears blue due to a phenomenon called **Rayleigh scattering**.\n\nHere",
+      "forced_path_top1_agreement_fraction": 1.0,
+      "prefill_cache": {
+        "requests": 3108,
+        "hits": 0,
+        "misses": 3108,
+        "evictions": 1828,
+        "bytes_transferred": 19553845248,
+        "source_load_seconds": 42.11318368650973,
+        "schedule_seconds": 43.11249715357553,
+        "host_wait_seconds": 0.008079700404778123
+      },
+      "decode_physical_cache": {
+        "requests": 4800,
+        "hits": 3890,
+        "misses": 910,
+        "evictions": 910,
+        "bytes_transferred": 5725224960,
+        "source_load_seconds": 13.291984498151578,
+        "schedule_seconds": 14.13283069501631,
+        "host_wait_seconds": 0.007951096398755908
+      },
+      "prefetch_stats": {
+        "requests": 0,
+        "hits": 0,
+        "misses": 0,
+        "evictions": 0,
+        "bytes_transferred": 0,
+        "source_load_seconds": 0.0,
+        "cuda_wait_seconds": 0.0,
+        "total_seconds": 0.0
+      },
+      "expected_oracle_decode_misses": 910,
+      "demand_misses_match_offline_optimal": true,
+      "steps": [
+        {
+          "output_token_index": 1,
+          "prefetch_seconds": 0.0,
+          "compute_seconds": 1.4139644419774413,
+          "prefetch": {
+            "requests": 0,
+            "hits": 0,
+            "misses": 0,
+            "evictions": 0,
+            "bytes_transferred": 0,
+            "source_load_seconds": 0.0,
+            "cuda_wait_seconds": 0.0,
+            "total_seconds": 0.0
+          },
+          "demand_cache": {
+            "requests": 320,
+            "hits": 260,
+            "misses": 60,
+            "evictions": 60,
+            "bytes_transferred": 377487360,
+            "source_load_seconds": 1.1479572907555848,
+            "schedule_seconds": 1.2045357830356807,
+            "host_wait_seconds": 0.0006112799746915698
+          },
+          "physical_cache": {
+            "requests": 320,
+            "hits": 260,
+            "misses": 60,
+            "evictions": 60,
+            "bytes_transferred": 377487360,
+            "source_load_seconds": 1.1479572907555848,
+            "schedule_seconds": 1.2045357830356807,
+            "host_wait_seconds": 0.0006112799746915698
+          }
+        },
+        {
+          "output_token_index": 2,
+          "prefetch_seconds": 0.0,
+          "compute_seconds": 1.016044958960265,
+          "prefetch": {
+            "requests": 0,
+            "hits": 0,
+            "misses": 0,
+            "evictions": 0,
+            "bytes_transferred": 0,
+            "source_load_seconds": 0.0,
+            "cuda_wait_seconds": 0.0,
+            "total_seconds": 0.0
+          },
+          "demand_cache": {
+            "requests": 320,
+            "hits": 271,
+            "misses": 49,
+            "evictions": 49,
+            "bytes_transferred": 308281344,
+            "source_load_seconds": 0.8207541455049068,
+            "schedule_seconds": 0.8719001098070294,
+            "host_wait_seconds": 0.0005284553626552224
+          },
+          "physical_cache": {
+            "requests": 320,
+            "hits": 271,
+            "misses": 49,
+            "evictions": 49,
+            "bytes_transferred": 308281344,
+            "source_load_seconds": 0.8207541455049068,
+            "schedule_seconds": 0.8719001098070294,
+            "host_wait_seconds": 0.0005284553626552224
+          }
+        },
+        {
+          "output_token_index": 3,
+          "prefetch_seconds": 0.0,
+          "compute_seconds": 0.946147785987705,
+          "prefetch": {
+            "requests": 0,
+            "hits": 0,
+            "misses": 0,
+            "evictions": 0,
+            "bytes_transferred": 0,
+            "source_load_seconds": 0.0,
+            "cuda_wait_seconds": 0.0,
+            "total_seconds": 0.0
+          },
+          "demand_cache": {
+            "requests": 320,
+            "hits": 269,
+            "misses": 51,
+            "evictions": 51,
+            "bytes_transferred": 320864256,
+            "source_load_seconds": 0.7545449750032276,
+            "schedule_seconds": 0.8029365928377956,
+            "host_wait_seconds": 0.0004975771298632026
+          },
+          "physical_cache": {
+            "requests": 320,
+            "hits": 269,
+            "misses": 51,
+            "evictions": 51,
+            "bytes_transferred": 320864256,
+            "source_load_seconds": 0.7545449750032276,
+            "schedule_seconds": 0.8029365928377956,
+            "host_wait_seconds": 0.0004975771298632026
+          }
+        },
+        {
+          "output_token_index": 4,
+          "prefetch_seconds": 0.0,
+          "compute_seconds": 0.5801305660279468,
+          "prefetch": {
+            "requests": 0,
+            "hits": 0,
+            "misses": 0,
+            "evictions": 0,
+            "bytes_transferred": 0,
+            "source_load_seconds": 0.0,
+            "cuda_wait_seconds": 0.0,
+            "total_seconds": 0.0
+          },
+          "demand_cache": {
+            "requests": 320,
+            "hits": 294,
+            "misses": 26,
+            "evictions": 26,
+            "bytes_transferred": 163577856,
+            "source_load_seconds": 0.41885482298675925,
+            "schedule_seconds": 0.4498911229893565,
+            "host_wait_seconds": 0.00027482607401907444
+          },
+          "physical_cache": {
+            "requests": 320,
+            "hits": 294,
+            "misses": 26,
+            "evictions": 26,
+            "bytes_transferred": 163577856,
+            "source_load_seconds": 0.41885482298675925,
+            "schedule_seconds": 0.4498911229893565,
+            "host_wait_seconds": 0.00027482607401907444
+          }
+        },
+        {
+          "output_token_index": 5,
+          "prefetch_seconds": 0.0,
+          "compute_seconds": 1.0090327899670228,
+          "prefetch": {
+            "requests": 0,
+            "hits": 0,
+            "misses": 0,
+            "evictions": 0,
+            "bytes_transferred": 0,
+            "source_load_seconds": 0.0,
+            "cuda_wait_seconds": 0.0,
+            "total_seconds": 0.0
+          },
+          "demand_cache": {
+            "requests": 320,
+            "hits": 271,
+            "misses": 49,
+            "evictions": 49,
+            "bytes_transferred": 308281344,
+            "source_load_seconds": 0.8166797822341323,
+            "schedule_seconds": 0.8672161988215521,
+            "host_wait_seconds": 0.0004630166804417968
+          },
+          "physical_cache": {
+            "requests": 320,
+            "hits": 271,
+            "misses": 49,
+            "evictions": 49,
+            "bytes_transferred": 308281344,
+            "source_load_seconds": 0.8166797822341323,
+            "schedule_seconds": 0.8672161988215521,
+            "host_wait_seconds": 0.0004630166804417968
+          }
+        },
+        {
+          "output_token_index": 6,
+          "prefetch_seconds": 0.0,
+          "compute_seconds": 0.8023505819728598,
+          "prefetch": {
+            "requests": 0,
+            "hits": 0,
+            "misses": 0,
+            "evictions": 0,
+            "bytes_transferred": 0,
+            "source_load_seconds": 0.0,
+            "cuda_wait_seconds": 0.0,
+            "total_seconds": 0.0
+          },
+          "demand_cache": {
+            "requests": 320,
+            "hits": 285,
+            "misses": 35,
+            "evictions": 35,
+            "bytes_transferred": 220200960,
+            "source_load_seconds": 0.6284286486916244,
+            "schedule_seconds": 0.6687465554568917,
+            "host_wait_seconds": 0.0003367718309164047
+          },
+          "physical_cache": {
+            "requests": 320,
+            "hits": 285,
+            "misses": 35,
+            "evictions": 35,
+            "bytes_transferred": 220200960,
+            "source_load_seconds": 0.6284286486916244,
+            "schedule_seconds": 0.6687465554568917,
+            "host_wait_seconds": 0.0003367718309164047
+          }
+        },
+        {
+          "output_token_index": 7,
+          "prefetch_seconds": 0.0,
+          "compute_seconds": 1.2373576669488102,
+          "prefetch": {
+            "requests": 0,
+            "hits": 0,
+            "misses": 0,
+            "evictions": 0,
+            "bytes_transferred": 0,
+            "source_load_seconds": 0.0,
+            "cuda_wait_seconds": 0.0,
+            "total_seconds": 0.0
+          },
+          "demand_cache": {
+            "requests": 320,
+            "hits": 248,
+            "misses": 72,
+            "evictions": 72,
+            "bytes_transferred": 452984832,
+            "source_load_seconds": 1.03428333834745,
+            "schedule_seconds": 1.0964091108180583,
+            "host_wait_seconds": 0.0005767359398305416
+          },
+          "physical_cache": {
+            "requests": 320,
+            "hits": 248,
+            "misses": 72,
+            "evictions": 72,
+            "bytes_transferred": 452984832,
+            "source_load_seconds": 1.03428333834745,
+            "schedule_seconds": 1.0964091108180583,
+            "host_wait_seconds": 0.0005767359398305416
+          }
+        },
+        {
+          "output_token_index": 8,
+          "prefetch_seconds": 0.0,
+          "compute_seconds": 0.9918500549392775,
+          "prefetch": {
+            "requests": 0,
+            "hits": 0,
+            "misses": 0,
+            "evictions": 0,
+            "bytes_transferred": 0,
+            "source_load_seconds": 0.0,
+            "cuda_wait_seconds": 0.0,
+            "total_seconds": 0.0
+          },
+          "demand_cache": {
+            "requests": 320,
+            "hits": 281,
+            "misses": 39,
+            "evictions": 39,
+            "bytes_transferred": 245366784,
+            "source_load_seconds": 0.8100977672729641,
+            "schedule_seconds": 0.8526814013021067,
+            "host_wait_seconds": 0.0003770875046029687
+          },
+          "physical_cache": {
+            "requests": 320,
+            "hits": 281,
+            "misses": 39,
+            "evictions": 39,
+            "bytes_transferred": 245366784,
+            "source_load_seconds": 0.8100977672729641,
+            "schedule_seconds": 0.8526814013021067,
+            "host_wait_seconds": 0.0003770875046029687
+          }
+        },
+        {
+          "output_token_index": 9,
+          "prefetch_seconds": 0.0,
+          "compute_seconds": 1.1172773879952729,
+          "prefetch": {
+            "requests": 0,
+            "hits": 0,
+            "misses": 0,
+            "evictions": 0,
+            "bytes_transferred": 0,
+            "source_load_seconds": 0.0,
+            "cuda_wait_seconds": 0.0,
+            "total_seconds": 0.0
+          },
+          "demand_cache": {
+            "requests": 320,
+            "hits": 271,
+            "misses": 49,
+            "evictions": 49,
+            "bytes_transferred": 308281344,
+            "source_load_seconds": 0.9267400393728167,
+            "schedule_seconds": 0.9775263172341511,
+            "host_wait_seconds": 0.000472179614007473
+          },
+          "physical_cache": {
+            "requests": 320,
+            "hits": 271,
+            "misses": 49,
+            "evictions": 49,
+            "bytes_transferred": 308281344,
+            "source_load_seconds": 0.9267400393728167,
+            "schedule_seconds": 0.9775263172341511,
+            "host_wait_seconds": 0.000472179614007473
+          }
+        },
+        {
+          "output_token_index": 10,
+          "prefetch_seconds": 0.0,
+          "compute_seconds": 1.191874590003863,
+          "prefetch": {
+            "requests": 0,
+            "hits": 0,
+            "misses": 0,
+            "evictions": 0,
+            "bytes_transferred": 0,
+            "source_load_seconds": 0.0,
+            "cuda_wait_seconds": 0.0,
+            "total_seconds": 0.0
+          },
+          "demand_cache": {
+            "requests": 320,
+            "hits": 260,
+            "misses": 60,
+            "evictions": 60,
+            "bytes_transferred": 377487360,
+            "source_load_seconds": 0.9976645215647295,
+            "schedule_seconds": 1.052736402838491,
+            "host_wait_seconds": 0.0005358702037483454
+          },
+          "physical_cache": {
+            "requests": 320,
+            "hits": 260,
+            "misses": 60,
+            "evictions": 60,
+            "bytes_transferred": 377487360,
+            "source_load_seconds": 0.9976645215647295,
+            "schedule_seconds": 1.052736402838491,
+            "host_wait_seconds": 0.0005358702037483454
+          }
+        },
+        {
+          "output_token_index": 11,
+          "prefetch_seconds": 0.0,
+          "compute_seconds": 1.8199756839312613,
+          "prefetch": {
+            "requests": 0,
+            "hits": 0,
+            "misses": 0,
+            "evictions": 0,
+            "bytes_transferred": 0,
+            "source_load_seconds": 0.0,
+            "cuda_wait_seconds": 0.0,
+            "total_seconds": 0.0
+          },
+          "demand_cache": {
+            "requests": 320,
+            "hits": 229,
+            "misses": 91,
+            "evictions": 91,
+            "bytes_transferred": 572522496,
+            "source_load_seconds": 1.5796766324201599,
+            "schedule_seconds": 1.6616615158272907,
+            "host_wait_seconds": 0.0008124911691993475
+          },
+          "physical_cache": {
+            "requests": 320,
+            "hits": 229,
+            "misses": 91,
+            "evictions": 91,
+            "bytes_transferred": 572522496,
+            "source_load_seconds": 1.5796766324201599,
+            "schedule_seconds": 1.6616615158272907,
+            "host_wait_seconds": 0.0008124911691993475
+          }
+        },
+        {
+          "output_token_index": 12,
+          "prefetch_seconds": 0.0,
+          "compute_seconds": 0.9461908250814304,
+          "prefetch": {
+            "requests": 0,
+            "hits": 0,
+            "misses": 0,
+            "evictions": 0,
+            "bytes_transferred": 0,
+            "source_load_seconds": 0.0,
+            "cuda_wait_seconds": 0.0,
+            "total_seconds": 0.0
+          },
+          "demand_cache": {
+            "requests": 320,
+            "hits": 280,
+            "misses": 40,
+            "evictions": 40,
+            "bytes_transferred": 251658240,
+            "source_load_seconds": 0.7411772286286578,
+            "schedule_seconds": 0.7978889860678464,
+            "host_wait_seconds": 0.00047503469977527857
+          },
+          "physical_cache": {
+            "requests": 320,
+            "hits": 280,
+            "misses": 40,
+            "evictions": 40,
+            "bytes_transferred": 251658240,
+            "source_load_seconds": 0.7411772286286578,
+            "schedule_seconds": 0.7978889860678464,
+            "host_wait_seconds": 0.00047503469977527857
+          }
+        },
+        {
+          "output_token_index": 13,
+          "prefetch_seconds": 0.0,
+          "compute_seconds": 1.094698666012846,
+          "prefetch": {
+            "requests": 0,
+            "hits": 0,
+            "misses": 0,
+            "evictions": 0,
+            "bytes_transferred": 0,
+            "source_load_seconds": 0.0,
+            "cuda_wait_seconds": 0.0,
+            "total_seconds": 0.0
+          },
+          "demand_cache": {
+            "requests": 320,
+            "hits": 262,
+            "misses": 58,
+            "evictions": 58,
+            "bytes_transferred": 364904448,
+            "source_load_seconds": 0.898129882174544,
+            "schedule_seconds": 0.9555052680661902,
+            "host_wait_seconds": 0.0005432161269709468
+          },
+          "physical_cache": {
+            "requests": 320,
+            "hits": 262,
+            "misses": 58,
+            "evictions": 58,
+            "bytes_transferred": 364904448,
+            "source_load_seconds": 0.898129882174544,
+            "schedule_seconds": 0.9555052680661902,
+            "host_wait_seconds": 0.0005432161269709468
+          }
+        },
+        {
+          "output_token_index": 14,
+          "prefetch_seconds": 0.0,
+          "compute_seconds": 1.1786809030454606,
+          "prefetch": {
+            "requests": 0,
+            "hits": 0,
+            "misses": 0,
+            "evictions": 0,
+            "bytes_transferred": 0,
+            "source_load_seconds": 0.0,
+            "cuda_wait_seconds": 0.0,
+            "total_seconds": 0.0
+          },
+          "demand_cache": {
+            "requests": 320,
+            "hits": 189,
+            "misses": 131,
+            "evictions": 131,
+            "bytes_transferred": 824180736,
+            "source_load_seconds": 0.951090368325822,
+            "schedule_seconds": 1.0338389221578836,
+            "host_wait_seconds": 0.0007795904530212283
+          },
+          "physical_cache": {
+            "requests": 320,
+            "hits": 189,
+            "misses": 131,
+            "evictions": 131,
+            "bytes_transferred": 824180736,
+            "source_load_seconds": 0.951090368325822,
+            "schedule_seconds": 1.0338389221578836,
+            "host_wait_seconds": 0.0007795904530212283
+          }
+        },
+        {
+          "output_token_index": 15,
+          "prefetch_seconds": 0.0,
+          "compute_seconds": 0.9955782809993252,
+          "prefetch": {
+            "requests": 0,
+            "hits": 0,
+            "misses": 0,
+            "evictions": 0,
+            "bytes_transferred": 0,
+            "source_load_seconds": 0.0,
+            "cuda_wait_seconds": 0.0,
+            "total_seconds": 0.0
+          },
+          "demand_cache": {
+            "requests": 320,
+            "hits": 220,
+            "misses": 100,
+            "evictions": 100,
+            "bytes_transferred": 629145600,
+            "source_load_seconds": 0.7659050548681989,
+            "schedule_seconds": 0.8393564077559859,
+            "host_wait_seconds": 0.0006669636350125074
+          },
+          "physical_cache": {
+            "requests": 320,
+            "hits": 220,
+            "misses": 100,
+            "evictions": 100,
+            "bytes_transferred": 629145600,
+            "source_load_seconds": 0.7659050548681989,
+            "schedule_seconds": 0.8393564077559859,
+            "host_wait_seconds": 0.0006669636350125074
+          }
+        }
+      ],
+      "final_cache_stats": {
+        "requests": 7908,
+        "hits": 3890,
+        "misses": 4018,
+        "evictions": 2738,
+        "bytes_transferred": 25279070208,
+        "source_load_seconds": 55.405168184661306,
+        "schedule_seconds": 57.24532784859184,
+        "host_wait_seconds": 0.01603079680353403
+      },
+      "oracle_trace_complete": true
+    },
+    {
+      "policy": "oracle_token_prefetch",
+      "cache_pages": 1280,
+      "cache_capacity_bytes": 8053063680,
+      "expert_page_bytes": 6291456,
+      "load": {
+        "loaded_tensors": 613,
+        "loaded_bytes": 4896711936,
+        "touched_shards": 26,
+        "load_seconds": 4.669008485972881,
+        "total_model_construction_seconds": 4.912857625982724
+      },
+      "peak_allocated_bytes": 13013256192,
+      "peak_fraction_of_checkpoint": 0.18098186980867795,
+      "prompt_tokens": 28,
+      "output_tokens": 16,
+      "time_to_first_token_seconds": 43.77250852098223,
+      "compute": {
+        "tokens": 15,
+        "seconds": 1.7527010571211576,
+        "tokens_per_second": 8.558219291906951,
+        "mean_seconds_per_token": 0.11684673714141051,
+        "median_seconds_per_token": 0.11456627899315208,
+        "p95_seconds_per_token": 0.1425001199822873,
+        "minimum_seconds_per_token": 0.10639365494716913,
+        "maximum_seconds_per_token": 0.1425001199822873
+      },
+      "pipeline": {
+        "decode_forwards": 15,
+        "serial_seconds": 16.14070472086314,
+        "serial_tokens_per_second": 0.9293274525127339,
+        "compute_only_seconds": 1.7527010571211576,
+        "compute_only_tokens_per_second": 8.558219291906951,
+        "ideal_one_token_overlap_seconds": 14.50018347974401,
+        "ideal_one_token_overlap_tokens_per_second": 1.0344696686737935,
+        "prefetch_seconds": 14.388003663741983
+      },
+      "serial_end_to_end_seconds": 59.91321324184537,
+      "serial_end_to_end_output_tokens_per_second": 0.2670529443215553,
+      "ideal_overlap_end_to_end_seconds": 58.27269200072624,
+      "ideal_overlap_end_to_end_output_tokens_per_second": 0.2745711490349647,
+      "predicted_token_ids": [
+        760,
+        12515,
+        7701,
+        6105,
+        4016,
+        310,
+        264,
+        24057,
+        2512,
+        2972,
+        28232,
+        60845,
+        69377,
+        159034,
+        271,
+        8160
+      ],
+      "selected_token_ids": [
+        760,
+        12515,
+        7701,
+        6105,
+        4016,
+        310,
+        264,
+        24057,
+        2512,
+        2972,
+        28232,
+        60845,
+        69377,
+        159034,
+        271,
+        8160
+      ],
+      "selected_text": "The sky appears blue due to a phenomenon called **Rayleigh scattering**.\n\nHere",
+      "forced_path_top1_agreement_fraction": 1.0,
+      "prefill_cache": {
+        "requests": 3108,
+        "hits": 0,
+        "misses": 3108,
+        "evictions": 1828,
+        "bytes_transferred": 19553845248,
+        "source_load_seconds": 41.82626498979516,
+        "schedule_seconds": 42.84802084299736,
+        "host_wait_seconds": 0.0069254613481462
+      },
+      "decode_physical_cache": {
+        "requests": 4800,
+        "hits": 4800,
+        "misses": 0,
+        "evictions": 920,
+        "bytes_transferred": 5788139520,
+        "source_load_seconds": 13.187990318983793,
+        "schedule_seconds": 0.045331106754019856,
+        "host_wait_seconds": 0.16267220920417458
+      },
+      "prefetch_stats": {
+        "requests": 4800,
+        "hits": 3880,
+        "misses": 920,
+        "evictions": 920,
+        "bytes_transferred": 5788139520,
+        "source_load_seconds": 13.187990318983793,
+        "cuda_wait_seconds": 0.16267220920417458,
+        "total_seconds": 14.384505988913588
+      },
+      "expected_oracle_decode_misses": 910,
+      "demand_misses_match_offline_optimal": false,
+      "steps": [
+        {
+          "output_token_index": 1,
+          "prefetch_seconds": 1.170276717050001,
+          "compute_seconds": 0.13242235104553401,
+          "prefetch": {
+            "requests": 320,
+            "hits": 260,
+            "misses": 60,
+            "evictions": 60,
+            "bytes_transferred": 377487360,
+            "source_load_seconds": 1.0894196644658223,
+            "cuda_wait_seconds": 0.012526786187663674,
+            "total_seconds": 1.1694644179660827
+          },
+          "demand_cache": {
+            "requests": 320,
+            "hits": 320,
+            "misses": 0,
+            "evictions": 0,
+            "bytes_transferred": 0,
+            "source_load_seconds": 0.0,
+            "schedule_seconds": 0.002544109127484262,
+            "host_wait_seconds": 0.0
+          },
+          "physical_cache": {
+            "requests": 320,
+            "hits": 320,
+            "misses": 0,
+            "evictions": 60,
+            "bytes_transferred": 377487360,
+            "source_load_seconds": 1.0894196644658223,
+            "schedule_seconds": 0.002544109127484262,
+            "host_wait_seconds": 0.012526786187663674
+          }
+        },
+        {
+          "output_token_index": 2,
+          "prefetch_seconds": 0.9982394649414346,
+          "compute_seconds": 0.11007961304858327,
+          "prefetch": {
+            "requests": 320,
+            "hits": 271,
+            "misses": 49,
+            "evictions": 49,
+            "bytes_transferred": 308281344,
+            "source_load_seconds": 0.9273881603730842,
+            "cuda_wait_seconds": 0.009912408189848065,
+            "total_seconds": 0.998014472075738
+          },
+          "demand_cache": {
+            "requests": 320,
+            "hits": 320,
+            "misses": 0,
+            "evictions": 0,
+            "bytes_transferred": 0,
+            "source_load_seconds": 0.0,
+            "schedule_seconds": 0.0029806639067828655,
+            "host_wait_seconds": 0.0
+          },
+          "physical_cache": {
+            "requests": 320,
+            "hits": 320,
+            "misses": 0,
+            "evictions": 49,
+            "bytes_transferred": 308281344,
+            "source_load_seconds": 0.9273881603730842,
+            "schedule_seconds": 0.0029806639067828655,
+            "host_wait_seconds": 0.009912408189848065
+          }
+        },
+        {
+          "output_token_index": 3,
+          "prefetch_seconds": 0.9253394099650905,
+          "compute_seconds": 0.11220004397910088,
+          "prefetch": {
+            "requests": 320,
+            "hits": 269,
+            "misses": 51,
+            "evictions": 51,
+            "bytes_transferred": 320864256,
+            "source_load_seconds": 0.8559574648970738,
+            "cuda_wait_seconds": 0.009689262369647622,
+            "total_seconds": 0.9251464559929445
+          },
+          "demand_cache": {
+            "requests": 320,
+            "hits": 320,
+            "misses": 0,
+            "evictions": 0,
+            "bytes_transferred": 0,
+            "source_load_seconds": 0.0,
+            "schedule_seconds": 0.0030119450530037284,
+            "host_wait_seconds": 0.0
+          },
+          "physical_cache": {
+            "requests": 320,
+            "hits": 320,
+            "misses": 0,
+            "evictions": 51,
+            "bytes_transferred": 320864256,
+            "source_load_seconds": 0.8559574648970738,
+            "schedule_seconds": 0.0030119450530037284,
+            "host_wait_seconds": 0.009689262369647622
+          }
+        },
+        {
+          "output_token_index": 4,
+          "prefetch_seconds": 0.43542867701034993,
+          "compute_seconds": 0.11456627899315208,
+          "prefetch": {
+            "requests": 320,
+            "hits": 294,
+            "misses": 26,
+            "evictions": 26,
+            "bytes_transferred": 163577856,
+            "source_load_seconds": 0.3995028620120138,
+            "cuda_wait_seconds": 0.006634583696722984,
+            "total_seconds": 0.4352091728942469
+          },
+          "demand_cache": {
+            "requests": 320,
+            "hits": 320,
+            "misses": 0,
+            "evictions": 0,
+            "bytes_transferred": 0,
+            "source_load_seconds": 0.0,
+            "schedule_seconds": 0.0028577031334862113,
+            "host_wait_seconds": 0.0
+          },
+          "physical_cache": {
+            "requests": 320,
+            "hits": 320,
+            "misses": 0,
+            "evictions": 26,
+            "bytes_transferred": 163577856,
+            "source_load_seconds": 0.3995028620120138,
+            "schedule_seconds": 0.0028577031334862113,
+            "host_wait_seconds": 0.006634583696722984
+          }
+        },
+        {
+          "output_token_index": 5,
+          "prefetch_seconds": 0.8936788720311597,
+          "compute_seconds": 0.10678254603408277,
+          "prefetch": {
+            "requests": 320,
+            "hits": 271,
+            "misses": 49,
+            "evictions": 49,
+            "bytes_transferred": 308281344,
+            "source_load_seconds": 0.8207835167413577,
+            "cuda_wait_seconds": 0.010675265220925212,
+            "total_seconds": 0.8935454400489107
+          },
+          "demand_cache": {
+            "requests": 320,
+            "hits": 320,
+            "misses": 0,
+            "evictions": 0,
+            "bytes_transferred": 0,
+            "source_load_seconds": 0.0,
+            "schedule_seconds": 0.0028767003677785397,
+            "host_wait_seconds": 0.0
+          },
+          "physical_cache": {
+            "requests": 320,
+            "hits": 320,
+            "misses": 0,
+            "evictions": 49,
+            "bytes_transferred": 308281344,
+            "source_load_seconds": 0.8207835167413577,
+            "schedule_seconds": 0.0028767003677785397,
+            "host_wait_seconds": 0.010675265220925212
+          }
+        },
+        {
+          "output_token_index": 6,
+          "prefetch_seconds": 0.6582759920274839,
+          "compute_seconds": 0.115642343997024,
+          "prefetch": {
+            "requests": 320,
+            "hits": 285,
+            "misses": 35,
+            "evictions": 35,
+            "bytes_transferred": 220200960,
+            "source_load_seconds": 0.6055406429804862,
+            "cuda_wait_seconds": 0.008632707293145359,
+            "total_seconds": 0.658008027006872
+          },
+          "demand_cache": {
+            "requests": 320,
+            "hits": 320,
+            "misses": 0,
+            "evictions": 0,
+            "bytes_transferred": 0,
+            "source_load_seconds": 0.0,
+            "schedule_seconds": 0.0029573168139904737,
+            "host_wait_seconds": 0.0
+          },
+          "physical_cache": {
+            "requests": 320,
+            "hits": 320,
+            "misses": 0,
+            "evictions": 35,
+            "bytes_transferred": 220200960,
+            "source_load_seconds": 0.6055406429804862,
+            "schedule_seconds": 0.0029573168139904737,
+            "host_wait_seconds": 0.008632707293145359
+          }
+        },
+        {
+          "output_token_index": 7,
+          "prefetch_seconds": 1.3355422709137201,
+          "compute_seconds": 0.1425001199822873,
+          "prefetch": {
+            "requests": 320,
+            "hits": 248,
+            "misses": 72,
+            "evictions": 72,
+            "bytes_transferred": 452984832,
+            "source_load_seconds": 1.2161983384285122,
+            "cuda_wait_seconds": 0.012924166396260262,
+            "total_seconds": 1.335214102989994
+          },
+          "demand_cache": {
+            "requests": 320,
+            "hits": 320,
+            "misses": 0,
+            "evictions": 0,
+            "bytes_transferred": 0,
+            "source_load_seconds": 0.0,
+            "schedule_seconds": 0.003719439497217536,
+            "host_wait_seconds": 0.0
+          },
+          "physical_cache": {
+            "requests": 320,
+            "hits": 320,
+            "misses": 0,
+            "evictions": 72,
+            "bytes_transferred": 452984832,
+            "source_load_seconds": 1.2161983384285122,
+            "schedule_seconds": 0.003719439497217536,
+            "host_wait_seconds": 0.012924166396260262
+          }
+        },
+        {
+          "output_token_index": 8,
+          "prefetch_seconds": 0.7764551310101524,
+          "compute_seconds": 0.10639365494716913,
+          "prefetch": {
+            "requests": 320,
+            "hits": 281,
+            "misses": 39,
+            "evictions": 39,
+            "bytes_transferred": 245366784,
+            "source_load_seconds": 0.7137262540636584,
+            "cuda_wait_seconds": 0.010046221199445426,
+            "total_seconds": 0.7763407960301265
+          },
+          "demand_cache": {
+            "requests": 320,
+            "hits": 320,
+            "misses": 0,
+            "evictions": 0,
+            "bytes_transferred": 0,
+            "source_load_seconds": 0.0,
+            "schedule_seconds": 0.002608714858070016,
+            "host_wait_seconds": 0.0
+          },
+          "physical_cache": {
+            "requests": 320,
+            "hits": 320,
+            "misses": 0,
+            "evictions": 39,
+            "bytes_transferred": 245366784,
+            "source_load_seconds": 0.7137262540636584,
+            "schedule_seconds": 0.002608714858070016,
+            "host_wait_seconds": 0.010046221199445426
+          }
+        },
+        {
+          "output_token_index": 9,
+          "prefetch_seconds": 0.9356433750363067,
+          "compute_seconds": 0.11650414601899683,
+          "prefetch": {
+            "requests": 320,
+            "hits": 271,
+            "misses": 49,
+            "evictions": 49,
+            "bytes_transferred": 308281344,
+            "source_load_seconds": 0.8611752383876592,
+            "cuda_wait_seconds": 0.008510437444783747,
+            "total_seconds": 0.9354616029886529
+          },
+          "demand_cache": {
+            "requests": 320,
+            "hits": 320,
+            "misses": 0,
+            "evictions": 0,
+            "bytes_transferred": 0,
+            "source_load_seconds": 0.0,
+            "schedule_seconds": 0.003109028679318726,
+            "host_wait_seconds": 0.0
+          },
+          "physical_cache": {
+            "requests": 320,
+            "hits": 320,
+            "misses": 0,
+            "evictions": 49,
+            "bytes_transferred": 308281344,
+            "source_load_seconds": 0.8611752383876592,
+            "schedule_seconds": 0.003109028679318726,
+            "host_wait_seconds": 0.008510437444783747
+          }
+        },
+        {
+          "output_token_index": 10,
+          "prefetch_seconds": 1.064653601963073,
+          "compute_seconds": 0.12680037796963006,
+          "prefetch": {
+            "requests": 320,
+            "hits": 260,
+            "misses": 60,
+            "evictions": 60,
+            "bytes_transferred": 377487360,
+            "source_load_seconds": 0.9790784607175738,
+            "cuda_wait_seconds": 0.010996155207976699,
+            "total_seconds": 1.0644341689767316
+          },
+          "demand_cache": {
+            "requests": 320,
+            "hits": 320,
+            "misses": 0,
+            "evictions": 0,
+            "bytes_transferred": 0,
+            "source_load_seconds": 0.0,
+            "schedule_seconds": 0.003687811433337629,
+            "host_wait_seconds": 0.0
+          },
+          "physical_cache": {
+            "requests": 320,
+            "hits": 320,
+            "misses": 0,
+            "evictions": 60,
+            "bytes_transferred": 377487360,
+            "source_load_seconds": 0.9790784607175738,
+            "schedule_seconds": 0.003687811433337629,
+            "host_wait_seconds": 0.010996155207976699
+          }
+        },
+        {
+          "output_token_index": 11,
+          "prefetch_seconds": 1.5539557789452374,
+          "compute_seconds": 0.1166427469579503,
+          "prefetch": {
+            "requests": 320,
+            "hits": 229,
+            "misses": 91,
+            "evictions": 91,
+            "bytes_transferred": 572522496,
+            "source_load_seconds": 1.429541883408092,
+            "cuda_wait_seconds": 0.012831740779802203,
+            "total_seconds": 1.5538403620012105
+          },
+          "demand_cache": {
+            "requests": 320,
+            "hits": 320,
+            "misses": 0,
+            "evictions": 0,
+            "bytes_transferred": 0,
+            "source_load_seconds": 0.0,
+            "schedule_seconds": 0.003114314400590956,
+            "host_wait_seconds": 0.0
+          },
+          "physical_cache": {
+            "requests": 320,
+            "hits": 320,
+            "misses": 0,
+            "evictions": 91,
+            "bytes_transferred": 572522496,
+            "source_load_seconds": 1.429541883408092,
+            "schedule_seconds": 0.003114314400590956,
+            "host_wait_seconds": 0.012831740779802203
+          }
+        },
+        {
+          "output_token_index": 12,
+          "prefetch_seconds": 0.6959934199694544,
+          "compute_seconds": 0.11158762103877962,
+          "prefetch": {
+            "requests": 320,
+            "hits": 280,
+            "misses": 40,
+            "evictions": 40,
+            "bytes_transferred": 251658240,
+            "source_load_seconds": 0.6341627821093425,
+            "cuda_wait_seconds": 0.010255545610561967,
+            "total_seconds": 0.6957853289786726
+          },
+          "demand_cache": {
+            "requests": 320,
+            "hits": 320,
+            "misses": 0,
+            "evictions": 0,
+            "bytes_transferred": 0,
+            "source_load_seconds": 0.0,
+            "schedule_seconds": 0.0029593920335173607,
+            "host_wait_seconds": 0.0
+          },
+          "physical_cache": {
+            "requests": 320,
+            "hits": 320,
+            "misses": 0,
+            "evictions": 40,
+            "bytes_transferred": 251658240,
+            "source_load_seconds": 0.6341627821093425,
+            "schedule_seconds": 0.0029593920335173607,
+            "host_wait_seconds": 0.010255545610561967
+          }
+        },
+        {
+          "output_token_index": 13,
+          "prefetch_seconds": 0.9261465879390016,
+          "compute_seconds": 0.11463566904421896,
+          "prefetch": {
+            "requests": 320,
+            "hits": 262,
+            "misses": 58,
+            "evictions": 58,
+            "bytes_transferred": 364904448,
+            "source_load_seconds": 0.8484591556480154,
+            "cuda_wait_seconds": 0.012103217770345509,
+            "total_seconds": 0.9260202799923718
+          },
+          "demand_cache": {
+            "requests": 320,
+            "hits": 320,
+            "misses": 0,
+            "evictions": 0,
+            "bytes_transferred": 0,
+            "source_load_seconds": 0.0,
+            "schedule_seconds": 0.003140345332212746,
+            "host_wait_seconds": 0.0
+          },
+          "physical_cache": {
+            "requests": 320,
+            "hits": 320,
+            "misses": 0,
+            "evictions": 58,
+            "bytes_transferred": 364904448,
+            "source_load_seconds": 0.8484591556480154,
+            "schedule_seconds": 0.003140345332212746,
+            "host_wait_seconds": 0.012103217770345509
+          }
+        },
+        {
+          "output_token_index": 14,
+          "prefetch_seconds": 1.2042801129864529,
+          "compute_seconds": 0.11376372806262225,
+          "prefetch": {
+            "requests": 320,
+            "hits": 180,
+            "misses": 140,
+            "evictions": 140,
+            "bytes_transferred": 880803840,
+            "source_load_seconds": 1.0805519137065858,
+            "cuda_wait_seconds": 0.014266522484831512,
+            "total_seconds": 1.2040442089783028
+          },
+          "demand_cache": {
+            "requests": 320,
+            "hits": 320,
+            "misses": 0,
+            "evictions": 0,
+            "bytes_transferred": 0,
+            "source_load_seconds": 0.0,
+            "schedule_seconds": 0.0028953072614967823,
+            "host_wait_seconds": 0.0
+          },
+          "physical_cache": {
+            "requests": 320,
+            "hits": 320,
+            "misses": 0,
+            "evictions": 140,
+            "bytes_transferred": 880803840,
+            "source_load_seconds": 1.0805519137065858,
+            "schedule_seconds": 0.0028953072614967823,
+            "host_wait_seconds": 0.014266522484831512
+          }
+        },
+        {
+          "output_token_index": 15,
+          "prefetch_seconds": 0.8140942519530654,
+          "compute_seconds": 0.1121798160020262,
+          "prefetch": {
+            "requests": 320,
+            "hits": 219,
+            "misses": 101,
+            "evictions": 101,
+            "bytes_transferred": 635437056,
+            "source_load_seconds": 0.726503981044516,
+            "cuda_wait_seconds": 0.012667189352214336,
+            "total_seconds": 0.8139771519927308
+          },
+          "demand_cache": {
+            "requests": 320,
+            "hits": 320,
+            "misses": 0,
+            "evictions": 0,
+            "bytes_transferred": 0,
+            "source_load_seconds": 0.0,
+            "schedule_seconds": 0.0028683148557320237,
+            "host_wait_seconds": 0.0
+          },
+          "physical_cache": {
+            "requests": 320,
+            "hits": 320,
+            "misses": 0,
+            "evictions": 101,
+            "bytes_transferred": 635437056,
+            "source_load_seconds": 0.726503981044516,
+            "schedule_seconds": 0.0028683148557320237,
+            "host_wait_seconds": 0.012667189352214336
+          }
+        }
+      ],
+      "final_cache_stats": {
+        "requests": 7908,
+        "hits": 4800,
+        "misses": 3108,
+        "evictions": 2748,
+        "bytes_transferred": 25341984768,
+        "source_load_seconds": 55.01425530877896,
+        "schedule_seconds": 42.89335194975138,
+        "host_wait_seconds": 0.16959767055232078
+      },
+      "oracle_trace_complete": true
+    },
+    {
+      "policy": "oracle_retention",
+      "cache_pages": 2560,
+      "cache_capacity_bytes": 16106127360,
+      "expert_page_bytes": 6291456,
+      "load": {
+        "loaded_tensors": 613,
+        "loaded_bytes": 4896711936,
+        "touched_shards": 26,
+        "load_seconds": 4.296025346033275,
+        "total_model_construction_seconds": 4.545166015042923
+      },
+      "peak_allocated_bytes": 21066319872,
+      "peak_fraction_of_checkpoint": 0.29297985870485727,
+      "prompt_tokens": 28,
+      "output_tokens": 16,
+      "time_to_first_token_seconds": 45.619205181952566,
+      "compute": {
+        "tokens": 15,
+        "seconds": 15.886182357906364,
+        "tokens_per_second": 0.9442167829915837,
+        "mean_seconds_per_token": 1.0590788238604243,
+        "median_seconds_per_token": 1.1088222690159455,
+        "p95_seconds_per_token": 1.919235304929316,
+        "minimum_seconds_per_token": 0.3302413609344512,
+        "maximum_seconds_per_token": 1.919235304929316
+      },
+      "pipeline": {
+        "decode_forwards": 15,
+        "serial_seconds": 15.886182357906364,
+        "serial_tokens_per_second": 0.9442167829915837,
+        "compute_only_seconds": 15.886182357906364,
+        "compute_only_tokens_per_second": 0.9442167829915837,
+        "ideal_one_token_overlap_seconds": 15.886182357906364,
+        "ideal_one_token_overlap_tokens_per_second": 0.9442167829915837,
+        "prefetch_seconds": 0.0
+      },
+      "serial_end_to_end_seconds": 61.50538753985893,
+      "serial_end_to_end_output_tokens_per_second": 0.26013981278682463,
+      "ideal_overlap_end_to_end_seconds": 61.50538753985893,
+      "ideal_overlap_end_to_end_output_tokens_per_second": 0.26013981278682463,
+      "predicted_token_ids": [
+        760,
+        12515,
+        7701,
+        6105,
+        4016,
+        310,
+        264,
+        24057,
+        2512,
+        2972,
+        28232,
+        60845,
+        69377,
+        159034,
+        271,
+        8160
+      ],
+      "selected_token_ids": [
+        760,
+        12515,
+        7701,
+        6105,
+        4016,
+        310,
+        264,
+        24057,
+        2512,
+        2972,
+        28232,
+        60845,
+        69377,
+        159034,
+        271,
+        8160
+      ],
+      "selected_text": "The sky appears blue due to a phenomenon called **Rayleigh scattering**.\n\nHere",
+      "forced_path_top1_agreement_fraction": 1.0,
+      "prefill_cache": {
+        "requests": 3108,
+        "hits": 0,
+        "misses": 3108,
+        "evictions": 548,
+        "bytes_transferred": 19553845248,
+        "source_load_seconds": 43.74876617570408,
+        "schedule_seconds": 44.796055700979196,
+        "host_wait_seconds": 0.0014371981378644705
+      },
+      "decode_physical_cache": {
+        "requests": 4800,
+        "hits": 4061,
+        "misses": 739,
+        "evictions": 739,
+        "bytes_transferred": 4649385984,
+        "source_load_seconds": 12.731692538014613,
+        "schedule_seconds": 13.769039233913645,
+        "host_wait_seconds": 0.0071602604584768414
+      },
+      "prefetch_stats": {
+        "requests": 0,
+        "hits": 0,
+        "misses": 0,
+        "evictions": 0,
+        "bytes_transferred": 0,
+        "source_load_seconds": 0.0,
+        "cuda_wait_seconds": 0.0,
+        "total_seconds": 0.0
+      },
+      "expected_oracle_decode_misses": 739,
+      "demand_misses_match_offline_optimal": true,
+      "steps": [
+        {
+          "output_token_index": 1,
+          "prefetch_seconds": 0.0,
+          "compute_seconds": 1.3865055850474164,
+          "prefetch": {
+            "requests": 0,
+            "hits": 0,
+            "misses": 0,
+            "evictions": 0,
+            "bytes_transferred": 0,
+            "source_load_seconds": 0.0,
+            "cuda_wait_seconds": 0.0,
+            "total_seconds": 0.0
+          },
+          "demand_cache": {
+            "requests": 320,
+            "hits": 260,
+            "misses": 60,
+            "evictions": 60,
+            "bytes_transferred": 377487360,
+            "source_load_seconds": 1.1606630381429568,
+            "schedule_seconds": 1.2331494585378096,
+            "host_wait_seconds": 0.0005695507861673832
+          },
+          "physical_cache": {
+            "requests": 320,
+            "hits": 260,
+            "misses": 60,
+            "evictions": 60,
+            "bytes_transferred": 377487360,
+            "source_load_seconds": 1.1606630381429568,
+            "schedule_seconds": 1.2331494585378096,
+            "host_wait_seconds": 0.0005695507861673832
+          }
+        },
+        {
+          "output_token_index": 2,
+          "prefetch_seconds": 0.0,
+          "compute_seconds": 1.1088222690159455,
+          "prefetch": {
+            "requests": 0,
+            "hits": 0,
+            "misses": 0,
+            "evictions": 0,
+            "bytes_transferred": 0,
+            "source_load_seconds": 0.0,
+            "cuda_wait_seconds": 0.0,
+            "total_seconds": 0.0
+          },
+          "demand_cache": {
+            "requests": 320,
+            "hits": 271,
+            "misses": 49,
+            "evictions": 49,
+            "bytes_transferred": 308281344,
+            "source_load_seconds": 0.9042449611006305,
+            "schedule_seconds": 0.9690036908723414,
+            "host_wait_seconds": 0.0005145571194589138
+          },
+          "physical_cache": {
+            "requests": 320,
+            "hits": 271,
+            "misses": 49,
+            "evictions": 49,
+            "bytes_transferred": 308281344,
+            "source_load_seconds": 0.9042449611006305,
+            "schedule_seconds": 0.9690036908723414,
+            "host_wait_seconds": 0.0005145571194589138
+          }
+        },
+        {
+          "output_token_index": 3,
+          "prefetch_seconds": 0.0,
+          "compute_seconds": 1.0588775629876181,
+          "prefetch": {
+            "requests": 0,
+            "hits": 0,
+            "misses": 0,
+            "evictions": 0,
+            "bytes_transferred": 0,
+            "source_load_seconds": 0.0,
+            "cuda_wait_seconds": 0.0,
+            "total_seconds": 0.0
+          },
+          "demand_cache": {
+            "requests": 320,
+            "hits": 269,
+            "misses": 51,
+            "evictions": 51,
+            "bytes_transferred": 320864256,
+            "source_load_seconds": 0.8475282713770866,
+            "schedule_seconds": 0.9148456922266632,
+            "host_wait_seconds": 0.0005147373303771019
+          },
+          "physical_cache": {
+            "requests": 320,
+            "hits": 269,
+            "misses": 51,
+            "evictions": 51,
+            "bytes_transferred": 320864256,
+            "source_load_seconds": 0.8475282713770866,
+            "schedule_seconds": 0.9148456922266632,
+            "host_wait_seconds": 0.0005147373303771019
+          }
+        },
+        {
+          "output_token_index": 4,
+          "prefetch_seconds": 0.0,
+          "compute_seconds": 0.5673329980345443,
+          "prefetch": {
+            "requests": 0,
+            "hits": 0,
+            "misses": 0,
+            "evictions": 0,
+            "bytes_transferred": 0,
+            "source_load_seconds": 0.0,
+            "cuda_wait_seconds": 0.0,
+            "total_seconds": 0.0
+          },
+          "demand_cache": {
+            "requests": 320,
+            "hits": 294,
+            "misses": 26,
+            "evictions": 26,
+            "bytes_transferred": 163577856,
+            "source_load_seconds": 0.3977663991972804,
+            "schedule_seconds": 0.437240315368399,
+            "host_wait_seconds": 0.0002817779313772917
+          },
+          "physical_cache": {
+            "requests": 320,
+            "hits": 294,
+            "misses": 26,
+            "evictions": 26,
+            "bytes_transferred": 163577856,
+            "source_load_seconds": 0.3977663991972804,
+            "schedule_seconds": 0.437240315368399,
+            "host_wait_seconds": 0.0002817779313772917
+          }
+        },
+        {
+          "output_token_index": 5,
+          "prefetch_seconds": 0.0,
+          "compute_seconds": 1.1553849769989029,
+          "prefetch": {
+            "requests": 0,
+            "hits": 0,
+            "misses": 0,
+            "evictions": 0,
+            "bytes_transferred": 0,
+            "source_load_seconds": 0.0,
+            "cuda_wait_seconds": 0.0,
+            "total_seconds": 0.0
+          },
+          "demand_cache": {
+            "requests": 320,
+            "hits": 271,
+            "misses": 49,
+            "evictions": 49,
+            "bytes_transferred": 308281344,
+            "source_load_seconds": 0.9211795580340549,
+            "schedule_seconds": 0.9966299537336454,
+            "host_wait_seconds": 0.0005496661178767681
+          },
+          "physical_cache": {
+            "requests": 320,
+            "hits": 271,
+            "misses": 49,
+            "evictions": 49,
+            "bytes_transferred": 308281344,
+            "source_load_seconds": 0.9211795580340549,
+            "schedule_seconds": 0.9966299537336454,
+            "host_wait_seconds": 0.0005496661178767681
+          }
+        },
+        {
+          "output_token_index": 6,
+          "prefetch_seconds": 0.0,
+          "compute_seconds": 0.8029707990353927,
+          "prefetch": {
+            "requests": 0,
+            "hits": 0,
+            "misses": 0,
+            "evictions": 0,
+            "bytes_transferred": 0,
+            "source_load_seconds": 0.0,
+            "cuda_wait_seconds": 0.0,
+            "total_seconds": 0.0
+          },
+          "demand_cache": {
+            "requests": 320,
+            "hits": 285,
+            "misses": 35,
+            "evictions": 35,
+            "bytes_transferred": 220200960,
+            "source_load_seconds": 0.6238966641249135,
+            "schedule_seconds": 0.6717295185662806,
+            "host_wait_seconds": 0.0003111156402155757
+          },
+          "physical_cache": {
+            "requests": 320,
+            "hits": 285,
+            "misses": 35,
+            "evictions": 35,
+            "bytes_transferred": 220200960,
+            "source_load_seconds": 0.6238966641249135,
+            "schedule_seconds": 0.6717295185662806,
+            "host_wait_seconds": 0.0003111156402155757
+          }
+        },
+        {
+          "output_token_index": 7,
+          "prefetch_seconds": 0.0,
+          "compute_seconds": 1.243972072028555,
+          "prefetch": {
+            "requests": 0,
+            "hits": 0,
+            "misses": 0,
+            "evictions": 0,
+            "bytes_transferred": 0,
+            "source_load_seconds": 0.0,
+            "cuda_wait_seconds": 0.0,
+            "total_seconds": 0.0
+          },
+          "demand_cache": {
+            "requests": 320,
+            "hits": 248,
+            "misses": 72,
+            "evictions": 72,
+            "bytes_transferred": 452984832,
+            "source_load_seconds": 1.0168853040086105,
+            "schedule_seconds": 1.1003420075867325,
+            "host_wait_seconds": 0.0005587545456364751
+          },
+          "physical_cache": {
+            "requests": 320,
+            "hits": 248,
+            "misses": 72,
+            "evictions": 72,
+            "bytes_transferred": 452984832,
+            "source_load_seconds": 1.0168853040086105,
+            "schedule_seconds": 1.1003420075867325,
+            "host_wait_seconds": 0.0005587545456364751
+          }
+        },
+        {
+          "output_token_index": 8,
+          "prefetch_seconds": 0.0,
+          "compute_seconds": 0.9884136429755017,
+          "prefetch": {
+            "requests": 0,
+            "hits": 0,
+            "misses": 0,
+            "evictions": 0,
+            "bytes_transferred": 0,
+            "source_load_seconds": 0.0,
+            "cuda_wait_seconds": 0.0,
+            "total_seconds": 0.0
+          },
+          "demand_cache": {
+            "requests": 320,
+            "hits": 281,
+            "misses": 39,
+            "evictions": 39,
+            "bytes_transferred": 245366784,
+            "source_load_seconds": 0.7907368880696595,
+            "schedule_seconds": 0.8492683874210343,
+            "host_wait_seconds": 0.0004171034088358283
+          },
+          "physical_cache": {
+            "requests": 320,
+            "hits": 281,
+            "misses": 39,
+            "evictions": 39,
+            "bytes_transferred": 245366784,
+            "source_load_seconds": 0.7907368880696595,
+            "schedule_seconds": 0.8492683874210343,
+            "host_wait_seconds": 0.0004171034088358283
+          }
+        },
+        {
+          "output_token_index": 9,
+          "prefetch_seconds": 0.0,
+          "compute_seconds": 1.1111308629624546,
+          "prefetch": {
+            "requests": 0,
+            "hits": 0,
+            "misses": 0,
+            "evictions": 0,
+            "bytes_transferred": 0,
+            "source_load_seconds": 0.0,
+            "cuda_wait_seconds": 0.0,
+            "total_seconds": 0.0
+          },
+          "demand_cache": {
+            "requests": 320,
+            "hits": 271,
+            "misses": 49,
+            "evictions": 49,
+            "bytes_transferred": 308281344,
+            "source_load_seconds": 0.8982095557730645,
+            "schedule_seconds": 0.9686142421560362,
+            "host_wait_seconds": 0.0004902732325717807
+          },
+          "physical_cache": {
+            "requests": 320,
+            "hits": 271,
+            "misses": 49,
+            "evictions": 49,
+            "bytes_transferred": 308281344,
+            "source_load_seconds": 0.8982095557730645,
+            "schedule_seconds": 0.9686142421560362,
+            "host_wait_seconds": 0.0004902732325717807
+          }
+        },
+        {
+          "output_token_index": 10,
+          "prefetch_seconds": 0.0,
+          "compute_seconds": 1.2184125590138137,
+          "prefetch": {
+            "requests": 0,
+            "hits": 0,
+            "misses": 0,
+            "evictions": 0,
+            "bytes_transferred": 0,
+            "source_load_seconds": 0.0,
+            "cuda_wait_seconds": 0.0,
+            "total_seconds": 0.0
+          },
+          "demand_cache": {
+            "requests": 320,
+            "hits": 260,
+            "misses": 60,
+            "evictions": 60,
+            "bytes_transferred": 377487360,
+            "source_load_seconds": 0.994164826348424,
+            "schedule_seconds": 1.0744306802516803,
+            "host_wait_seconds": 0.0005206617061048746
+          },
+          "physical_cache": {
+            "requests": 320,
+            "hits": 260,
+            "misses": 60,
+            "evictions": 60,
+            "bytes_transferred": 377487360,
+            "source_load_seconds": 0.994164826348424,
+            "schedule_seconds": 1.0744306802516803,
+            "host_wait_seconds": 0.0005206617061048746
+          }
+        },
+        {
+          "output_token_index": 11,
+          "prefetch_seconds": 0.0,
+          "compute_seconds": 1.919235304929316,
+          "prefetch": {
+            "requests": 0,
+            "hits": 0,
+            "misses": 0,
+            "evictions": 0,
+            "bytes_transferred": 0,
+            "source_load_seconds": 0.0,
+            "cuda_wait_seconds": 0.0,
+            "total_seconds": 0.0
+          },
+          "demand_cache": {
+            "requests": 320,
+            "hits": 229,
+            "misses": 91,
+            "evictions": 91,
+            "bytes_transferred": 572522496,
+            "source_load_seconds": 1.6498274758923799,
+            "schedule_seconds": 1.7698356847977266,
+            "host_wait_seconds": 0.0007786903297528625
+          },
+          "physical_cache": {
+            "requests": 320,
+            "hits": 229,
+            "misses": 91,
+            "evictions": 91,
+            "bytes_transferred": 572522496,
+            "source_load_seconds": 1.6498274758923799,
+            "schedule_seconds": 1.7698356847977266,
+            "host_wait_seconds": 0.0007786903297528625
+          }
+        },
+        {
+          "output_token_index": 12,
+          "prefetch_seconds": 0.0,
+          "compute_seconds": 0.9143008339451626,
+          "prefetch": {
+            "requests": 0,
+            "hits": 0,
+            "misses": 0,
+            "evictions": 0,
+            "bytes_transferred": 0,
+            "source_load_seconds": 0.0,
+            "cuda_wait_seconds": 0.0,
+            "total_seconds": 0.0
+          },
+          "demand_cache": {
+            "requests": 320,
+            "hits": 280,
+            "misses": 40,
+            "evictions": 40,
+            "bytes_transferred": 251658240,
+            "source_load_seconds": 0.6928680940764025,
+            "schedule_seconds": 0.7680752483429387,
+            "host_wait_seconds": 0.00046826095785945654
+          },
+          "physical_cache": {
+            "requests": 320,
+            "hits": 280,
+            "misses": 40,
+            "evictions": 40,
+            "bytes_transferred": 251658240,
+            "source_load_seconds": 0.6928680940764025,
+            "schedule_seconds": 0.7680752483429387,
+            "host_wait_seconds": 0.00046826095785945654
+          }
+        },
+        {
+          "output_token_index": 13,
+          "prefetch_seconds": 0.0,
+          "compute_seconds": 1.1592984129674733,
+          "prefetch": {
+            "requests": 0,
+            "hits": 0,
+            "misses": 0,
+            "evictions": 0,
+            "bytes_transferred": 0,
+            "source_load_seconds": 0.0,
+            "cuda_wait_seconds": 0.0,
+            "total_seconds": 0.0
+          },
+          "demand_cache": {
+            "requests": 320,
+            "hits": 262,
+            "misses": 58,
+            "evictions": 58,
+            "bytes_transferred": 364904448,
+            "source_load_seconds": 0.9366652786266059,
+            "schedule_seconds": 1.0196735342033207,
+            "host_wait_seconds": 0.0005501369014382362
+          },
+          "physical_cache": {
+            "requests": 320,
+            "hits": 262,
+            "misses": 58,
+            "evictions": 58,
+            "bytes_transferred": 364904448,
+            "source_load_seconds": 0.9366652786266059,
+            "schedule_seconds": 1.0196735342033207,
+            "host_wait_seconds": 0.0005501369014382362
+          }
+        },
+        {
+          "output_token_index": 14,
+          "prefetch_seconds": 0.0,
+          "compute_seconds": 0.9212831170298159,
+          "prefetch": {
+            "requests": 0,
+            "hits": 0,
+            "misses": 0,
+            "evictions": 0,
+            "bytes_transferred": 0,
+            "source_load_seconds": 0.0,
+            "cuda_wait_seconds": 0.0,
+            "total_seconds": 0.0
+          },
+          "demand_cache": {
+            "requests": 320,
+            "hits": 273,
+            "misses": 47,
+            "evictions": 47,
+            "bytes_transferred": 295698432,
+            "source_load_seconds": 0.7145725802984089,
+            "schedule_seconds": 0.784763002069667,
+            "host_wait_seconds": 0.0004611862823367119
+          },
+          "physical_cache": {
+            "requests": 320,
+            "hits": 273,
+            "misses": 47,
+            "evictions": 47,
+            "bytes_transferred": 295698432,
+            "source_load_seconds": 0.7145725802984089,
+            "schedule_seconds": 0.784763002069667,
+            "host_wait_seconds": 0.0004611862823367119
+          }
+        },
+        {
+          "output_token_index": 15,
+          "prefetch_seconds": 0.0,
+          "compute_seconds": 0.3302413609344512,
+          "prefetch": {
+            "requests": 0,
+            "hits": 0,
+            "misses": 0,
+            "evictions": 0,
+            "bytes_transferred": 0,
+            "source_load_seconds": 0.0,
+            "cuda_wait_seconds": 0.0,
+            "total_seconds": 0.0
+          },
+          "demand_cache": {
+            "requests": 320,
+            "hits": 307,
+            "misses": 13,
+            "evictions": 13,
+            "bytes_transferred": 81788928,
+            "source_load_seconds": 0.18248364294413477,
+            "schedule_seconds": 0.21143781777936965,
+            "host_wait_seconds": 0.00017378816846758127
+          },
+          "physical_cache": {
+            "requests": 320,
+            "hits": 307,
+            "misses": 13,
+            "evictions": 13,
+            "bytes_transferred": 81788928,
+            "source_load_seconds": 0.18248364294413477,
+            "schedule_seconds": 0.21143781777936965,
+            "host_wait_seconds": 0.00017378816846758127
+          }
+        }
+      ],
+      "final_cache_stats": {
+        "requests": 7908,
+        "hits": 4061,
+        "misses": 3847,
+        "evictions": 1287,
+        "bytes_transferred": 24203231232,
+        "source_load_seconds": 56.48045871371869,
+        "schedule_seconds": 58.56509493489284,
+        "host_wait_seconds": 0.008597458596341312
+      },
+      "oracle_trace_complete": true
+    },
+    {
+      "policy": "oracle_token_prefetch",
+      "cache_pages": 2560,
+      "cache_capacity_bytes": 16106127360,
+      "expert_page_bytes": 6291456,
+      "load": {
+        "loaded_tensors": 613,
+        "loaded_bytes": 4896711936,
+        "touched_shards": 26,
+        "load_seconds": 4.215501033002511,
+        "total_model_construction_seconds": 4.459670473006554
+      },
+      "peak_allocated_bytes": 21066319872,
+      "peak_fraction_of_checkpoint": 0.29297985870485727,
+      "prompt_tokens": 28,
+      "output_tokens": 16,
+      "time_to_first_token_seconds": 46.82688709395006,
+      "compute": {
+        "tokens": 15,
+        "seconds": 1.7938189031556249,
+        "tokens_per_second": 8.362048127384828,
+        "mean_seconds_per_token": 0.11958792687704166,
+        "median_seconds_per_token": 0.11440325994044542,
+        "p95_seconds_per_token": 0.1780624110251665,
+        "minimum_seconds_per_token": 0.10947145603131503,
+        "maximum_seconds_per_token": 0.1780624110251665
+      },
+      "pipeline": {
+        "decode_forwards": 15,
+        "serial_seconds": 15.074151747277938,
+        "serial_tokens_per_second": 0.995080867665318,
+        "compute_only_seconds": 1.7938189031556249,
+        "compute_only_tokens_per_second": 8.362048127384828,
+        "ideal_one_token_overlap_seconds": 13.391443857108243,
+        "ideal_one_token_overlap_tokens_per_second": 1.1201182008494124,
+        "prefetch_seconds": 13.280332844122313
+      },
+      "serial_end_to_end_seconds": 61.901038841228,
+      "serial_end_to_end_output_tokens_per_second": 0.25847708373746237,
+      "ideal_overlap_end_to_end_seconds": 60.218330951058306,
+      "ideal_overlap_end_to_end_output_tokens_per_second": 0.2656998250749228,
+      "predicted_token_ids": [
+        760,
+        12515,
+        7701,
+        6105,
+        4016,
+        310,
+        264,
+        24057,
+        2512,
+        2972,
+        28232,
+        60845,
+        69377,
+        159034,
+        271,
+        8160
+      ],
+      "selected_token_ids": [
+        760,
+        12515,
+        7701,
+        6105,
+        4016,
+        310,
+        264,
+        24057,
+        2512,
+        2972,
+        28232,
+        60845,
+        69377,
+        159034,
+        271,
+        8160
+      ],
+      "selected_text": "The sky appears blue due to a phenomenon called **Rayleigh scattering**.\n\nHere",
+      "forced_path_top1_agreement_fraction": 1.0,
+      "prefill_cache": {
+        "requests": 3108,
+        "hits": 0,
+        "misses": 3108,
+        "evictions": 548,
+        "bytes_transferred": 19553845248,
+        "source_load_seconds": 44.83727064076811,
+        "schedule_seconds": 46.00205961451866,
+        "host_wait_seconds": 0.005048330524004996
+      },
+      "decode_physical_cache": {
+        "requests": 4800,
+        "hits": 4800,
+        "misses": 0,
+        "evictions": 739,
+        "bytes_transferred": 4649385984,
+        "source_load_seconds": 11.85337675595656,
+        "schedule_seconds": 0.08070532081183046,
+        "host_wait_seconds": 0.13843048189301044
+      },
+      "prefetch_stats": {
+        "requests": 4800,
+        "hits": 4061,
+        "misses": 739,
+        "evictions": 739,
+        "bytes_transferred": 4649385984,
+        "source_load_seconds": 11.85337675595656,
+        "cuda_wait_seconds": 0.13843048189301044,
+        "total_seconds": 13.278443070827052
+      },
+      "expected_oracle_decode_misses": 739,
+      "demand_misses_match_offline_optimal": false,
+      "steps": [
+        {
+          "output_token_index": 1,
+          "prefetch_seconds": 1.2692877299850807,
+          "compute_seconds": 0.1780624110251665,
+          "prefetch": {
+            "requests": 320,
+            "hits": 260,
+            "misses": 60,
+            "evictions": 60,
+            "bytes_transferred": 377487360,
+            "source_load_seconds": 1.157098464667797,
+            "cuda_wait_seconds": 0.012479909346438944,
+            "total_seconds": 1.2689912010682747
+          },
+          "demand_cache": {
+            "requests": 320,
+            "hits": 320,
+            "misses": 0,
+            "evictions": 0,
+            "bytes_transferred": 0,
+            "source_load_seconds": 0.0,
+            "schedule_seconds": 0.006126363063231111,
+            "host_wait_seconds": 0.0
+          },
+          "physical_cache": {
+            "requests": 320,
+            "hits": 320,
+            "misses": 0,
+            "evictions": 60,
+            "bytes_transferred": 377487360,
+            "source_load_seconds": 1.157098464667797,
+            "schedule_seconds": 0.006126363063231111,
+            "host_wait_seconds": 0.012479909346438944
+          }
+        },
+        {
+          "output_token_index": 2,
+          "prefetch_seconds": 0.9478076120140031,
+          "compute_seconds": 0.11440325994044542,
+          "prefetch": {
+            "requests": 320,
+            "hits": 271,
+            "misses": 49,
+            "evictions": 49,
+            "bytes_transferred": 308281344,
+            "source_load_seconds": 0.8508266269927844,
+            "cuda_wait_seconds": 0.009111744235269725,
+            "total_seconds": 0.9476728879380971
+          },
+          "demand_cache": {
+            "requests": 320,
+            "hits": 320,
+            "misses": 0,
+            "evictions": 0,
+            "bytes_transferred": 0,
+            "source_load_seconds": 0.0,
+            "schedule_seconds": 0.004813082283362746,
+            "host_wait_seconds": 0.0
+          },
+          "physical_cache": {
+            "requests": 320,
+            "hits": 320,
+            "misses": 0,
+            "evictions": 49,
+            "bytes_transferred": 308281344,
+            "source_load_seconds": 0.8508266269927844,
+            "schedule_seconds": 0.004813082283362746,
+            "host_wait_seconds": 0.009111744235269725
+          }
+        },
+        {
+          "output_token_index": 3,
+          "prefetch_seconds": 0.9169160630553961,
+          "compute_seconds": 0.11657930596265942,
+          "prefetch": {
+            "requests": 320,
+            "hits": 269,
+            "misses": 51,
+            "evictions": 51,
+            "bytes_transferred": 320864256,
+            "source_load_seconds": 0.8283395989565179,
+            "cuda_wait_seconds": 0.008870272198691964,
+            "total_seconds": 0.9168102529365569
+          },
+          "demand_cache": {
+            "requests": 320,
+            "hits": 320,
+            "misses": 0,
+            "evictions": 0,
+            "bytes_transferred": 0,
+            "source_load_seconds": 0.0,
+            "schedule_seconds": 0.004773276043124497,
+            "host_wait_seconds": 0.0
+          },
+          "physical_cache": {
+            "requests": 320,
+            "hits": 320,
+            "misses": 0,
+            "evictions": 51,
+            "bytes_transferred": 320864256,
+            "source_load_seconds": 0.8283395989565179,
+            "schedule_seconds": 0.004773276043124497,
+            "host_wait_seconds": 0.008870272198691964
+          }
+        },
+        {
+          "output_token_index": 4,
+          "prefetch_seconds": 0.44765266205649823,
+          "compute_seconds": 0.12499651999678463,
+          "prefetch": {
+            "requests": 320,
+            "hits": 294,
+            "misses": 26,
+            "evictions": 26,
+            "bytes_transferred": 163577856,
+            "source_load_seconds": 0.39852691476698965,
+            "cuda_wait_seconds": 0.006472299457527697,
+            "total_seconds": 0.4475292090792209
+          },
+          "demand_cache": {
+            "requests": 320,
+            "hits": 320,
+            "misses": 0,
+            "evictions": 0,
+            "bytes_transferred": 0,
+            "source_load_seconds": 0.0,
+            "schedule_seconds": 0.005713529186323285,
+            "host_wait_seconds": 0.0
+          },
+          "physical_cache": {
+            "requests": 320,
+            "hits": 320,
+            "misses": 0,
+            "evictions": 26,
+            "bytes_transferred": 163577856,
+            "source_load_seconds": 0.39852691476698965,
+            "schedule_seconds": 0.005713529186323285,
+            "host_wait_seconds": 0.006472299457527697
+          }
+        },
+        {
+          "output_token_index": 5,
+          "prefetch_seconds": 0.9077358009526506,
+          "compute_seconds": 0.11653130606282502,
+          "prefetch": {
+            "requests": 320,
+            "hits": 271,
+            "misses": 49,
+            "evictions": 49,
+            "bytes_transferred": 308281344,
+            "source_load_seconds": 0.8129708144115284,
+            "cuda_wait_seconds": 0.012060236767865717,
+            "total_seconds": 0.907622879021801
+          },
+          "demand_cache": {
+            "requests": 320,
+            "hits": 320,
+            "misses": 0,
+            "evictions": 0,
+            "bytes_transferred": 0,
+            "source_load_seconds": 0.0,
+            "schedule_seconds": 0.004951928509399295,
+            "host_wait_seconds": 0.0
+          },
+          "physical_cache": {
+            "requests": 320,
+            "hits": 320,
+            "misses": 0,
+            "evictions": 49,
+            "bytes_transferred": 308281344,
+            "source_load_seconds": 0.8129708144115284,
+            "schedule_seconds": 0.004951928509399295,
+            "host_wait_seconds": 0.012060236767865717
+          }
+        },
+        {
+          "output_token_index": 6,
+          "prefetch_seconds": 0.6201410900102928,
+          "compute_seconds": 0.11174453608691692,
+          "prefetch": {
+            "requests": 320,
+            "hits": 285,
+            "misses": 35,
+            "evictions": 35,
+            "bytes_transferred": 220200960,
+            "source_load_seconds": 0.5531354778213426,
+            "cuda_wait_seconds": 0.008280670386739075,
+            "total_seconds": 0.6200324749806896
+          },
+          "demand_cache": {
+            "requests": 320,
+            "hits": 320,
+            "misses": 0,
+            "evictions": 0,
+            "bytes_transferred": 0,
+            "source_load_seconds": 0.0,
+            "schedule_seconds": 0.0049255917547270656,
+            "host_wait_seconds": 0.0
+          },
+          "physical_cache": {
+            "requests": 320,
+            "hits": 320,
+            "misses": 0,
+            "evictions": 35,
+            "bytes_transferred": 220200960,
+            "source_load_seconds": 0.5531354778213426,
+            "schedule_seconds": 0.0049255917547270656,
+            "host_wait_seconds": 0.008280670386739075
+          }
+        },
+        {
+          "output_token_index": 7,
+          "prefetch_seconds": 1.218266998999752,
+          "compute_seconds": 0.11379711900372058,
+          "prefetch": {
+            "requests": 320,
+            "hits": 248,
+            "misses": 72,
+            "evictions": 72,
+            "bytes_transferred": 452984832,
+            "source_load_seconds": 1.0945618642726913,
+            "cuda_wait_seconds": 0.011173254111781716,
+            "total_seconds": 1.2181354110362008
+          },
+          "demand_cache": {
+            "requests": 320,
+            "hits": 320,
+            "misses": 0,
+            "evictions": 0,
+            "bytes_transferred": 0,
+            "source_load_seconds": 0.0,
+            "schedule_seconds": 0.005240001366473734,
+            "host_wait_seconds": 0.0
+          },
+          "physical_cache": {
+            "requests": 320,
+            "hits": 320,
+            "misses": 0,
+            "evictions": 72,
+            "bytes_transferred": 452984832,
+            "source_load_seconds": 1.0945618642726913,
+            "schedule_seconds": 0.005240001366473734,
+            "host_wait_seconds": 0.011173254111781716
+          }
+        },
+        {
+          "output_token_index": 8,
+          "prefetch_seconds": 0.7888559850398451,
+          "compute_seconds": 0.10947145603131503,
+          "prefetch": {
+            "requests": 320,
+            "hits": 281,
+            "misses": 39,
+            "evictions": 39,
+            "bytes_transferred": 245366784,
+            "source_load_seconds": 0.7103309414815158,
+            "cuda_wait_seconds": 0.0077034353744238615,
+            "total_seconds": 0.7887479510391131
+          },
+          "demand_cache": {
+            "requests": 320,
+            "hits": 320,
+            "misses": 0,
+            "evictions": 0,
+            "bytes_transferred": 0,
+            "source_load_seconds": 0.0,
+            "schedule_seconds": 0.004722547251731157,
+            "host_wait_seconds": 0.0
+          },
+          "physical_cache": {
+            "requests": 320,
+            "hits": 320,
+            "misses": 0,
+            "evictions": 39,
+            "bytes_transferred": 245366784,
+            "source_load_seconds": 0.7103309414815158,
+            "schedule_seconds": 0.004722547251731157,
+            "host_wait_seconds": 0.0077034353744238615
+          }
+        },
+        {
+          "output_token_index": 9,
+          "prefetch_seconds": 0.9504860029555857,
+          "compute_seconds": 0.13012650702148676,
+          "prefetch": {
+            "requests": 320,
+            "hits": 271,
+            "misses": 49,
+            "evictions": 49,
+            "bytes_transferred": 308281344,
+            "source_load_seconds": 0.8515390664106235,
+            "cuda_wait_seconds": 0.008280521142296493,
+            "total_seconds": 0.9503817869117483
+          },
+          "demand_cache": {
+            "requests": 320,
+            "hits": 320,
+            "misses": 0,
+            "evictions": 0,
+            "bytes_transferred": 0,
+            "source_load_seconds": 0.0,
+            "schedule_seconds": 0.008267989731393754,
+            "host_wait_seconds": 0.0
+          },
+          "physical_cache": {
+            "requests": 320,
+            "hits": 320,
+            "misses": 0,
+            "evictions": 49,
+            "bytes_transferred": 308281344,
+            "source_load_seconds": 0.8515390664106235,
+            "schedule_seconds": 0.008267989731393754,
+            "host_wait_seconds": 0.008280521142296493
+          }
+        },
+        {
+          "output_token_index": 10,
+          "prefetch_seconds": 1.0593185470206663,
+          "compute_seconds": 0.11492194596212357,
+          "prefetch": {
+            "requests": 320,
+            "hits": 260,
+            "misses": 60,
+            "evictions": 60,
+            "bytes_transferred": 377487360,
+            "source_load_seconds": 0.9415277922526002,
+            "cuda_wait_seconds": 0.010163183906115592,
+            "total_seconds": 1.0592052139109
+          },
+          "demand_cache": {
+            "requests": 320,
+            "hits": 320,
+            "misses": 0,
+            "evictions": 0,
+            "bytes_transferred": 0,
+            "source_load_seconds": 0.0,
+            "schedule_seconds": 0.005122596863657236,
+            "host_wait_seconds": 0.0
+          },
+          "physical_cache": {
+            "requests": 320,
+            "hits": 320,
+            "misses": 0,
+            "evictions": 60,
+            "bytes_transferred": 377487360,
+            "source_load_seconds": 0.9415277922526002,
+            "schedule_seconds": 0.005122596863657236,
+            "host_wait_seconds": 0.010163183906115592
+          }
+        },
+        {
+          "output_token_index": 11,
+          "prefetch_seconds": 1.6004816610366106,
+          "compute_seconds": 0.11246659397147596,
+          "prefetch": {
+            "requests": 320,
+            "hits": 229,
+            "misses": 91,
+            "evictions": 91,
+            "bytes_transferred": 572522496,
+            "source_load_seconds": 1.426238949643448,
+            "cuda_wait_seconds": 0.012651331024244428,
+            "total_seconds": 1.600370159954764
+          },
+          "demand_cache": {
+            "requests": 320,
+            "hits": 320,
+            "misses": 0,
+            "evictions": 0,
+            "bytes_transferred": 0,
+            "source_load_seconds": 0.0,
+            "schedule_seconds": 0.005175182828679681,
+            "host_wait_seconds": 0.0
+          },
+          "physical_cache": {
+            "requests": 320,
+            "hits": 320,
+            "misses": 0,
+            "evictions": 91,
+            "bytes_transferred": 572522496,
+            "source_load_seconds": 1.426238949643448,
+            "schedule_seconds": 0.005175182828679681,
+            "host_wait_seconds": 0.012651331024244428
+          }
+        },
+        {
+          "output_token_index": 12,
+          "prefetch_seconds": 0.7429485700558871,
+          "compute_seconds": 0.11756226699799299,
+          "prefetch": {
+            "requests": 320,
+            "hits": 280,
+            "misses": 40,
+            "evictions": 40,
+            "bytes_transferred": 251658240,
+            "source_load_seconds": 0.6532842194428667,
+            "cuda_wait_seconds": 0.00933966098818928,
+            "total_seconds": 0.7428396339528263
+          },
+          "demand_cache": {
+            "requests": 320,
+            "hits": 320,
+            "misses": 0,
+            "evictions": 0,
+            "bytes_transferred": 0,
+            "source_load_seconds": 0.0,
+            "schedule_seconds": 0.0054616492707282305,
+            "host_wait_seconds": 0.0
+          },
+          "physical_cache": {
+            "requests": 320,
+            "hits": 320,
+            "misses": 0,
+            "evictions": 40,
+            "bytes_transferred": 251658240,
+            "source_load_seconds": 0.6532842194428667,
+            "schedule_seconds": 0.0054616492707282305,
+            "host_wait_seconds": 0.00933966098818928
+          }
+        },
+        {
+          "output_token_index": 13,
+          "prefetch_seconds": 0.9358171710046008,
+          "compute_seconds": 0.11148737103212625,
+          "prefetch": {
+            "requests": 320,
+            "hits": 262,
+            "misses": 58,
+            "evictions": 58,
+            "bytes_transferred": 364904448,
+            "source_load_seconds": 0.8227057904005051,
+            "cuda_wait_seconds": 0.00977418222464621,
+            "total_seconds": 0.935704558971338
+          },
+          "demand_cache": {
+            "requests": 320,
+            "hits": 320,
+            "misses": 0,
+            "evictions": 0,
+            "bytes_transferred": 0,
+            "source_load_seconds": 0.0,
+            "schedule_seconds": 0.0052842654986307025,
+            "host_wait_seconds": 0.0
+          },
+          "physical_cache": {
+            "requests": 320,
+            "hits": 320,
+            "misses": 0,
+            "evictions": 58,
+            "bytes_transferred": 364904448,
+            "source_load_seconds": 0.8227057904005051,
+            "schedule_seconds": 0.0052842654986307025,
+            "host_wait_seconds": 0.00977418222464621
+          }
+        },
+        {
+          "output_token_index": 14,
+          "prefetch_seconds": 0.7199829600285739,
+          "compute_seconds": 0.11055729107465595,
+          "prefetch": {
+            "requests": 320,
+            "hits": 273,
+            "misses": 47,
+            "evictions": 47,
+            "bytes_transferred": 295698432,
+            "source_load_seconds": 0.6270082351984456,
+            "cuda_wait_seconds": 0.008656865102238953,
+            "total_seconds": 0.7198724719928578
+          },
+          "demand_cache": {
+            "requests": 320,
+            "hits": 320,
+            "misses": 0,
+            "evictions": 0,
+            "bytes_transferred": 0,
+            "source_load_seconds": 0.0,
+            "schedule_seconds": 0.005026472150348127,
+            "host_wait_seconds": 0.0
+          },
+          "physical_cache": {
+            "requests": 320,
+            "hits": 320,
+            "misses": 0,
+            "evictions": 47,
+            "bytes_transferred": 295698432,
+            "source_load_seconds": 0.6270082351984456,
+            "schedule_seconds": 0.005026472150348127,
+            "host_wait_seconds": 0.008656865102238953
+          }
+        },
+        {
+          "output_token_index": 15,
+          "prefetch_seconds": 0.15463398990686983,
+          "compute_seconds": 0.11111101298592985,
+          "prefetch": {
+            "requests": 320,
+            "hits": 307,
+            "misses": 13,
+            "evictions": 13,
+            "bytes_transferred": 81788928,
+            "source_load_seconds": 0.12528199923690408,
+            "cuda_wait_seconds": 0.00341291562654078,
+            "total_seconds": 0.15452697803266346
+          },
+          "demand_cache": {
+            "requests": 320,
+            "hits": 320,
+            "misses": 0,
+            "evictions": 0,
+            "bytes_transferred": 0,
+            "source_load_seconds": 0.0,
+            "schedule_seconds": 0.005100845010019839,
+            "host_wait_seconds": 0.0
+          },
+          "physical_cache": {
+            "requests": 320,
+            "hits": 320,
+            "misses": 0,
+            "evictions": 13,
+            "bytes_transferred": 81788928,
+            "source_load_seconds": 0.12528199923690408,
+            "schedule_seconds": 0.005100845010019839,
+            "host_wait_seconds": 0.00341291562654078
+          }
+        }
+      ],
+      "final_cache_stats": {
+        "requests": 7908,
+        "hits": 4800,
+        "misses": 3108,
+        "evictions": 1287,
+        "bytes_transferred": 24203231232,
+        "source_load_seconds": 56.69064739672467,
+        "schedule_seconds": 46.08276493533049,
+        "host_wait_seconds": 0.14347881241701543
+      },
+      "oracle_trace_complete": true
+    }
+  ]
+}

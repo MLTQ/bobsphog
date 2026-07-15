@@ -18,7 +18,7 @@ pretrained = [
   "accelerate>=1.13",
   "huggingface-hub>=1.9",
   "safetensors>=0.7",
-  "transformers>=5.5",
+  "transformers>=5.12",
 ]
 
 [project.scripts]
@@ -31,6 +31,8 @@ bobsphog-b1 = "bobsphog.b1:main"
 bobsphog-b1-capability = "bobsphog.b1_capability:main"
 bobsphog-b1-throughput = "bobsphog.b1_throughput:main"
 bobsphog-b2 = "bobsphog.b2:main"
+bobsphog-b21 = "bobsphog.b21:main"
+bobsphog-glm-b15 = "bobsphog.glm_b15:main"
 bobsphog-smoke = "bobsphog.smoke:main"
 
 [dependency-groups]

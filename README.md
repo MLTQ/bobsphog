@@ -126,6 +126,9 @@ See:
 - [B2 cache-scaling results](docs/b2-results.md) for the measured VRAM/rate
   frontier, multi-token expert union, previous-token overlap, and
   offline-optimal replacement bound.
+- [B2.1 oracle paging results](docs/b21-results.md) for live future-aware
+  retention, compute-ready decode speed, token-prefetch limits, and the
+  zero-fault prompt-union control.
 
 ## Current prototype
 
@@ -159,6 +162,16 @@ uv run bobsphog-b1-throughput \
 uv run bobsphog-b2 \
   --checkpoint /path/to/Qwen3.6-35B-A3B \
   --cache-pages 2560 2048 1280 640 320
+uv run bobsphog-b21 \
+  --checkpoint /path/to/Qwen3.6-35B-A3B \
+  --trace outputs/b2-4090-warm-ascending.json \
+  --cache-pages 1280 2048 2560
+# The full decode union plus the largest prefill layer requires 2,560 pages:
+uv run bobsphog-b21 \
+  --checkpoint /path/to/Qwen3.6-35B-A3B \
+  --trace outputs/b2-4090-warm-ascending.json \
+  --cache-pages 2560 \
+  --policies oracle_prompt_union
 ```
 
 The smoke command reports output divergence from the full model as logical
