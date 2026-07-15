@@ -30,6 +30,7 @@ bobsphog-a6 = "bobsphog.a6:main"
 bobsphog-b1 = "bobsphog.b1:main"
 bobsphog-b1-capability = "bobsphog.b1_capability:main"
 bobsphog-b1-throughput = "bobsphog.b1_throughput:main"
+bobsphog-b2 = "bobsphog.b2:main"
 bobsphog-smoke = "bobsphog.smoke:main"
 
 [dependency-groups]

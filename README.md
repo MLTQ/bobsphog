@@ -123,6 +123,9 @@ See:
 - [B1.6 throughput results](docs/b1-throughput-results.md) for TTFT, steady
   decode rate, same-device slowdown, 4090 file-backed performance, and B2
   optimization gates.
+- [B2 cache-scaling results](docs/b2-results.md) for the measured VRAM/rate
+  frontier, multi-token expert union, previous-token overlap, and
+  offline-optimal replacement bound.
 
 ## Current prototype
 
@@ -153,6 +156,9 @@ uv run bobsphog-b1-capability \
 uv run bobsphog-b1-throughput \
   --checkpoint /path/to/Qwen3.6-35B-A3B \
   --mode both
+uv run bobsphog-b2 \
+  --checkpoint /path/to/Qwen3.6-35B-A3B \
+  --cache-pages 2560 2048 1280 640 320
 ```
 
 The smoke command reports output divergence from the full model as logical
