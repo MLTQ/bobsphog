@@ -117,6 +117,12 @@ See:
   Qwen3.6-35B-A3B and its 6 MiB file-backed expert-page layout.
 - [B1 results](docs/b1-results.md) for the first full out-of-core pretrained
   inference, 90.3% CUDA residency reduction, warm replay, and decode-time churn.
+- [B1.5 capability results](docs/b1-capability-results.md) for the same-device
+  full-model control, 89.9% peak-memory reduction, six capability probes, and
+  exact paged autoregressive output parity.
+- [B1.6 throughput results](docs/b1-throughput-results.md) for TTFT, steady
+  decode rate, same-device slowdown, 4090 file-backed performance, and B2
+  optimization gates.
 
 ## Current prototype
 
@@ -140,6 +146,13 @@ uv run bobsphog-a6
 # On the CUDA host, after the Qwen3.6 checkpoint is present:
 uv sync --extra pretrained
 uv run bobsphog-b1 --checkpoint /path/to/Qwen3.6-35B-A3B
+# On a device with enough memory for the full text-model control:
+uv run bobsphog-b1-capability \
+  --checkpoint /path/to/Qwen3.6-35B-A3B \
+  --autoregressive-probes 6
+uv run bobsphog-b1-throughput \
+  --checkpoint /path/to/Qwen3.6-35B-A3B \
+  --mode both
 ```
 
 The smoke command reports output divergence from the full model as logical
@@ -148,10 +161,11 @@ allocated in one PyTorch model; real CPU/GPU demand paging comes after the
 logical mechanics and training objectives are validated.
 
 The Mac remains useful for controller plumbing and CPU tests. CUDA cache work
-now runs remotely on the 4090. The pretrained target is Qwen3.6-35B-A3B: a 35B
-total/3B active MoE whose routed expert tensors remain memory-mapped on NVMe.
-Qwen3.5-2B may be used as a cheap compatibility fixture, but it is not the main
-deployment claim.
+runs remotely on the 4090; the 128 GB Strix Halo box provides a 100 GiB ROCm
+allocation for full-model controls. The pretrained target is Qwen3.6-35B-A3B:
+a 35B-total/3B-active MoE whose routed expert tensors remain memory-mapped on
+NVMe. Qwen3.5-2B may be used as a cheap compatibility fixture, but it is not the
+main deployment claim.
 
 The A2 command trains a dense teacher on addition and multiplication modulo ten,
 converts it exactly into the paged representation, trains the student with

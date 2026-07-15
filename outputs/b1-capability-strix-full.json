@@ -1,0 +1,336 @@
+{
+  "config": {
+    "checkpoint": "/root/.cache/huggingface/hub/models--Qwen--Qwen3.6-35B-A3B/snapshots/995ad96eacd98c81ed38be0c5b274b04031597b0",
+    "device": "cuda:0",
+    "cache_pages": 320,
+    "max_new_tokens": 12,
+    "probe_limit": 6,
+    "autoregressive_probes": 6,
+    "top_k": 5
+  },
+  "gpu": "Radeon 8060S Graphics",
+  "checkpoint_parameter_bytes": 71903776776,
+  "reference": {
+    "load": {
+      "loaded_tensors": 693,
+      "loaded_bytes": 69321221376,
+      "touched_shards": 26,
+      "load_seconds": 16.535557799000003
+    },
+    "allocated_bytes": 69321256960,
+    "peak_allocated_bytes": 69490578432,
+    "evaluation_seconds": 14.923535618000074
+  },
+  "after_reference_free_allocated_bytes": 79691776,
+  "paged": {
+    "load": {
+      "loaded_tensors": 613,
+      "loaded_bytes": 4896711936,
+      "touched_shards": 26,
+      "load_seconds": 1.3499239489999582
+    },
+    "allocated_before_probes_bytes": 4976439296,
+    "peak_allocated_bytes": 7044852224,
+    "expert_cache_capacity_bytes": 2013265920,
+    "evaluation_seconds": 46.34177318900004,
+    "final_cache_stats": {
+      "requests": 48384,
+      "hits": 2557,
+      "misses": 45827,
+      "evictions": 45507,
+      "bytes_transferred": 288318554112,
+      "source_load_seconds": 25.401628908998646,
+      "schedule_seconds": 27.526682544001915,
+      "host_wait_seconds": 0.0736793110038434
+    }
+  },
+  "memory": {
+    "paged_to_reference_peak_fraction": 0.10137852328994124,
+    "peak_reduction_fraction": 0.8986214767100588
+  },
+  "capability": {
+    "probes": 6,
+    "generated_steps": 36,
+    "reference_expected_passes": 6,
+    "paged_expected_passes": 6,
+    "reference_top1_agreement_fraction": 0.9722222238779068,
+    "all_probe_decisions_match": false,
+    "autoregressive_probes": 6,
+    "autoregressive_sequence_matches": 6,
+    "all_autoregressive_sequences_match": true,
+    "mean_teacher_kl_per_token": 0.0008068172310736878,
+    "max_teacher_kl_per_token": 0.017569933086633682
+  },
+  "probe_results": [
+    {
+      "name": "instruction",
+      "prompt": "Reply with exactly SAPPHIRE and nothing else.",
+      "expected_substring": "sapphire",
+      "reference_text": "SAPPHIRE\n",
+      "paged_teacher_forced_top1_text": "SAPPHIRE\n",
+      "reference_expected_pass": true,
+      "paged_expected_pass": true,
+      "comparison": {
+        "steps": 7,
+        "mean_kl_per_token": 0.0001647755125304684,
+        "max_kl_per_token": 0.0005502233980223536,
+        "mean_absolute_logit_error": 0.2314123958349228,
+        "max_absolute_logit_error": 2.21875,
+        "reference_top1_agreement_fraction": 1.0,
+        "generated_token_agreement_fraction": 1.0,
+        "all_reference_top1_decisions_match": true,
+        "all_generated_tokens_match": true,
+        "mean_top_k_overlap_fraction": 0.9428571462631226,
+        "first_reference_top1_mismatch_step": null
+      },
+      "cache": {
+        "requests": 3402,
+        "hits": 0,
+        "misses": 3402,
+        "evictions": 3082,
+        "bytes_transferred": 21403533312,
+        "source_load_seconds": 4.800305657999161,
+        "schedule_seconds": 5.034205975999612,
+        "host_wait_seconds": 0.0050801880021253965
+      },
+      "paged_autoregressive_text": "SAPPHIRE\n",
+      "autoregressive_sequence_match": true,
+      "autoregressive_seconds": 4.073731275,
+      "autoregressive_cache": {
+        "requests": 4787,
+        "hits": 467,
+        "misses": 4320,
+        "evictions": 4320,
+        "bytes_transferred": 27179089920,
+        "source_load_seconds": 1.725524112003086,
+        "schedule_seconds": 1.9267369730011978,
+        "host_wait_seconds": 0.0068873589957547665
+      }
+    },
+    {
+      "name": "factual",
+      "prompt": "What is the capital of France? Answer with only the city name.",
+      "expected_substring": "paris",
+      "reference_text": "Paris\n",
+      "paged_teacher_forced_top1_text": "Paris\n",
+      "reference_expected_pass": true,
+      "paged_expected_pass": true,
+      "comparison": {
+        "steps": 4,
+        "mean_kl_per_token": 0.0001247041509486735,
+        "max_kl_per_token": 0.0003881452139467001,
+        "mean_absolute_logit_error": 0.19270506501197815,
+        "max_absolute_logit_error": 5.4375,
+        "reference_top1_agreement_fraction": 1.0,
+        "generated_token_agreement_fraction": 1.0,
+        "all_reference_top1_decisions_match": true,
+        "all_generated_tokens_match": true,
+        "mean_top_k_overlap_fraction": 0.8999999761581421,
+        "first_reference_top1_mismatch_step": null
+      },
+      "cache": {
+        "requests": 3208,
+        "hits": 0,
+        "misses": 3208,
+        "evictions": 3208,
+        "bytes_transferred": 20182990848,
+        "source_load_seconds": 2.4833048729997245,
+        "schedule_seconds": 2.629316549000123,
+        "host_wait_seconds": 0.005248123000455962
+      },
+      "paged_autoregressive_text": "Paris\n",
+      "autoregressive_sequence_match": true,
+      "autoregressive_seconds": 3.391328647000023,
+      "autoregressive_cache": {
+        "requests": 3852,
+        "hits": 143,
+        "misses": 3709,
+        "evictions": 3709,
+        "bytes_transferred": 23335010304,
+        "source_load_seconds": 1.6312160729969492,
+        "schedule_seconds": 1.8081041740001638,
+        "host_wait_seconds": 0.006368764004378136
+      }
+    },
+    {
+      "name": "arithmetic",
+      "prompt": "A shelf has 17 books. Nine are removed. How many remain? Answer only.",
+      "expected_substring": "8",
+      "reference_text": "8\n",
+      "paged_teacher_forced_top1_text": "8\n",
+      "reference_expected_pass": true,
+      "paged_expected_pass": true,
+      "comparison": {
+        "steps": 4,
+        "mean_kl_per_token": 4.523495135799749e-06,
+        "max_kl_per_token": 1.6636789951007813e-05,
+        "mean_absolute_logit_error": 0.14863191545009613,
+        "max_absolute_logit_error": 1.203125,
+        "reference_top1_agreement_fraction": 1.0,
+        "generated_token_agreement_fraction": 1.0,
+        "all_reference_top1_decisions_match": true,
+        "all_generated_tokens_match": true,
+        "mean_top_k_overlap_fraction": 0.949999988079071,
+        "first_reference_top1_mismatch_step": null
+      },
+      "cache": {
+        "requests": 3610,
+        "hits": 0,
+        "misses": 3610,
+        "evictions": 3610,
+        "bytes_transferred": 22712156160,
+        "source_load_seconds": 2.403618540999787,
+        "schedule_seconds": 2.5316333029998077,
+        "host_wait_seconds": 0.005171177003262528
+      },
+      "paged_autoregressive_text": "8\n",
+      "autoregressive_sequence_match": true,
+      "autoregressive_seconds": 3.657572574000028,
+      "autoregressive_cache": {
+        "requests": 4286,
+        "hits": 170,
+        "misses": 4116,
+        "evictions": 4116,
+        "bytes_transferred": 25895632896,
+        "source_load_seconds": 1.763342313006092,
+        "schedule_seconds": 1.9589478589999771,
+        "host_wait_seconds": 0.006900219997874046
+      }
+    },
+    {
+      "name": "translation",
+      "prompt": "Translate 'good morning' into Spanish. Answer only with the translation.",
+      "expected_substring": "buenos",
+      "reference_text": "Buenos d\u00edas\n",
+      "paged_teacher_forced_top1_text": "Buenos d\u00edas\n",
+      "reference_expected_pass": true,
+      "paged_expected_pass": true,
+      "comparison": {
+        "steps": 7,
+        "mean_kl_per_token": 0.0025269887410104275,
+        "max_kl_per_token": 0.017569933086633682,
+        "mean_absolute_logit_error": 0.15378336608409882,
+        "max_absolute_logit_error": 1.67578125,
+        "reference_top1_agreement_fraction": 0.8571428656578064,
+        "generated_token_agreement_fraction": 1.0,
+        "all_reference_top1_decisions_match": false,
+        "all_generated_tokens_match": true,
+        "mean_top_k_overlap_fraction": 1.0,
+        "first_reference_top1_mismatch_step": 0
+      },
+      "cache": {
+        "requests": 3380,
+        "hits": 0,
+        "misses": 3380,
+        "evictions": 3380,
+        "bytes_transferred": 21265121280,
+        "source_load_seconds": 2.0202740340018863,
+        "schedule_seconds": 2.1749225889998343,
+        "host_wait_seconds": 0.005727128998614717
+      },
+      "paged_autoregressive_text": "Buenos d\u00edas\n",
+      "autoregressive_sequence_match": true,
+      "autoregressive_seconds": 3.944983810999929,
+      "autoregressive_cache": {
+        "requests": 4858,
+        "hits": 707,
+        "misses": 4151,
+        "evictions": 4151,
+        "bytes_transferred": 26115833856,
+        "source_load_seconds": 1.657681364003679,
+        "schedule_seconds": 1.8471887790002484,
+        "host_wait_seconds": 0.006673832999695151
+      }
+    },
+    {
+      "name": "science",
+      "prompt": "What process lets green plants convert light into chemical energy? Answer only.",
+      "expected_substring": "photosynthesis",
+      "reference_text": "Photosynthesis\n",
+      "paged_teacher_forced_top1_text": "Photosynthesis\n",
+      "reference_expected_pass": true,
+      "paged_expected_pass": true,
+      "comparison": {
+        "steps": 5,
+        "mean_kl_per_token": 0.0015535400016233325,
+        "max_kl_per_token": 0.007741355337202549,
+        "mean_absolute_logit_error": 0.2353276014328003,
+        "max_absolute_logit_error": 3.3125,
+        "reference_top1_agreement_fraction": 1.0,
+        "generated_token_agreement_fraction": 1.0,
+        "all_reference_top1_decisions_match": true,
+        "all_generated_tokens_match": true,
+        "mean_top_k_overlap_fraction": 0.9600000381469727,
+        "first_reference_top1_mismatch_step": null
+      },
+      "cache": {
+        "requests": 3352,
+        "hits": 0,
+        "misses": 3352,
+        "evictions": 3352,
+        "bytes_transferred": 21088960512,
+        "source_load_seconds": 1.7550987399965834,
+        "schedule_seconds": 1.9034608930001014,
+        "host_wait_seconds": 0.005489539002383026
+      },
+      "paged_autoregressive_text": "Photosynthesis\n",
+      "autoregressive_sequence_match": true,
+      "autoregressive_seconds": 3.3729774760000737,
+      "autoregressive_cache": {
+        "requests": 4253,
+        "hits": 252,
+        "misses": 4001,
+        "evictions": 4001,
+        "bytes_transferred": 25172115456,
+        "source_load_seconds": 1.4820704719984406,
+        "schedule_seconds": 1.6472656880008572,
+        "host_wait_seconds": 0.0060825460026308065
+      }
+    },
+    {
+      "name": "code",
+      "prompt": "Complete this Python assignment so y is x squared. Return one line: y =",
+      "expected_substring": "x",
+      "reference_text": "y = x ** 2\n",
+      "paged_teacher_forced_top1_text": "y = x ** 2\n",
+      "reference_expected_pass": true,
+      "paged_expected_pass": true,
+      "comparison": {
+        "steps": 9,
+        "mean_kl_per_token": 0.00021316221682354808,
+        "max_kl_per_token": 0.0009650964639149606,
+        "mean_absolute_logit_error": 0.10755995661020279,
+        "max_absolute_logit_error": 1.103515625,
+        "reference_top1_agreement_fraction": 1.0,
+        "generated_token_agreement_fraction": 1.0,
+        "all_reference_top1_decisions_match": true,
+        "all_generated_tokens_match": true,
+        "mean_top_k_overlap_fraction": 0.9555556178092957,
+        "first_reference_top1_mismatch_step": null
+      },
+      "cache": {
+        "requests": 3656,
+        "hits": 0,
+        "misses": 3656,
+        "evictions": 3656,
+        "bytes_transferred": 23001563136,
+        "source_load_seconds": 1.7461546030006048,
+        "schedule_seconds": 1.898662669000032,
+        "host_wait_seconds": 0.005915116998835401
+      },
+      "paged_autoregressive_text": "y = x ** 2\n",
+      "autoregressive_sequence_match": true,
+      "autoregressive_seconds": 4.710166705999995,
+      "autoregressive_cache": {
+        "requests": 5740,
+        "hits": 818,
+        "misses": 4922,
+        "evictions": 4922,
+        "bytes_transferred": 30966546432,
+        "source_load_seconds": 1.9330381259926526,
+        "schedule_seconds": 2.1662370919999603,
+        "host_wait_seconds": 0.008135315997833459
+      }
+    }
+  ]
+}

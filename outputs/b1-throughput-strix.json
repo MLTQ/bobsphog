@@ -1,0 +1,177 @@
+{
+  "config": {
+    "checkpoint": "/root/.cache/huggingface/hub/models--Qwen--Qwen3.6-35B-A3B/snapshots/995ad96eacd98c81ed38be0c5b274b04031597b0",
+    "mode": "both",
+    "device": "cuda:0",
+    "cache_pages": 320,
+    "output_tokens": 16,
+    "prompt": "Explain why the sky appears blue during the day in clear, concise language."
+  },
+  "gpu": "Radeon 8060S Graphics",
+  "reference": {
+    "load": {
+      "loaded_tensors": 693,
+      "loaded_bytes": 69321221376,
+      "touched_shards": 26,
+      "load_seconds": 15.855109406999873
+    },
+    "peak_allocated_bytes": 69455874048,
+    "benchmark": {
+      "prompt_tokens": 28,
+      "output_tokens": 16,
+      "time_to_first_token_seconds": 3.3598343690000547,
+      "prefill_input_tokens_per_second": 8.333744144754757,
+      "decode": {
+        "tokens": 15,
+        "seconds": 2.210446877000095,
+        "tokens_per_second": 6.785958149945332,
+        "mean_seconds_per_token": 0.14736312513333966,
+        "median_seconds_per_token": 0.14630614500015326,
+        "p95_seconds_per_token": 0.16391817099997752,
+        "minimum_seconds_per_token": 0.14540956400014693,
+        "maximum_seconds_per_token": 0.16391817099997752
+      },
+      "end_to_end_seconds": 5.57028124600015,
+      "end_to_end_output_tokens_per_second": 2.8723863829118352,
+      "predicted_token_ids": [
+        760,
+        12515,
+        7701,
+        6105,
+        4016,
+        310,
+        264,
+        24057,
+        2512,
+        2972,
+        28232,
+        60845,
+        69377,
+        159034,
+        271,
+        8160
+      ],
+      "selected_token_ids": [
+        760,
+        12515,
+        7701,
+        6105,
+        4016,
+        310,
+        264,
+        24057,
+        2512,
+        2972,
+        28232,
+        60845,
+        69377,
+        159034,
+        271,
+        8160
+      ],
+      "selected_text": "The sky appears blue due to a phenomenon called **Rayleigh scattering**.\n\nHere",
+      "forced_path_top1_agreement_fraction": null
+    }
+  },
+  "paged": {
+    "load": {
+      "loaded_tensors": 613,
+      "loaded_bytes": 4896711936,
+      "touched_shards": 26,
+      "load_seconds": 1.3155536320000465
+    },
+    "peak_allocated_bytes": 7044630528,
+    "expert_cache_capacity_bytes": 2013265920,
+    "benchmark": {
+      "prompt_tokens": 28,
+      "output_tokens": 16,
+      "time_to_first_token_seconds": 5.54620240700001,
+      "prefill_input_tokens_per_second": 5.048499485821226,
+      "decode": {
+        "tokens": 15,
+        "seconds": 5.418359753999312,
+        "tokens_per_second": 2.7683654613240556,
+        "mean_seconds_per_token": 0.3612239835999541,
+        "median_seconds_per_token": 0.34733147999986613,
+        "p95_seconds_per_token": 0.4802492110000003,
+        "minimum_seconds_per_token": 0.288594503000013,
+        "maximum_seconds_per_token": 0.4802492110000003
+      },
+      "end_to_end_seconds": 10.964562160999321,
+      "end_to_end_output_tokens_per_second": 1.4592465950817086,
+      "predicted_token_ids": [
+        760,
+        12515,
+        7701,
+        6105,
+        4016,
+        310,
+        264,
+        24057,
+        2512,
+        2972,
+        28232,
+        60845,
+        69377,
+        159034,
+        271,
+        8160
+      ],
+      "selected_token_ids": [
+        760,
+        12515,
+        7701,
+        6105,
+        4016,
+        310,
+        264,
+        24057,
+        2512,
+        2972,
+        28232,
+        60845,
+        69377,
+        159034,
+        271,
+        8160
+      ],
+      "selected_text": "The sky appears blue due to a phenomenon called **Rayleigh scattering**.\n\nHere",
+      "forced_path_top1_agreement_fraction": 1.0,
+      "prefill_cache": {
+        "requests": 3110,
+        "hits": 0,
+        "misses": 3110,
+        "evictions": 2790,
+        "bytes_transferred": 19566428160,
+        "source_load_seconds": 3.9419357909935115,
+        "schedule_seconds": 4.157755737001025,
+        "host_wait_seconds": 0.004736607000040749
+      },
+      "decode_cache": {
+        "requests": 4800,
+        "hits": 1675,
+        "misses": 3125,
+        "evictions": 3125,
+        "bytes_transferred": 19660800000,
+        "source_load_seconds": 2.142984656994713,
+        "schedule_seconds": 2.3606059020030443,
+        "host_wait_seconds": 0.006207777010558857
+      }
+    },
+    "final_cache_stats": {
+      "requests": 7910,
+      "hits": 1675,
+      "misses": 6235,
+      "evictions": 5915,
+      "bytes_transferred": 39227228160,
+      "source_load_seconds": 6.084920447988225,
+      "schedule_seconds": 6.51836163900407,
+      "host_wait_seconds": 0.010944384010599606
+    }
+  },
+  "slowdown": {
+    "time_to_first_token_factor": 1.6507368512486098,
+    "decode_latency_factor": 2.451250835465827,
+    "end_to_end_latency_factor": 1.968403690365301
+  }
+}
