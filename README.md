@@ -103,6 +103,61 @@ See:
   inference system.
 - [Experiment plan](docs/experiment-plan.md) for staged tests, baselines,
   metrics, ablations, and go/no-go criteria.
+- [A2 results](docs/a2-results.md) for the first learned multi-budget run and
+  the resident-capacity-collapse control.
+- [A3 results](docs/a3-results.md) for oracle and learned counterfactual page
+  selection across equal logical budgets.
+- [A4 results](docs/a4-results.md) for the compositional task and sparse signed
+  page-relationship graph.
+
+## Current prototype
+
+The first toy milestone implements a nanoGPT-like causal transformer whose FFN
+matrices are decomposed into a resident low-rank base plus ordered executable
+low-rank pages. It includes full, base-only, uniform-prefix, and reproducible
+structured-dropout page plans; logical byte accounting; and page execution
+traces.
+
+Run it locally with:
+
+```bash
+uv sync
+uv run pytest
+uv run bobsphog-smoke
+uv run bobsphog-a2
+uv run bobsphog-a3
+uv run bobsphog-a4
+```
+
+The smoke command reports output divergence from the full model as logical
+resident parameter bytes increase. All page tensors are still physically
+allocated in one PyTorch model; real CPU/GPU demand paging comes after the
+logical mechanics and training objectives are validated.
+
+The Mac is sufficient for decomposition tests, controller plumbing, and small
+debug training runs. Move to the 4090 when A2 multi-budget training needs broad
+hyperparameter sweeps, when CUDA transfer/cache measurements begin, or when the
+project advances to a pretrained 1–3B checkpoint.
+
+The A2 command trains a dense teacher on addition and multiplication modulo ten,
+converts it exactly into the paged representation, trains the student with
+variable structured page dropout and teacher distillation, and emits static SVD
+and sampled-mask budget curves plus per-domain page-ablation utilities as JSON.
+The resident skeleton is frozen during student training by default to prevent
+the toy task from collapsing entirely into always-resident weights; pass
+`--train-resident` to reproduce that control. For a fast wiring check, reduce
+`--teacher-steps`, `--student-steps`, and `--batch-size`.
+
+The A3 command retrains the A2 fixture, collects direct counterfactual utility
+labels for omitted pages, fits a query-and-resident-set utility estimator, and
+compares learned selection against random pages, static SVD order, and a
+label-aware greedy oracle at identical page counts. These are still logical
+selection experiments; no physical page transfer occurs yet.
+
+The A4 command moves to order-sensitive compositional arithmetic, builds a
+sparse signed pair-interaction graph from calibration examples, and compares
+independent page scores against graph-expanded bundles for both calibrated and
+learned selectors.
 
 ## Scope boundaries
 
