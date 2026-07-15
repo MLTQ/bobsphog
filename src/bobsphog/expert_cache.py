@@ -89,6 +89,38 @@ class CudaExpertCache:
             if cached.staging is not None and cached.ready.query():
                 cached.staging = None
 
+    def _fixed_expert_bytes(self) -> int | None:
+        """Return a source-provided fixed page size when one is available."""
+
+        spec = getattr(self.source, "spec", None)
+        expert_bytes = getattr(spec, "expert_bytes", None)
+        if not callable(expert_bytes):
+            return None
+        value = int(expert_bytes())
+        return value if value > 0 else None
+
+    def _enqueue_loaded(
+        self,
+        key: ExpertKey,
+        weights: ExpertWeights,
+        protected: set[ExpertKey],
+    ) -> None:
+        self._evict_for(weights.parameter_bytes, protected)
+        with torch.cuda.stream(self._stream):
+            gate_up = weights.gate_up.to(self.device, non_blocking=True)
+            down = weights.down.to(self.device, non_blocking=True)
+            ready = torch.cuda.Event()
+            ready.record(self._stream)
+        self._cache[key] = CachedExpert(
+            gate_up=gate_up,
+            down=down,
+            parameter_bytes=weights.parameter_bytes,
+            ready=ready,
+            staging=weights,
+        )
+        self._cache_bytes += weights.parameter_bytes
+        self.stats.bytes_transferred += weights.parameter_bytes
+
     def _evict_for(self, required_bytes: int, protected: set[ExpertKey]) -> None:
         while self._cache_bytes + required_bytes > self.capacity_bytes:
             victim = next((key for key in self._cache if key not in protected), None)
@@ -118,37 +150,36 @@ class CudaExpertCache:
                 self.stats.misses += 1
                 missing.append(key)
 
-        loaded: list[tuple[ExpertKey, ExpertWeights]] = []
-        for layer, expert in missing:
-            load_started = perf_counter()
-            weights = self.source.load(layer, expert, pin_memory=True)
-            self.stats.source_load_seconds += perf_counter() - load_started
-            loaded.append(((layer, expert), weights))
-        requested_bytes = sum(weights.parameter_bytes for _, weights in loaded)
         resident_requested_bytes = sum(
             self._cache[key].parameter_bytes
             for key in requested
             if key in self._cache
         )
-        if requested_bytes + resident_requested_bytes > self.capacity_bytes:
-            raise ValueError("requested expert set exceeds cache capacity")
-
-        for key, weights in loaded:
-            self._evict_for(weights.parameter_bytes, protected)
-            with torch.cuda.stream(self._stream):
-                gate_up = weights.gate_up.to(self.device, non_blocking=True)
-                down = weights.down.to(self.device, non_blocking=True)
-                ready = torch.cuda.Event()
-                ready.record(self._stream)
-            self._cache[key] = CachedExpert(
-                gate_up=gate_up,
-                down=down,
-                parameter_bytes=weights.parameter_bytes,
-                ready=ready,
-                staging=weights,
-            )
-            self._cache_bytes += weights.parameter_bytes
-            self.stats.bytes_transferred += weights.parameter_bytes
+        fixed_expert_bytes = self._fixed_expert_bytes()
+        if fixed_expert_bytes is not None:
+            requested_bytes = len(missing) * fixed_expert_bytes
+            if requested_bytes + resident_requested_bytes > self.capacity_bytes:
+                raise ValueError("requested expert set exceeds cache capacity")
+            for key in missing:
+                self._reap_staging()
+                load_started = perf_counter()
+                weights = self.source.load(*key, pin_memory=True)
+                self.stats.source_load_seconds += perf_counter() - load_started
+                if weights.parameter_bytes != fixed_expert_bytes:
+                    raise ValueError("loaded expert size differs from source specification")
+                self._enqueue_loaded(key, weights, protected)
+        else:
+            loaded: list[tuple[ExpertKey, ExpertWeights]] = []
+            for key in missing:
+                load_started = perf_counter()
+                weights = self.source.load(*key, pin_memory=True)
+                self.stats.source_load_seconds += perf_counter() - load_started
+                loaded.append((key, weights))
+            requested_bytes = sum(weights.parameter_bytes for _, weights in loaded)
+            if requested_bytes + resident_requested_bytes > self.capacity_bytes:
+                raise ValueError("requested expert set exceeds cache capacity")
+            for key, weights in loaded:
+                self._enqueue_loaded(key, weights, protected)
         self.stats.schedule_seconds += perf_counter() - started
         return requested
 

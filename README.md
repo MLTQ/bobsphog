@@ -122,6 +122,9 @@ See:
   exact paged autoregressive output parity.
 - [GLM-5.2 B1.5 feasibility results](docs/glm-b15-results.md) for the 1.506 TB
   checkpoint running on a 128 GiB Strix Halo with a 38.50 GB measured peak.
+- [GLM-5.2 B2.2 benchmark results](docs/glm-b22-benchmark-results.md) for the
+  zero-shot MMLU cross-section, 1.434-TB exact prefill, 320-page memory bound,
+  and same-KV prompt-bundle decode control.
 - [B1.6 throughput results](docs/b1-throughput-results.md) for TTFT, steady
   decode rate, same-device slowdown, 4090 file-backed performance, and B2
   optimization gates.
@@ -134,6 +137,9 @@ See:
 - [B2.2 predictor results](docs/b22-results.md) for the 64-prompt route corpus,
   held-out prompt-bundle prediction, pinned-LRU cache simulation, cross-backend
   parity, and live 4090 validation.
+- [B2.3 adaptive-retention results](docs/b23-results.md) for calibrated
+  confidence, warm-prefill cache replay, lazy query-conditioned retention,
+  background-staging controls, and the next storage-system gate.
 
 ## Current prototype
 
@@ -181,6 +187,10 @@ uv run bobsphog-b21 \
 uv run bobsphog-glm-b15 \
   --checkpoint /path/to/GLM-5.2 \
   --cache-pages 16
+uv run bobsphog-glm-b22-benchmark \
+  --checkpoint /path/to/GLM-5.2 \
+  --mmlu-root /path/to/mmlu/data \
+  --subject-limit 16
 ```
 
 The smoke command reports output divergence from the full model as logical

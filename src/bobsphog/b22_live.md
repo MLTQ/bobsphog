@@ -24,10 +24,27 @@ The default is the validation-selected three-nearest-neighbor predictor with a
 - `before_prefill` makes the predicted bundle available immediately but limits
   prefill to the residual cache;
 - `after_prefill` gives prefill the full LRU cache, then synchronously reshapes
-  and pins the working set before decode.
+  and pins the working set before decode;
+- `background_host` materializes predicted pages into host RAM concurrently
+  with full-cache prefill, then promotes the staged bundle for decode;
+- `lazy_background_decode` preserves full-cache prefill, protects predicted
+  pages only after their first demand load, and stages opportunistically during
+  decode without a synchronous promotion barrier;
+- `lazy_pin_decode` applies the same demand-time retention without speculative
+  host reads, isolating cache-policy value from storage contention.
 
-The latter is a scheduling control for prefill thrash. Its prefetch pause is
-included in end-to-end time but not TTFT because the first token already exists.
+The eager after-prefill and background-host schedules are controls for prefill
+thrash. Their final promotion pause is included in end-to-end time but not TTFT
+because the first token already exists. Background staging reports direct reads
+and duplicate races separately.
+
+The lazy schedule is the causal B2.3 path for the current predictor, whose
+bundle is not known until prefill routing exists. It trades some first-use faults
+for zero bundle-loading delay, starts staging exactly once after prefill, and
+cancels unused staging when decode ends.
+
+The pin-only schedule is the clean physical control for deciding whether a
+prediction helps residency before adding any transfer mechanism.
 
 When training traces and deployment use different numerical backends,
 `--execution-trace` supplies a B2 route captured on the deployment GPU. The
@@ -43,6 +60,7 @@ Both backend-specific offline scores are retained in the result.
 | Optional B2 trace | Prompt text exactly matches the corpus case | Comparing different prompts across backends |
 | Predictor | Training/validation/test split is fixed before fitting | Tuning on held-out test routes |
 | Physical cache | Bundle plus largest unpinned atomic layer group fits | Oversized bundle |
+| Background source | One host-staging epoch is joined before teardown | Reusing the source across prompts |
 | Parity gate | Forced token path reproduces exact top-1 and expert routes | Approximate expert kernels |
 
 Route failures report the first divergent layer, missing and extra keys, and
@@ -51,7 +69,7 @@ diagnosable without weakening the parity gate.
 
 ## Interpretation
 
-This is a synchronous prefetch control. A speedup demonstrates that route
-prediction is useful before implementing background I/O. Failure can be split
-into predictor error, cache churn, or prefetch overhead because each component
-is reported separately.
+The before/after phases are synchronous controls; `background_host` is the first
+real overlap path. Failure can be split into predictor error, cache churn,
+background source contention, final promotion, or decode demand because each is
+reported separately.

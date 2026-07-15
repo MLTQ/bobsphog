@@ -39,6 +39,9 @@ class PagedGlmExperts(nn.Module):
         top_k_index: Tensor,
         top_k_weights: Tensor,
     ) -> Tensor:
+        route_observer = getattr(self.cache, "observe_routes", None)
+        if route_observer is not None:
+            route_observer(self.layer, top_k_index)
         experts = tuple(int(value) for value in torch.unique(top_k_index).tolist())
         self.cache.schedule((self.layer, expert) for expert in experts)
         return self.cache.apply_routed(

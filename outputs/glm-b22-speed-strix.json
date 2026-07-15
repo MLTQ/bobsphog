@@ -1,0 +1,135 @@
+{
+  "config": {
+    "checkpoint": "/srv/models/GLM-5.2",
+    "mmlu_root": null,
+    "device": "cuda:0",
+    "mode": "speed",
+    "accuracy_cache_pages": 256,
+    "speed_cache_pages": 320,
+    "pinned_pages": 300,
+    "samples_per_subject": 1,
+    "subject_limit": null,
+    "accuracy_batch_size": 64,
+    "seed": 20260715,
+    "decode_forwards": 4,
+    "speed_prompt": "Explain in one sentence why the sky appears blue."
+  },
+  "gpu": "Radeon 8060S Graphics",
+  "checkpoint": {
+    "layers": 78,
+    "sparse_layers": 75,
+    "experts_per_layer": 256,
+    "experts_per_token": 8,
+    "expert_bytes_bfloat16": 75497472,
+    "estimated_causal_scaffold_upper_bound_bytes": 37781104640,
+    "checkpoint_bytes": 1506659919872
+  },
+  "load": {
+    "loaded_tensors": 1194,
+    "loaded_bytes": 37202615808,
+    "ignored_tensors": 58391,
+    "touched_shards": 85,
+    "load_seconds": 8.578378444999544,
+    "total_model_construction_seconds": 9.13647500099978
+  },
+  "method": "Exact BF16 routed experts with a bounded file-backed cache; no quantization, expert dropping, substitution, or output repair.",
+  "speed": {
+    "prompt": "Explain in one sentence why the sky appears blue.",
+    "formatted_prompt_tokens": 17,
+    "prefill": {
+      "seconds": 350.83521791400017,
+      "prompt_tokens_per_second": 0.04845579671584507,
+      "cache": {
+        "requests": 5102,
+        "hits": 0,
+        "misses": 5102,
+        "evictions": 4782,
+        "bytes_transferred": 385188102144,
+        "source_load_seconds": 337.30894336096026,
+        "schedule_seconds": 341.7872262219953,
+        "host_wait_seconds": 0.07531076500799827
+      }
+    },
+    "cache_pages": 320,
+    "cache_capacity_bytes": 24159191040,
+    "pinned_pages": 300,
+    "pinned_bytes": 22649241600,
+    "bundle_policy": "B2.2 prefill-reuse baseline: equal per-layer quota ranked by this prompt's exact prefill route frequency.",
+    "bundle_prefetch": {
+      "seconds": 19.881318308000118,
+      "cache": {
+        "requests": 300,
+        "hits": 0,
+        "misses": 300,
+        "evictions": 0,
+        "bytes_transferred": 22649241600,
+        "source_load_seconds": 17.969869097007177,
+        "schedule_seconds": 19.7735970729982,
+        "host_wait_seconds": 0.10554940900055954
+      }
+    },
+    "decode_forwards": 4,
+    "baseline": {
+      "seconds": 131.20962737899936,
+      "tokens_per_second": 0.03048556786497068,
+      "per_token_seconds": [
+        40.666551970999535,
+        31.304117372999826,
+        31.003251342000112,
+        28.235706692999884
+      ],
+      "cache": {
+        "requests": 2400,
+        "hits": 0,
+        "misses": 2400,
+        "evictions": 2400,
+        "bytes_transferred": 181193932800,
+        "source_load_seconds": 123.69351807300882,
+        "schedule_seconds": 125.01580378000472,
+        "host_wait_seconds": 0.036679095003819384
+      },
+      "peak_allocated_bytes": 61702813696
+    },
+    "predicted": {
+      "seconds": 120.57330572900082,
+      "tokens_per_second": 0.033174838956396814,
+      "per_token_seconds": [
+        33.9131968290003,
+        30.406067001000338,
+        28.901324290000048,
+        27.352717609000138
+      ],
+      "cache": {
+        "requests": 2400,
+        "hits": 280,
+        "misses": 2120,
+        "evictions": 2100,
+        "bytes_transferred": 160054640640,
+        "source_load_seconds": 112.79894788401543,
+        "schedule_seconds": 114.34270609100986,
+        "host_wait_seconds": 0.030938440005229495
+      },
+      "peak_allocated_bytes": 61663121920,
+      "top1_agreement": 1.0
+    },
+    "decode_speedup": 1.0882145644567847,
+    "decode_fault_reduction": 0.1166666666666667,
+    "baseline_end_to_end_seconds": 482.0448452929995,
+    "predicted_end_to_end_seconds": 491.2898419510011,
+    "selected_token_ids": [
+      785,
+      12877,
+      7951,
+      6303,
+      1576
+    ],
+    "selected_text": "The sky appears blue because",
+    "predicted_token_ids": [
+      12877,
+      7951,
+      6303,
+      1576
+    ],
+    "validation": "Both branches share deep-copied exact prefill KV state. The predicted branch is forced along the baseline inputs and checks independent top-1 parity."
+  }
+}

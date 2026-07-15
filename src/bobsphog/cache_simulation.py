@@ -33,6 +33,21 @@ class CacheSimulationResult:
         return result
 
 
+@dataclass(frozen=True)
+class PhasedPinnedSimulationResult:
+    """Prefetch, prefill, and decode counters for a fixed pinned bundle."""
+
+    capacity_pages: int
+    pinned_pages: int
+    prefetch_misses: int
+    prefill: CacheSimulationResult
+    decode: CacheSimulationResult
+
+    @property
+    def total_misses(self) -> int:
+        return self.prefetch_misses + self.prefill.misses + self.decode.misses
+
+
 def _normalize_groups(
     groups: Iterable[Iterable[ExpertKey]],
 ) -> list[tuple[ExpertKey, ...]]:
@@ -93,6 +108,105 @@ def simulate_grouped_lru(
         hits=hits,
         misses=misses,
         evictions=evictions,
+    )
+
+
+def simulate_phased_pinned_lru(
+    prefill_groups: Iterable[Iterable[ExpertKey]],
+    decode_groups: Iterable[Iterable[ExpertKey]],
+    capacity_pages: int,
+    *,
+    pinned: Iterable[ExpertKey] = (),
+    preload_pinned: bool = True,
+    pin_during_prefill: bool = True,
+) -> PhasedPinnedSimulationResult:
+    """Replay prefetch, prefill, and decode with a permanently pinned bundle."""
+
+    prefill = _normalize_groups(prefill_groups)
+    decode = _normalize_groups(decode_groups)
+    pinned_keys = tuple(dict.fromkeys(pinned))
+    pinned_set = set(pinned_keys)
+    _validate(prefill + decode, capacity_pages)
+    if len(pinned_keys) > capacity_pages:
+        raise ValueError("pinned bundle exceeds cache capacity")
+    largest_prefill_residency = max(
+        (
+            (len(pinned_keys) + len(set(group) - pinned_set))
+            if pin_during_prefill
+            else len(group)
+            for group in prefill
+        ),
+        default=len(pinned_keys) if pin_during_prefill else 0,
+    )
+    largest_decode_residency = max(
+        (len(pinned_keys) + len(set(group) - pinned_set) for group in decode),
+        default=len(pinned_keys),
+    )
+    if max(largest_prefill_residency, largest_decode_residency) > capacity_pages:
+        raise ValueError("pinned bundle leaves too little room for an atomic group")
+
+    cache: OrderedDict[ExpertKey, None] = OrderedDict(
+        (key, None) for key in pinned_keys if preload_pinned
+    )
+
+    def replay(
+        groups: list[tuple[ExpertKey, ...]],
+        policy: str,
+        protected_pins: set[ExpertKey],
+    ) -> CacheSimulationResult:
+        requests = hits = misses = evictions = 0
+        for group in groups:
+            protected = set(group) | protected_pins
+            missing: list[ExpertKey] = []
+            for key in group:
+                requests += 1
+                if key in cache:
+                    hits += 1
+                    cache.move_to_end(key)
+                else:
+                    misses += 1
+                    missing.append(key)
+            for key in missing:
+                while len(cache) >= capacity_pages:
+                    victim = next(
+                        (
+                            candidate
+                            for candidate in cache
+                            if candidate not in protected
+                        ),
+                        None,
+                    )
+                    if victim is None:
+                        raise RuntimeError(
+                            "no evictable page despite validated pinned capacity"
+                        )
+                    cache.pop(victim)
+                    evictions += 1
+                cache[key] = None
+            for key in group:
+                cache.move_to_end(key)
+        return CacheSimulationResult(
+            policy=policy,
+            capacity_pages=capacity_pages,
+            request_groups=len(groups),
+            requests=requests,
+            hits=hits,
+            misses=misses,
+            evictions=evictions,
+        )
+
+    prefill_result = replay(
+        prefill,
+        "prefill_pinned_lru" if pin_during_prefill else "prefill_lru",
+        pinned_set if pin_during_prefill else set(),
+    )
+    decode_result = replay(decode, "decode_pinned_lru", pinned_set)
+    return PhasedPinnedSimulationResult(
+        capacity_pages=capacity_pages,
+        pinned_pages=len(pinned_keys),
+        prefetch_misses=len(pinned_keys) if preload_pinned else 0,
+        prefill=prefill_result,
+        decode=decode_result,
     )
 
 

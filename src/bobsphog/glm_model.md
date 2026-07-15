@@ -18,6 +18,10 @@ streamed to the accelerator.
 
 - **Does**: Schedules the unique experts selected by GLM's native router and
   delegates exact weighted execution to `CudaExpertCache`.
+- **Optional observation**: Calls a cache's `observe_routes(layer, indices)`
+  hook before scheduling when present. The normal cache has no hook, so regular
+  execution is unchanged; benchmark caches can retain route tensors without a
+  per-layer host synchronization.
 
 ### `load_paged_glm`
 

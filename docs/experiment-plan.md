@@ -199,8 +199,13 @@ device.
 
 Completed B2.1 and B2.2 results are recorded in
 [the oracle paging report](b21-results.md) and
-[the held-out predictor report](b22-results.md). The current gate is B2.3:
-confidence-conditioned bundle size plus prefill-overlapped physical transfer.
+[the held-out predictor report](b22-results.md). Those results led to B2.3:
+confidence-conditioned bundle size plus overlapped physical transfer.
+
+B2.3 is complete in [the adaptive-retention report](b23-results.md). Lazy
+protect-on-touch retention passes the fault and exactness gates, while
+same-source background staging fails the latency gate. B2.4 should replace
+random safetensor slicing with a controlled contiguous page source.
 
 ### B3. Decompose and reconstruct
 

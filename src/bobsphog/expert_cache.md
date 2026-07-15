@@ -19,6 +19,10 @@ CPU memory, and copied on a dedicated CUDA stream.
   active set during LRU eviction, retains pinned staging until asynchronous
   copies complete, and executes cached SwiGLU experts.
 - **Interacts with**: `MappedExpertSource` and Qwen top-k router outputs.
+- **Loading dynamics**: Sources that expose a fixed `spec.expert_bytes()` are
+  streamed one page at a time. Each disk read overlaps the prior asynchronous
+  device copy, and completed staging tensors are reaped between pages. This
+  avoids materializing an entire high-fanout layer in pinned host memory.
 
 ### `apply_routed`
 
@@ -39,6 +43,6 @@ CPU memory, and copied on a dedicated CUDA stream.
 
 ## Notes
 
-Disk-to-pinned-memory loading is synchronous in this first cache. The CUDA copy
-is asynchronous. A background source prefetcher is the next optimization after
-the one-layer numerical path is validated.
+Disk-to-pinned-memory loading remains synchronous, while the preceding device
+copy can progress on the cache stream. A background source prefetcher remains a
+future optimization.

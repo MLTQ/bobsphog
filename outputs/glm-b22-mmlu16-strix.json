@@ -1,0 +1,414 @@
+{
+  "config": {
+    "checkpoint": "/srv/models/GLM-5.2",
+    "mmlu_root": "/workspace/data/mmlu",
+    "device": "cuda:0",
+    "mode": "accuracy",
+    "accuracy_cache_pages": 256,
+    "speed_cache_pages": 320,
+    "pinned_pages": 300,
+    "samples_per_subject": 1,
+    "subject_limit": 16,
+    "accuracy_batch_size": 16,
+    "seed": 20260715,
+    "decode_forwards": 4,
+    "speed_prompt": "Explain in one sentence why the sky appears blue."
+  },
+  "gpu": "Radeon 8060S Graphics",
+  "checkpoint": {
+    "layers": 78,
+    "sparse_layers": 75,
+    "experts_per_layer": 256,
+    "experts_per_token": 8,
+    "expert_bytes_bfloat16": 75497472,
+    "estimated_causal_scaffold_upper_bound_bytes": 37781104640,
+    "checkpoint_bytes": 1506659919872
+  },
+  "load": {
+    "loaded_tensors": 1194,
+    "loaded_bytes": 37202615808,
+    "ignored_tensors": 58391,
+    "touched_shards": 85,
+    "load_seconds": 29.505128577000505,
+    "total_model_construction_seconds": 30.225434527001198
+  },
+  "method": "Exact BF16 routed experts with a bounded file-backed cache; no quantization, expert dropping, substitution, or output repair.",
+  "accuracy": {
+    "benchmark": "MMLU subject-stratified zero-shot sample",
+    "protocol": "One deterministic test item per subject by default; GLM chat template; thinking disabled; direct A/B/C/D next-token logit scoring; no dev examples.",
+    "examples": 16,
+    "subjects": 16,
+    "correct": 14,
+    "accuracy": 0.875,
+    "wilson_95": {
+      "low": 0.639771727342413,
+      "high": 0.9650225122567595
+    },
+    "random_baseline": 0.25,
+    "selection_sha256": "5592ead929086d2b27ebad647fd5dbdce499b7a0741e468b71d275b8933b48cc",
+    "answer_token_ids": {
+      "A": 32,
+      "B": 33,
+      "C": 34,
+      "D": 35
+    },
+    "prompt_tokens": 1956,
+    "padded_tokens": 4720,
+    "forward_seconds": 1316.8434212829998,
+    "prompt_tokens_per_second": 1.4853702181951673,
+    "padded_tokens_per_second": 3.5843289518819987,
+    "peak_allocated_bytes": 59991288320,
+    "cache": {
+      "requests": 18998,
+      "hits": 0,
+      "misses": 18998,
+      "evictions": 18742,
+      "bytes_transferred": 1434300973056,
+      "source_load_seconds": 1243.2503224081083,
+      "schedule_seconds": 1255.5423850960087,
+      "host_wait_seconds": 0.3632616869490448
+    },
+    "batches": [
+      {
+        "examples": 16,
+        "prompt_tokens": 1956,
+        "padded_tokens": 4720,
+        "seconds": 1316.8434212829998,
+        "prompt_tokens_per_second": 1.4853702181951673,
+        "cache": {
+          "requests": 18998,
+          "hits": 0,
+          "misses": 18998,
+          "evictions": 18742,
+          "bytes_transferred": 1434300973056,
+          "source_load_seconds": 1243.2503224081083,
+          "schedule_seconds": 1255.5423850960087,
+          "host_wait_seconds": 0.3632616869490448
+        }
+      }
+    ],
+    "results": [
+      {
+        "subject": "business_ethics",
+        "row_index": 27,
+        "question": " _________, such as _______ and _______ are processes by which organisations implement environmental goals, policies and responsibilities and ensure regular auditing and reporting, which go beyond legal compliance.",
+        "choices": [
+          "Environmental management systems, SA8000, EMAS",
+          "Social accountability standards, ISO14001, SA8000",
+          "Environmental management systems, ISO14001, EMAS",
+          "Social accountability standards, EMAS, SA8000"
+        ],
+        "answer": "C",
+        "predicted": "C",
+        "correct": true,
+        "choice_logits": {
+          "A": 21.875,
+          "B": 18.75,
+          "C": 30.125,
+          "D": 15.3125
+        }
+      },
+      {
+        "subject": "clinical_knowledge",
+        "row_index": 188,
+        "question": "The rate limiting enzyme of glycolysis is:",
+        "choices": [
+          "phosphorylase.",
+          "hexokinase.",
+          "pyruvate dehydrogenase.",
+          "phosphofructokinase."
+        ],
+        "answer": "D",
+        "predicted": "D",
+        "correct": true,
+        "choice_logits": {
+          "A": 17.875,
+          "B": 19.875,
+          "C": 16.875,
+          "D": 29.375
+        }
+      },
+      {
+        "subject": "college_biology",
+        "row_index": 44,
+        "question": "Natural enemies have been implicated as a strong selective force for all of the following EXCEPT",
+        "choices": [
+          "aposematic coloration",
+          "chemical defenses",
+          "masting (synchronous fruiting)",
+          "lekking behavior"
+        ],
+        "answer": "D",
+        "predicted": "D",
+        "correct": true,
+        "choice_logits": {
+          "A": 23.625,
+          "B": 20.75,
+          "C": 21.625,
+          "D": 28.375
+        }
+      },
+      {
+        "subject": "computer_security",
+        "row_index": 95,
+        "question": "Why would a ping sweep be used?",
+        "choices": [
+          "To identify live systems",
+          "To locate live systems",
+          "To identify open ports",
+          "To locate firewalls"
+        ],
+        "answer": "A",
+        "predicted": "A",
+        "correct": true,
+        "choice_logits": {
+          "A": 28.625,
+          "B": 25.375,
+          "C": 19.375,
+          "D": 17.375
+        }
+      },
+      {
+        "subject": "high_school_european_history",
+        "row_index": 23,
+        "question": "This question refers to the following information.\nAs a Jew, I have never believed in collective guilt. Only the guilty were guilty.\nChildren of killers are not killers but children. I have neither the desire nor the authority to judge today's generation for the unspeakable crimes committed by the generation of Hitler.\nBut we may\u2014and we must\u2014hold it responsible, not for the past, but for the way it remembers the past. And for what it does with the memory of the past. In remembering, you will help your own people vanquish the ghosts that hover over its history. Remember: a community that does not come to terms with the dead will continue to traumatize the living.\nWe remember Auschwitz and all that it symbolizes because we believe that, in spite of the past and its horrors, the world is worthy of salvation; and salvation, like redemption, can be found only in memory.\nElie Wiesel, \"Reflections of a Survivor,\" 1987\nFrom the passage, one may infer that Wiesel believed that the current generation of Germans",
+        "choices": [
+          "shared their ancestors' guilt for the Holocaust",
+          "had a responsibility to remember the Holocaust",
+          "shared in the responsibility for the Holocaust",
+          "had no responsibility where the Holocaust was concerned"
+        ],
+        "answer": "B",
+        "predicted": "B",
+        "correct": true,
+        "choice_logits": {
+          "A": 21.0,
+          "B": 29.25,
+          "C": 19.0,
+          "D": 15.3125
+        }
+      },
+      {
+        "subject": "high_school_government_and_politics",
+        "row_index": 125,
+        "question": "All of the following are specifically mentioned in the Constitution EXCEPT",
+        "choices": [
+          "judicial review",
+          "the national census",
+          "rules of impeachment",
+          "the State of the Union address"
+        ],
+        "answer": "A",
+        "predicted": "A",
+        "correct": true,
+        "choice_logits": {
+          "A": 28.875,
+          "B": 19.375,
+          "C": 18.5,
+          "D": 15.5625
+        }
+      },
+      {
+        "subject": "human_aging",
+        "row_index": 104,
+        "question": "The gender gap is likely to be associated with male/female differences in",
+        "choices": [
+          "Hormones",
+          "Risky behaviors and occupations",
+          "Proportion who smoke",
+          "All of the above"
+        ],
+        "answer": "D",
+        "predicted": "D",
+        "correct": true,
+        "choice_logits": {
+          "A": 23.25,
+          "B": 19.625,
+          "C": 16.625,
+          "D": 27.375
+        }
+      },
+      {
+        "subject": "human_sexuality",
+        "row_index": 38,
+        "question": "According to the Ethnocultural Communities Facing AIDS study, single _________ men are more likely than single _________ to report having had more than one sexual partner in the previous year.",
+        "choices": [
+          "Chinese; North African Muslim",
+          "South Asian; English-speaking Caribbean",
+          "South Asian; Chinese",
+          "North African Muslim; Latin American"
+        ],
+        "answer": "B",
+        "predicted": "C",
+        "correct": false,
+        "choice_logits": {
+          "A": 25.0,
+          "B": 24.75,
+          "C": 25.25,
+          "D": 18.5
+        }
+      },
+      {
+        "subject": "international_law",
+        "row_index": 85,
+        "question": "What is the meaning of cultural relativism?",
+        "choices": [
+          "Culture relativism posits that human rights apply equally to all without restrictions",
+          "Culture relativism posits that human rights have a cultural origin",
+          "Cultural relativism posits that the application of human rights is relative to the laws in each nation",
+          "Cultural relativism posits that local culture should validate the existence and practice of all human rights"
+        ],
+        "answer": "D",
+        "predicted": "D",
+        "correct": true,
+        "choice_logits": {
+          "A": 20.125,
+          "B": 23.625,
+          "C": 23.875,
+          "D": 28.25
+        }
+      },
+      {
+        "subject": "machine_learning",
+        "row_index": 84,
+        "question": "Statement 1| The training error of 1-nearest neighbor classifier is 0. Statement 2| As the number of data points grows to infinity, the MAP estimate approaches the MLE estimate for all possible priors. In other words, given enough data, the choice of prior is irrelevant.",
+        "choices": [
+          "True, True",
+          "False, False",
+          "True, False",
+          "False, True"
+        ],
+        "answer": "C",
+        "predicted": "C",
+        "correct": true,
+        "choice_logits": {
+          "A": 22.75,
+          "B": 18.875,
+          "C": 28.125,
+          "D": 16.375
+        }
+      },
+      {
+        "subject": "medical_genetics",
+        "row_index": 23,
+        "question": "Homeobox sequences",
+        "choices": [
+          "are present in the genome of many animal species",
+          "are found in prokaryotes but not in eukaryotes",
+          "were identified as the integration sites for bacterial viruses",
+          "represent integration sites for transposable elements"
+        ],
+        "answer": "A",
+        "predicted": "A",
+        "correct": true,
+        "choice_logits": {
+          "A": 28.875,
+          "B": 20.75,
+          "C": 15.9375,
+          "D": 15.8125
+        }
+      },
+      {
+        "subject": "moral_disputes",
+        "row_index": 277,
+        "question": " Suppose two athletes, A and B, are equally skilled. Suppose also that A naturally inherited certain traits from her father that made playing the sport easier for her, and thus she didn't have to train as hard as B. According to the ethic of willfulness,",
+        "choices": [
+          "A is a better athlete.",
+          "B is a better athlete.",
+          "B doesn't count as an athlete because training precludes athleticism.",
+          "A and B are equally good athletes."
+        ],
+        "answer": "B",
+        "predicted": "B",
+        "correct": true,
+        "choice_logits": {
+          "A": 24.25,
+          "B": 26.875,
+          "C": 17.0,
+          "D": 18.5
+        }
+      },
+      {
+        "subject": "nutrition",
+        "row_index": 75,
+        "question": "Which of the following statements is not true?\n",
+        "choices": [
+          "Vegan diets are likely to be deficient in protein",
+          "Cereals are deficient in lysine",
+          "Legumes are deficient in methionine",
+          "Dairy products are rich source of tryptophan"
+        ],
+        "answer": "A",
+        "predicted": "A",
+        "correct": true,
+        "choice_logits": {
+          "A": 29.875,
+          "B": 20.5,
+          "C": 18.5,
+          "D": 17.375
+        }
+      },
+      {
+        "subject": "professional_medicine",
+        "row_index": 224,
+        "question": "A 22-year-old woman comes to the emergency department because of a 5-day history of sore throat and fever. During the past 3 days, she also has noticed a change in her voice and has had increased pain with swallowing. She has been taking acetaminophen since her symptoms began. Medical history is unremarkable and she takes no routine medications. Vital signs are temperature 40.0\u00b0C (104.0\u00b0F), pulse 130/min, respirations 18/min, and blood pressure 102/66 mm Hg. Pulse oximetry on room air shows an oxygen saturation of 97%. Examination of the oropharynx shows erythema, edema, and anterior displacement of the right side of the soft palate. The uvula is deviated to the left. There is a white exudate on the right tonsil. Trismus is noted. Palpation of the neck discloses enlarged, tender, mobile anterior cervical lymph nodes. In addition to antibiotic therapy, which of the following is the most appropriate management?",
+        "choices": [
+          "Incision and drainage",
+          "Intravenous methylprednisolone therapy",
+          "Oral nystatin therapy",
+          "Salt water gargle"
+        ],
+        "answer": "A",
+        "predicted": "A",
+        "correct": true,
+        "choice_logits": {
+          "A": 28.75,
+          "B": 24.0,
+          "C": 17.625,
+          "D": 17.0
+        }
+      },
+      {
+        "subject": "security_studies",
+        "row_index": 39,
+        "question": "Which of the following is not a purportedly beneficial outcome of the globalization process?",
+        "choices": [
+          "The redistribution of wealth, addressing disparities in economic and resource allocation across the globe through a sense of greater 'interconnectedness'.",
+          "The growing sense of global community, resulting in super-national identities that result from populations feeling closer to one another.",
+          "The sharing of ideas, technologies and resources that can directly benefit human security, such as medical advancements.",
+          "A global market that has demonstrated the ability, if left unchecked, to reduce poverty and make substantial economic gains."
+        ],
+        "answer": "A",
+        "predicted": "D",
+        "correct": false,
+        "choice_logits": {
+          "A": 25.0,
+          "B": 19.75,
+          "C": 19.5,
+          "D": 29.5
+        }
+      },
+      {
+        "subject": "world_religions",
+        "row_index": 16,
+        "question": " What genre of Sikh literature is denoted by the term janam-sakhis?",
+        "choices": [
+          "Spiritual narratives",
+          "Redemption narratives",
+          "Birth narratives",
+          "Theological narratives"
+        ],
+        "answer": "C",
+        "predicted": "C",
+        "correct": true,
+        "choice_logits": {
+          "A": 24.0,
+          "B": 18.875,
+          "C": 29.75,
+          "D": 16.375
+        }
+      }
+    ],
+    "claim_scope": "This is a small zero-shot stratified sample, not the full 14k-question five-shot MMLU score. Its confidence interval is reported explicitly."
+  }
+}

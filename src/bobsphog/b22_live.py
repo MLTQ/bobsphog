@@ -171,8 +171,17 @@ def run_b22_live(config: B22LiveConfig) -> dict[str, Any]:
         raise RuntimeError("B2.2 live validation requires CUDA or HIP")
     if not 0 < config.bundle_pages < config.cache_pages:
         raise ValueError("bundle pages must be positive and smaller than cache pages")
-    if config.prefetch_phase not in {"before_prefill", "after_prefill"}:
-        raise ValueError("prefetch phase must be before_prefill or after_prefill")
+    if config.prefetch_phase not in {
+        "before_prefill",
+        "after_prefill",
+        "background_host",
+        "lazy_background_decode",
+        "lazy_pin_decode",
+    }:
+        raise ValueError(
+            "prefetch phase must be before_prefill, after_prefill, "
+            "background_host, lazy_background_decode, or lazy_pin_decode"
+        )
     checkpoint_root = Path(config.checkpoint).expanduser().resolve()
     record, example, corpus_route = load_live_case(config.corpus, config.prompt_id)
     route = (
@@ -226,6 +235,7 @@ def run_b22_live(config: B22LiveConfig) -> dict[str, Any]:
 
     from bobsphog.moe_checkpoint import MappedExpertSource, QwenMoeSpec, SafetensorCheckpointIndex
     from bobsphog.moe_model import load_paged_qwen
+    from bobsphog.staged_source import AsyncStagedExpertSource
     from transformers import AutoTokenizer
 
     device = torch.device(config.device)
@@ -237,7 +247,13 @@ def run_b22_live(config: B22LiveConfig) -> dict[str, Any]:
         checkpoint_root / "model.safetensors.index.json",
     )
     index = SafetensorCheckpointIndex(checkpoint_root / "model.safetensors.index.json")
-    source = MappedExpertSource(index, spec)
+    base_source = MappedExpertSource(index, spec)
+    staged_source = (
+        AsyncStagedExpertSource(base_source)
+        if config.prefetch_phase in {"background_host", "lazy_background_decode"}
+        else None
+    )
+    source = staged_source if staged_source is not None else base_source
     cache = TracingPinnedCudaExpertCache(
         source,
         device=device,
@@ -261,6 +277,10 @@ def run_b22_live(config: B22LiveConfig) -> dict[str, Any]:
         torch.cuda.synchronize(device)
         prefetch_seconds = perf_counter() - prefetch_started
         after_prefetch = cache.snapshot()
+    elif config.prefetch_phase == "background_host" and staged_source is not None:
+        staged_source.start(
+            key for group in reversed(selected_groups) for key in group
+        )
 
     input_ids = prompt_ids.unsqueeze(0).to(device)
     before_prefill = cache.snapshot()
@@ -273,15 +293,33 @@ def run_b22_live(config: B22LiveConfig) -> dict[str, Any]:
     _assert_route(cache.drain_request_trace(), route.prefill_groups, "prefill")
     after_prefill = cache.snapshot()
 
-    if config.prefetch_phase == "after_prefill":
+    if config.prefetch_phase in {"after_prefill", "background_host"}:
         cache.set_pinned_keys(selected_keys)
         before_prefetch = after_prefill
+        if staged_source is not None:
+            staged_source.set_wait_for_inflight(True)
         torch.cuda.synchronize(device)
         prefetch_started = perf_counter()
-        cache.prefetch_groups(selected_groups)
+        promotion_groups = (
+            tuple(reversed(selected_groups))
+            if staged_source is not None
+            else selected_groups
+        )
+        cache.prefetch_groups(promotion_groups)
         torch.cuda.synchronize(device)
         prefetch_seconds = perf_counter() - prefetch_started
         after_prefetch = cache.snapshot()
+        if staged_source is not None:
+            staged_source.finish()
+    elif config.prefetch_phase == "lazy_background_decode":
+        if staged_source is None:
+            raise RuntimeError("lazy background phase requires a staged source")
+        cache.set_pinned_keys(selected_keys)
+        staged_source.start(
+            key for group in reversed(selected_groups) for key in group
+        )
+    elif config.prefetch_phase == "lazy_pin_decode":
+        cache.set_pinned_keys(selected_keys)
     before_decode = cache.snapshot()
 
     predicted_ids = [int(output.logits[0, -1].argmax())]
@@ -311,6 +349,9 @@ def run_b22_live(config: B22LiveConfig) -> dict[str, Any]:
         past_key_values = output.past_key_values
 
     final_stats = cache.snapshot()
+    if config.prefetch_phase == "lazy_background_decode" and staged_source is not None:
+        staged_source.cancel()
+        staged_source.finish()
     decode = summarize_decode_latencies(decode_latencies)
     time_to_first_token = prefill_seconds + (
         prefetch_seconds if config.prefetch_phase == "before_prefill" else 0.0
@@ -327,6 +368,11 @@ def run_b22_live(config: B22LiveConfig) -> dict[str, Any]:
         "peak_fraction_of_checkpoint": torch.cuda.max_memory_allocated(device) / spec.checkpoint_bytes,
         "prompt_prefetch_seconds": prefetch_seconds,
         "prompt_prefetch_cache": _stats_delta(before_prefetch, after_prefetch),
+        "background_stage": (
+            asdict(staged_source.stats.snapshot())
+            if staged_source is not None
+            else None
+        ),
         "prefill_forward_seconds": prefill_seconds,
         "prefill_demand_cache": _stats_delta(before_prefill, after_prefill),
         "decode": decode,
@@ -343,6 +389,8 @@ def run_b22_live(config: B22LiveConfig) -> dict[str, Any]:
         "final_cache_stats": asdict(final_stats),
     }
     cache.close()
+    if staged_source is not None:
+        staged_source.close()
     del model, cache
     gc.collect()
     torch.cuda.empty_cache()
@@ -371,7 +419,13 @@ def main() -> None:
     )
     parser.add_argument(
         "--prefetch-phase",
-        choices=("before_prefill", "after_prefill"),
+        choices=(
+            "before_prefill",
+            "after_prefill",
+            "background_host",
+            "lazy_background_decode",
+            "lazy_pin_decode",
+        ),
         default="before_prefill",
     )
     print(json.dumps(run_b22_live(B22LiveConfig(**vars(parser.parse_args()))), indent=2))
