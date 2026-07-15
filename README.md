@@ -109,6 +109,14 @@ See:
   selection across equal logical budgets.
 - [A4 results](docs/a4-results.md) for the compositional task and sparse signed
   page-relationship graph.
+- [A5 results](docs/a5-results.md) for measured 4090 memory, transfer, cache, and
+  exact-output physical paging behavior.
+- [A6 results](docs/a6-results.md) for learned base-query selection driving the
+  physical cache and asynchronous transfer/compute overlap.
+- [B1 checkpoint selection](docs/b1-checkpoint-selection.md) for the move to
+  Qwen3.6-35B-A3B and its 6 MiB file-backed expert-page layout.
+- [B1 results](docs/b1-results.md) for the first full out-of-core pretrained
+  inference, 90.3% CUDA residency reduction, warm replay, and decode-time churn.
 
 ## Current prototype
 
@@ -127,6 +135,11 @@ uv run bobsphog-smoke
 uv run bobsphog-a2
 uv run bobsphog-a3
 uv run bobsphog-a4
+uv run bobsphog-a5
+uv run bobsphog-a6
+# On the CUDA host, after the Qwen3.6 checkpoint is present:
+uv sync --extra pretrained
+uv run bobsphog-b1 --checkpoint /path/to/Qwen3.6-35B-A3B
 ```
 
 The smoke command reports output divergence from the full model as logical
@@ -134,10 +147,11 @@ resident parameter bytes increase. All page tensors are still physically
 allocated in one PyTorch model; real CPU/GPU demand paging comes after the
 logical mechanics and training objectives are validated.
 
-The Mac is sufficient for decomposition tests, controller plumbing, and small
-debug training runs. Move to the 4090 when A2 multi-budget training needs broad
-hyperparameter sweeps, when CUDA transfer/cache measurements begin, or when the
-project advances to a pretrained 1–3B checkpoint.
+The Mac remains useful for controller plumbing and CPU tests. CUDA cache work
+now runs remotely on the 4090. The pretrained target is Qwen3.6-35B-A3B: a 35B
+total/3B active MoE whose routed expert tensors remain memory-mapped on NVMe.
+Qwen3.5-2B may be used as a cheap compatibility fixture, but it is not the main
+deployment claim.
 
 The A2 command trains a dense teacher on addition and multiplication modulo ten,
 converts it exactly into the paged representation, trains the student with
@@ -158,6 +172,17 @@ The A4 command moves to order-sensitive compositional arithmetic, builds a
 sparse signed pair-interaction graph from calibration examples, and compares
 independent page scores against graph-expanded bundles for both calibrated and
 learned selectors.
+
+The A5 command requires CUDA. It physically offloads optional factors to pinned
+CPU memory, prefetches a bounded prompt working set into an LRU GPU cache, checks
+exact output parity, and reports measured CUDA allocation, transfer bytes,
+latency, hits, misses, evictions, and working-set churn.
+
+The A6 command requires CUDA. It trains the toy counterfactual retriever, chooses
+each prompt's complete page bundle from one base-only hidden state, and executes
+those learned plans through asynchronous physical paging. It reports selector
+quality, plan overlap, cache reuse/churn, and exact parity with resident
+execution. A5 remains the scaled latency and memory benchmark.
 
 ## Scope boundaries
 

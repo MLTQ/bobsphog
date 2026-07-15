@@ -4,6 +4,7 @@ from bobsphog.catalog import PageCatalog
 from bobsphog.model import ToyConfig, ToyTransformer
 from bobsphog.retriever import (
     CounterfactualUtilityEstimator,
+    learned_base_query_selection,
     learned_greedy_selection,
     train_utility_estimator,
 )
@@ -56,8 +57,17 @@ def test_counterfactual_collection_training_and_selection_run() -> None:
         domain="addition",
     )
     selected = learned_greedy_selection(model, batch, catalog, estimator, budget=2)
+    base_selected = learned_base_query_selection(
+        model,
+        batch,
+        catalog,
+        estimator,
+        budget=2,
+    )
 
     assert len(examples) == 16
     assert torch.isfinite(torch.tensor(summary.validation_rmse))
     assert len(selected) == 2
     assert len(set(selected)) == 2
+    assert len(base_selected) == 2
+    assert len(set(base_selected)) == 2

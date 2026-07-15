@@ -24,6 +24,7 @@ class ToyConfig:
     dropout: float = 0.0
     base_rank: int = 8
     page_rank: int = 8
+    factorized_page_count: int | None = None
 
     def validate(self) -> None:
         if self.d_model % self.n_heads != 0:
@@ -32,6 +33,8 @@ class ToyConfig:
             raise ValueError("context_length and n_layers must be positive")
         if self.base_rank < 0 or self.page_rank <= 0:
             raise ValueError("base_rank must be non-negative and page_rank positive")
+        if self.factorized_page_count is not None and self.factorized_page_count <= 0:
+            raise ValueError("factorized_page_count must be positive when provided")
 
 
 @dataclass(frozen=True)
@@ -76,16 +79,24 @@ class PagedMLP(nn.Module):
 
     def __init__(self, config: ToyConfig) -> None:
         super().__init__()
-        self.expansion = PagedLinear.from_linear(
-            nn.Linear(config.d_model, config.d_ff),
-            base_rank=config.base_rank,
-            page_rank=config.page_rank,
-        )
-        self.projection = PagedLinear.from_linear(
-            nn.Linear(config.d_ff, config.d_model),
-            base_rank=config.base_rank,
-            page_rank=config.page_rank,
-        )
+
+        def make_linear(in_features: int, out_features: int) -> PagedLinear:
+            if config.factorized_page_count is None:
+                return PagedLinear.from_linear(
+                    nn.Linear(in_features, out_features),
+                    base_rank=config.base_rank,
+                    page_rank=config.page_rank,
+                )
+            return PagedLinear.random_factorized(
+                in_features,
+                out_features,
+                base_rank=config.base_rank,
+                page_rank=config.page_rank,
+                page_count=config.factorized_page_count,
+            )
+
+        self.expansion = make_linear(config.d_model, config.d_ff)
+        self.projection = make_linear(config.d_ff, config.d_model)
         self.dropout = nn.Dropout(config.dropout)
 
     def forward(

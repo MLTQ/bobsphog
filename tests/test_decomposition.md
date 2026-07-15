@@ -16,6 +16,11 @@ Protects the mathematical contract of the SVD page decomposition.
 
 - **Does**: Ensures ambiguous duplicate page selections are rejected.
 
+### Direct-factor initialization test
+
+- **Does**: Verifies requested base rank, page rank/count, and output shape for
+  the scaled A5 construction path.
+
 ## Contracts
 
 | Dependent | Expects | Breaking changes |

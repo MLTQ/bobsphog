@@ -13,10 +13,21 @@ dependencies = [
   "torch>=2.7",
 ]
 
+[project.optional-dependencies]
+pretrained = [
+  "accelerate>=1.13",
+  "huggingface-hub>=1.9",
+  "safetensors>=0.7",
+  "transformers>=5.5",
+]
+
 [project.scripts]
 bobsphog-a2 = "bobsphog.a2:main"
 bobsphog-a3 = "bobsphog.a3:main"
 bobsphog-a4 = "bobsphog.a4:main"
+bobsphog-a5 = "bobsphog.a5:main"
+bobsphog-a6 = "bobsphog.a6:main"
+bobsphog-b1 = "bobsphog.b1:main"
 bobsphog-smoke = "bobsphog.smoke:main"
 
 [dependency-groups]

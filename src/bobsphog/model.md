@@ -11,6 +11,8 @@ base-only, static-budget, or dropout page plans while keeping attention resident
 
 - **Does**: Defines model size and low-rank page granularity.
 - **Interacts with**: All model constructors.
+- **Rationale**: `factorized_page_count` bypasses dense SVD construction for
+  scaled systems benchmarks while preserving the same execution contracts.
 
 ### `CausalSelfAttention`
 
@@ -55,7 +57,7 @@ base-only, static-budget, or dropout page plans while keeping attention resident
 ## Notes
 
 - This is logical paging: all parameters are still allocated in the PyTorch
-  module. Real memory movement is a later milestone.
+  module unless a physical page provider is attached.
 - The token embedding and language head share weights.
 - Progressive SVD reconstruction is guaranteed at the matrix level, not strict
   monotonic output quality through nonlinear transformer layers.

@@ -3,14 +3,14 @@
 ## Purpose
 
 Provides a small end-to-end check for A3 counterfactual collection, estimator
-training, and label-free greedy selection.
+training, adaptive greedy selection, and deployable base-query selection.
 
 ## Components
 
 ### Retriever integration test
 
-- **Does**: Collects direct utilities, trains two optimizer steps, and selects
-  two unique pages.
+- **Does**: Collects direct utilities, trains two optimizer steps, and verifies
+  that both selectors return two unique pages.
 - **Interacts with**: Catalog, utility data, estimator, and toy model.
 
 ## Contracts

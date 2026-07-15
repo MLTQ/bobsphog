@@ -3,12 +3,20 @@
 from __future__ import annotations
 
 from collections.abc import Iterable
+from math import sqrt
+from typing import Protocol
 
 import torch
 from torch import Tensor, nn
 from torch.nn import functional as F
 
 from bobsphog.paging import PageEvent, PagingTrace
+
+
+class PageProvider(Protocol):
+    """Apply an exact page supplied by an external residency runtime."""
+
+    def apply(self, layer_id: str, page_id: int, inputs: Tensor) -> Tensor: ...
 
 
 class LowRankPage(nn.Module):
@@ -51,6 +59,7 @@ class PagedLinear(nn.Module):
         self.base = base
         self.pages = nn.ModuleList(pages)
         self.bias = nn.Parameter(bias.detach().clone()) if bias is not None else None
+        self._page_provider: PageProvider | None = None
 
     @classmethod
     @torch.no_grad()
@@ -85,6 +94,33 @@ class PagedLinear(nn.Module):
         ]
         return cls(base, pages, linear.bias)
 
+    @classmethod
+    def random_factorized(
+        cls,
+        in_features: int,
+        out_features: int,
+        *,
+        base_rank: int,
+        page_rank: int,
+        page_count: int,
+        bias: bool = True,
+    ) -> PagedLinear:
+        """Initialize factors directly without constructing or decomposing a dense matrix."""
+
+        if min(in_features, out_features, base_rank, page_rank, page_count) <= 0:
+            raise ValueError("feature sizes, ranks, and page_count must be positive")
+        component_count = page_count + 1
+
+        def make_page(rank: int) -> LowRankPage:
+            right = torch.randn(rank, in_features) / sqrt(in_features)
+            left = torch.randn(out_features, rank) / sqrt(rank * component_count)
+            return LowRankPage(left, right)
+
+        resident = make_page(base_rank)
+        pages = [make_page(page_rank) for _ in range(page_count)]
+        bias_tensor = torch.zeros(out_features) if bias else None
+        return cls(resident, pages, bias_tensor)
+
     @property
     def in_features(self) -> int:
         return self.base.right.shape[1]
@@ -116,6 +152,11 @@ class PagedLinear(nn.Module):
             raise IndexError("active page ID is out of range")
         return page_ids
 
+    def set_page_provider(self, provider: PageProvider | None) -> None:
+        """Bind an inference-time provider without registering it as a child module."""
+
+        self._page_provider = provider
+
     def forward(
         self,
         inputs: Tensor,
@@ -127,7 +168,13 @@ class PagedLinear(nn.Module):
         page_ids = self.normalize_page_ids(active_pages)
         output = self.base(inputs)
         for page_id in page_ids:
-            output = output + self.pages[page_id](inputs)
+            if self._page_provider is None:
+                contribution = self.pages[page_id](inputs)
+            else:
+                if not layer_id:
+                    raise ValueError("layer_id is required when a page provider is bound")
+                contribution = self._page_provider.apply(layer_id, page_id, inputs)
+            output = output + contribution
         if self.bias is not None:
             output = output + self.bias
 

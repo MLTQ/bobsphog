@@ -151,3 +151,35 @@ def learned_greedy_selection(
     model.train(model_was_training)
     estimator.train(estimator_was_training)
     return tuple(selected)
+
+
+@torch.no_grad()
+def learned_base_query_selection(
+    model: ToyTransformer,
+    batch: SyntheticBatch,
+    catalog: PageCatalog,
+    estimator: CounterfactualUtilityEstimator,
+    budget: int,
+) -> tuple[int, ...]:
+    """Choose a complete prompt working set from one base-only query state."""
+
+    if not 0 <= budget <= len(catalog):
+        raise ValueError("budget must be between zero and page count")
+    model_was_training = model.training
+    estimator_was_training = estimator.training
+    model.eval()
+    estimator.eval()
+    device = batch.input_ids.device
+    base_plan = catalog.plan(())
+    query = model.hidden_states(batch.input_ids, plan=base_plan)[:, 1, :].mean(dim=0, keepdim=True)
+    selected: list[int] = []
+    for _ in range(budget):
+        candidates = [index for index in range(len(catalog)) if index not in selected]
+        candidate_tensor = torch.tensor(candidates, dtype=torch.long, device=device)
+        queries = query.expand(len(candidates), -1)
+        resident_mask = catalog.resident_mask(selected, device=device).expand(len(candidates), -1)
+        scores = estimator(queries, candidate_tensor, resident_mask)
+        selected.append(candidates[scores.argmax().item()])
+    model.train(model_was_training)
+    estimator.train(estimator_was_training)
+    return tuple(selected)

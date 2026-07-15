@@ -28,6 +28,19 @@ plus independently loadable low-rank residuals derived from a dense matrix.
   $U\sqrt{S}$ and $\sqrt{S}V^\top$.
 - **Interacts with**: `ToyTransformer` construction in `model.py`.
 
+### `PagedLinear.random_factorized`
+
+- **Does**: Creates resident and optional factors directly without an expensive
+  dense matrix or SVD.
+- **Interacts with**: The scaled A5 physical-paging benchmark.
+
+### `PageProvider` / `PagedLinear.set_page_provider`
+
+- **Does**: Lets an external inference runtime supply exact page computation.
+- **Interacts with**: `PhysicalPageCache` in `physical_cache.py`.
+- **Rationale**: Source page parameters can remain on CPU while cached copies
+  execute on the accelerator.
+
 ## Contracts
 
 | Dependent | Expects | Breaking changes |
@@ -36,10 +49,11 @@ plus independently loadable low-rank residuals derived from a dense matrix.
 | `model.py` | Empty page IDs execute only the resident base | Changing empty-selection semantics |
 | `paging.py` traces | Byte counts reflect stored factor tensors | Quantization or storage-layout changes |
 | Tests | Full page set reconstructs the source matrix to numerical tolerance | Decomposition algorithm changes |
+| Physical pager | Provider receives stable `layer_id`, local page ID, and accelerator inputs | Provider signature changes |
 
 ## Notes
 
 - Bias is resident and counted with the base.
 - Page ordering follows descending singular values.
-- Physical device paging is not implemented yet; page selection currently
-  simulates residency while all parameters remain allocated by PyTorch.
+- Without a provider, selection remains ordinary in-module execution. A bound
+  provider is inference-only and owns physical residency.

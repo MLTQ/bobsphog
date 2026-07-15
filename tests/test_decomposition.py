@@ -40,3 +40,18 @@ def test_invalid_page_ids_are_rejected() -> None:
         pass
     else:
         raise AssertionError("duplicate page IDs should fail")
+
+
+def test_direct_factorized_initialization_has_requested_layout() -> None:
+    paged = PagedLinear.random_factorized(
+        7,
+        11,
+        base_rank=3,
+        page_rank=2,
+        page_count=4,
+    )
+    inputs = torch.randn(5, 7)
+
+    assert paged.base.rank == 3
+    assert tuple(page.rank for page in paged.pages) == (2, 2, 2, 2)
+    assert paged(inputs).shape == (5, 11)

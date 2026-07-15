@@ -25,12 +25,13 @@ Limitations:
 - simulated paging does not establish a real hardware advantage; and
 - success does not prove useful pretrained knowledge can be decomposed.
 
-### Stage B: pretrained 1–3B checkpoint
+### Stage B: pretrained checkpoint
 
 After the mechanism passes the Stage A gates, adapt a permissively licensed,
-well-supported 1–3B decoder checkpoint. Prefer a model with ordinary transformer
-blocks, accessible weights and tokenizer, strong evaluation support, and no
-architectural feature that confounds the first paging experiment.
+well-supported checkpoint with accessible weights and tokenizer. A dense 1–3B
+model is the cheap compatibility path. The primary target is now
+Qwen3.6-35B-A3B because its 35B-total/3B-active expert layout creates a genuine
+out-of-core deployment problem on the 4090.
 
 Keep attention resident initially. Decompose FFN matrices into a base
 approximation plus residual low-rank pages, train the pages and controller to
@@ -49,9 +50,9 @@ Costs:
 - framework and kernel overhead can obscure the mechanism; and
 - decomposition damage must be separated from retrieval failure.
 
-**Recommendation:** do not begin by training a 1–3B model from scratch. Do not
-stop after the toy result either. The toy model proves mechanics; the pretrained
-model establishes relevance.
+**Recommendation:** do not train a small model from scratch. The toy model
+proves mechanics; a small dense checkpoint can debug framework integration; and
+the out-of-core Qwen3.6 MoE establishes deployment relevance.
 
 ## 1. Research questions
 
@@ -138,6 +139,13 @@ transfers, contiguous superpages, prefetch, and eviction. Compare:
 
 Report time to first token and end-to-end latency, not only kernel time.
 
+### A6. Learned physical integration
+
+Select the complete prompt bundle from one base-only hidden state, schedule it
+through the physical cache, and verify exact parity with resident execution.
+Measure overlap-aware cold latency and cache reuse when the prompt domain
+changes. This is the final toy integration gate before Stage B.
+
 ## 3. Stage A data design
 
 Use at least two visibly different domains plus shared language. For example,
@@ -174,7 +182,7 @@ gate 1 passes but gate 2 fails, focus on the index and counterfactual labels. If
 quality gates pass but gate 5 fails, the idea may still be useful for model
 extraction but not demand paging.
 
-## 5. Stage B: pretrained 1–3B validation
+## 5. Stage B: pretrained validation
 
 ### B1. Select and freeze a teacher
 
