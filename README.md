@@ -120,6 +120,8 @@ See:
 - [B1.5 capability results](docs/b1-capability-results.md) for the same-device
   full-model control, 89.9% peak-memory reduction, six capability probes, and
   exact paged autoregressive output parity.
+- [GLM-5.2 B1.5 feasibility results](docs/glm-b15-results.md) for the 1.506 TB
+  checkpoint running on a 128 GiB Strix Halo with a 38.50 GB measured peak.
 - [B1.6 throughput results](docs/b1-throughput-results.md) for TTFT, steady
   decode rate, same-device slowdown, 4090 file-backed performance, and B2
   optimization gates.
@@ -129,6 +131,9 @@ See:
 - [B2.1 oracle paging results](docs/b21-results.md) for live future-aware
   retention, compute-ready decode speed, token-prefetch limits, and the
   zero-fault prompt-union control.
+- [B2.2 predictor results](docs/b22-results.md) for the 64-prompt route corpus,
+  held-out prompt-bundle prediction, pinned-LRU cache simulation, cross-backend
+  parity, and live 4090 validation.
 
 ## Current prototype
 
@@ -172,6 +177,10 @@ uv run bobsphog-b21 \
   --trace outputs/b2-4090-warm-ascending.json \
   --cache-pages 2560 \
   --policies oracle_prompt_union
+# On a 128 GiB Strix Halo with the complete GLM-5.2 checkpoint:
+uv run bobsphog-glm-b15 \
+  --checkpoint /path/to/GLM-5.2 \
+  --cache-pages 16
 ```
 
 The smoke command reports output divergence from the full model as logical

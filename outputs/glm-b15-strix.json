@@ -1,0 +1,80 @@
+{
+  "config": {
+    "checkpoint": "/srv/models/GLM-5.2",
+    "device": "cuda:0",
+    "cache_pages": 16,
+    "seed_text": "Hello",
+    "top_k": 5
+  },
+  "gpu": "Radeon 8060S Graphics",
+  "checkpoint": {
+    "layers": 78,
+    "sparse_layers": 75,
+    "experts_per_layer": 256,
+    "experts_per_token": 8,
+    "expert_bytes_bfloat16": 75497472,
+    "estimated_causal_scaffold_upper_bound_bytes": 37781104640,
+    "checkpoint_bytes": 1506659919872
+  },
+  "load": {
+    "loaded_tensors": 1194,
+    "loaded_bytes": 37202615808,
+    "ignored_tensors": 58391,
+    "touched_shards": 85,
+    "load_seconds": 28.251481749999584,
+    "total_model_construction_seconds": 29.012342186999376
+  },
+  "input_token_id": 9703,
+  "forward_seconds": 42.49132896899937,
+  "peak_allocated_bytes": 38501770240,
+  "peak_fraction_of_checkpoint": 0.02555438671473451,
+  "expert_cache_capacity_bytes": 1207959552,
+  "forward_cache": {
+    "requests": 600,
+    "hits": 0,
+    "misses": 600,
+    "evictions": 584,
+    "bytes_transferred": 45298483200,
+    "source_load_seconds": 39.03174405999016,
+    "schedule_seconds": 39.152462130997264,
+    "host_wait_seconds": 0.00215548499909346
+  },
+  "final_cache_stats": {
+    "requests": 600,
+    "hits": 0,
+    "misses": 600,
+    "evictions": 584,
+    "bytes_transferred": 45298483200,
+    "source_load_seconds": 39.03174405999016,
+    "schedule_seconds": 39.152462130997264,
+    "host_wait_seconds": 0.00215548499909346
+  },
+  "next_token_candidates": [
+    {
+      "token_id": 154820,
+      "text": "<|endoftext|>",
+      "logit": 6.28125
+    },
+    {
+      "token_id": 565,
+      "text": "##",
+      "logit": 4.1875
+    },
+    {
+      "token_id": 59,
+      "text": "\\",
+      "logit": 2.78125
+    },
+    {
+      "token_id": 4102,
+      "text": "\u00a0",
+      "logit": 1.390625
+    },
+    {
+      "token_id": 319,
+      "text": "\r\n",
+      "logit": 1.203125
+    }
+  ],
+  "validation_scope": "Paged feasibility only: a full-resident 1.5 TB reference cannot fit on the 128 GiB Strix Halo host."
+}

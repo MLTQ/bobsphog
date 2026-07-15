@@ -197,6 +197,11 @@ head, KV cache, runtime workspace, and the smallest acceptable FFN base. This
 determines whether paging residual capacity can matter at all on the target
 device.
 
+Completed B2.1 and B2.2 results are recorded in
+[the oracle paging report](b21-results.md) and
+[the held-out predictor report](b22-results.md). The current gate is B2.3:
+confidence-conditioned bundle size plus prefill-overlapped physical transfer.
+
 ### B3. Decompose and reconstruct
 
 Compare:
