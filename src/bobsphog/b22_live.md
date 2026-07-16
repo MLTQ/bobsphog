@@ -52,6 +52,11 @@ bundle is still predicted only from the ROCm training corpus, while route,
 token, fault, and quality parity are judged against the CUDA-native control.
 Both backend-specific offline scores are retained in the result.
 
+`--expert-store STORE` replaces checkpoint slice reads with the B2.4 contiguous
+page source. Selection, execution traces, protection policy, and physical cache
+remain unchanged. This flag must be identical on matched ordinary-LRU and lazy
+protect-on-touch runs so the experiment isolates policy rather than storage.
+
 ## Contracts
 
 | Dependent | Expects | Breaking changes |
@@ -62,6 +67,7 @@ Both backend-specific offline scores are retained in the result.
 | Physical cache | Bundle plus largest unpinned atomic layer group fits | Oversized bundle |
 | Background source | One host-staging epoch is joined before teardown | Reusing the source across prompts |
 | Parity gate | Forced token path reproduces exact top-1 and expert routes | Approximate expert kernels |
+| B2.4 source | Store geometry matches the selected checkpoint | Reusing a store for another checkpoint shape |
 
 Route failures report the first divergent layer, missing and extra keys, and
 whether the difference is ordering-only. This keeps cross-backend drift

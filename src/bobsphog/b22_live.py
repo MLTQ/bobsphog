@@ -33,6 +33,7 @@ class B22LiveConfig:
     checkpoint: str
     corpus: str
     prompt_id: str
+    expert_store: str | None = None
     device: str = "cuda:0"
     method: str = "nearest_neighbor"
     bundle_pages: int = 2048
@@ -247,7 +248,16 @@ def run_b22_live(config: B22LiveConfig) -> dict[str, Any]:
         checkpoint_root / "model.safetensors.index.json",
     )
     index = SafetensorCheckpointIndex(checkpoint_root / "model.safetensors.index.json")
-    base_source = MappedExpertSource(index, spec)
+    if config.expert_store is None:
+        base_source = MappedExpertSource(index, spec)
+    else:
+        from bobsphog.page_store import ContiguousExpertSource
+
+        base_source = ContiguousExpertSource(
+            config.expert_store,
+            expected_spec=spec,
+            expected_checkpoint=checkpoint_root,
+        )
     staged_source = (
         AsyncStagedExpertSource(base_source)
         if config.prefetch_phase in {"background_host", "lazy_background_decode"}
@@ -403,6 +413,10 @@ def main() -> None:
     parser.add_argument("--checkpoint", required=True)
     parser.add_argument("--corpus", required=True)
     parser.add_argument("--prompt-id", required=True)
+    parser.add_argument(
+        "--expert-store",
+        help="optional fixed-offset expert page-store directory",
+    )
     parser.add_argument("--device", default="cuda:0")
     parser.add_argument(
         "--method",

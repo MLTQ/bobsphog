@@ -140,6 +140,9 @@ See:
 - [B2.3 adaptive-retention results](docs/b23-results.md) for calibrated
   confidence, warm-prefill cache replay, lazy query-conditioned retention,
   background-staging controls, and the next storage-system gate.
+- [B2.4 contiguous-page results](docs/b24-results.md) for the exact 60 GiB
+  fixed-offset store, controlled cold/hot ABBA trials, source speedup, and the
+  finding that fewer random cold faults still do not guarantee throughput.
 
 ## Current prototype
 
@@ -183,6 +186,14 @@ uv run bobsphog-b21 \
   --trace outputs/b2-4090-warm-ascending.json \
   --cache-pages 2560 \
   --policies oracle_prompt_union
+# Build once, then use the same exact source for LRU and lazy-retention trials:
+uv run bobsphog-page-store build \
+  --checkpoint /path/to/Qwen3.6-35B-A3B \
+  --store /path/to/qwen-expert-pages
+uv run bobsphog-b2 \
+  --checkpoint /path/to/Qwen3.6-35B-A3B \
+  --expert-store /path/to/qwen-expert-pages \
+  --cache-pages 2560
 # On a 128 GiB Strix Halo with the complete GLM-5.2 checkpoint:
 uv run bobsphog-glm-b15 \
   --checkpoint /path/to/GLM-5.2 \

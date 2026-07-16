@@ -1,0 +1,279 @@
+{
+  "protocol": "POSIX_FADV_DONTNEED before each run; ABBA per domain; 32 output tokens; 2560 page cache; lazy bundle 2520",
+  "rows": [
+    {
+      "domain": "language",
+      "policy": "lru",
+      "replicate": 1,
+      "e2e": 44.06386002781801,
+      "ttft": 32.09267140598968,
+      "decode_seconds": 11.971188621828333,
+      "decode_tps": 2.589550710401006,
+      "source_seconds": 36.08964839880355,
+      "schedule_seconds": 37.71090521465521,
+      "decode_misses": 1797,
+      "peak": 21066826240,
+      "token_parity": null,
+      "route_parity": null
+    },
+    {
+      "domain": "language",
+      "policy": "lru",
+      "replicate": 2,
+      "e2e": 38.35071524884552,
+      "ttft": 27.335098766023293,
+      "decode_seconds": 11.015616482822224,
+      "decode_tps": 2.814186573065744,
+      "source_seconds": 31.283664409187622,
+      "schedule_seconds": 32.64989258046262,
+      "decode_misses": 1797,
+      "peak": 21066826240,
+      "token_parity": null,
+      "route_parity": null
+    },
+    {
+      "domain": "language",
+      "policy": "lazy",
+      "replicate": 1,
+      "e2e": 39.95434114406817,
+      "ttft": 29.06379871198442,
+      "decode_seconds": 10.890542432083748,
+      "decode_tps": 2.8465065163947574,
+      "source_seconds": 32.68474312138278,
+      "schedule_seconds": 34.26902384951245,
+      "decode_misses": 1528,
+      "peak": 21066826240,
+      "token_parity": 1.0,
+      "route_parity": 1.0
+    },
+    {
+      "domain": "language",
+      "policy": "lazy",
+      "replicate": 2,
+      "e2e": 40.41422589693684,
+      "ttft": 29.05901135399472,
+      "decode_seconds": 11.355214542942122,
+      "decode_tps": 2.730023275453494,
+      "source_seconds": 32.465963238850236,
+      "schedule_seconds": 34.11897877580486,
+      "decode_misses": 1528,
+      "peak": 21066826240,
+      "token_parity": 1.0,
+      "route_parity": 1.0
+    },
+    {
+      "domain": "science",
+      "policy": "lru",
+      "replicate": 1,
+      "e2e": 43.51820671395399,
+      "ttft": 30.26395503699314,
+      "decode_seconds": 13.254251676960848,
+      "decode_tps": 2.3388721412228524,
+      "source_seconds": 35.79251466749702,
+      "schedule_seconds": 37.32053651846945,
+      "decode_misses": 2223,
+      "peak": 21066897920,
+      "token_parity": null,
+      "route_parity": null
+    },
+    {
+      "domain": "science",
+      "policy": "lru",
+      "replicate": 2,
+      "e2e": 41.369037429918535,
+      "ttft": 28.68140424694866,
+      "decode_seconds": 12.687633182969876,
+      "decode_tps": 2.4433241056819104,
+      "source_seconds": 33.706393963540904,
+      "schedule_seconds": 35.28579149954021,
+      "decode_misses": 2223,
+      "peak": 21066897920,
+      "token_parity": null,
+      "route_parity": null
+    },
+    {
+      "domain": "science",
+      "policy": "lazy",
+      "replicate": 1,
+      "e2e": 43.91703596001025,
+      "ttft": 30.021956712938845,
+      "decode_seconds": 13.895079247071408,
+      "decode_tps": 2.2310056278760486,
+      "source_seconds": 35.379175158566795,
+      "schedule_seconds": 37.356549382559024,
+      "decode_misses": 2058,
+      "peak": 21066897920,
+      "token_parity": 1.0,
+      "route_parity": 1.0
+    },
+    {
+      "domain": "science",
+      "policy": "lazy",
+      "replicate": 2,
+      "e2e": 41.20129117905162,
+      "ttft": 28.544960019993596,
+      "decode_seconds": 12.656331159058027,
+      "decode_tps": 2.449367009317986,
+      "source_seconds": 33.319957253406756,
+      "schedule_seconds": 35.18021612102166,
+      "decode_misses": 2058,
+      "peak": 21066897920,
+      "token_parity": 1.0,
+      "route_parity": 1.0
+    },
+    {
+      "domain": "history",
+      "policy": "lru",
+      "replicate": 1,
+      "e2e": 40.41330224974081,
+      "ttft": 27.427078823908232,
+      "decode_seconds": 12.986223425832577,
+      "decode_tps": 2.3871451293787147,
+      "source_seconds": 32.96571853396017,
+      "schedule_seconds": 34.41926938621327,
+      "decode_misses": 1887,
+      "peak": 21066393088,
+      "token_parity": null,
+      "route_parity": null
+    },
+    {
+      "domain": "history",
+      "policy": "lru",
+      "replicate": 2,
+      "e2e": 38.729816583450884,
+      "ttft": 26.05586915195454,
+      "decode_seconds": 12.673947431496345,
+      "decode_tps": 2.4459624886056512,
+      "source_seconds": 31.356966909137554,
+      "schedule_seconds": 32.78246933990158,
+      "decode_misses": 1887,
+      "peak": 21066393088,
+      "token_parity": null,
+      "route_parity": null
+    },
+    {
+      "domain": "history",
+      "policy": "lazy",
+      "replicate": 1,
+      "e2e": 41.19809720548801,
+      "ttft": 27.77459964703303,
+      "decode_seconds": 13.423497558454983,
+      "decode_tps": 2.3093832188671426,
+      "source_seconds": 33.19386749737896,
+      "schedule_seconds": 34.919853458879516,
+      "decode_misses": 1667,
+      "peak": 21066393088,
+      "token_parity": 1.0,
+      "route_parity": 1.0
+    },
+    {
+      "domain": "history",
+      "policy": "lazy",
+      "replicate": 2,
+      "e2e": 40.635968572227284,
+      "ttft": 27.614651525975205,
+      "decode_seconds": 13.02131704625208,
+      "decode_tps": 2.380711558584062,
+      "source_seconds": 33.151231997297145,
+      "schedule_seconds": 34.808333398075774,
+      "decode_misses": 1667,
+      "peak": 21066393088,
+      "token_parity": 1.0,
+      "route_parity": 1.0
+    }
+  ],
+  "domains": {
+    "language": {
+      "lru": {
+        "e2e": 41.20728763833176,
+        "ttft": 29.713885086006485,
+        "decode_seconds": 11.493402552325279,
+        "decode_tps": 2.701868641733375,
+        "source_seconds": 33.686656403995585,
+        "schedule_seconds": 35.180398897558916,
+        "decode_misses": 1797,
+        "peak": 21066826240
+      },
+      "lazy": {
+        "e2e": 40.184283520502504,
+        "ttft": 29.06140503298957,
+        "decode_seconds": 11.122878487512935,
+        "decode_tps": 2.788264895924126,
+        "source_seconds": 32.57535318011651,
+        "schedule_seconds": 34.194001312658656,
+        "decode_misses": 1528,
+        "peak": 21066826240
+      }
+    },
+    "science": {
+      "lru": {
+        "e2e": 42.44362207193626,
+        "ttft": 29.4726796419709,
+        "decode_seconds": 12.970942429965362,
+        "decode_tps": 2.391098123452381,
+        "source_seconds": 34.74945431551896,
+        "schedule_seconds": 36.30316400900483,
+        "decode_misses": 2223,
+        "peak": 21066897920
+      },
+      "lazy": {
+        "e2e": 42.55916356953094,
+        "ttft": 29.28345836646622,
+        "decode_seconds": 13.275705203064717,
+        "decode_tps": 2.3401863185970173,
+        "source_seconds": 34.349566205986775,
+        "schedule_seconds": 36.26838275179034,
+        "decode_misses": 2058,
+        "peak": 21066897920
+      }
+    },
+    "history": {
+      "lru": {
+        "e2e": 39.571559416595846,
+        "ttft": 26.741473987931386,
+        "decode_seconds": 12.83008542866446,
+        "decode_tps": 2.416553808992183,
+        "source_seconds": 32.16134272154886,
+        "schedule_seconds": 33.60086936305743,
+        "decode_misses": 1887,
+        "peak": 21066393088
+      },
+      "lazy": {
+        "e2e": 40.91703288885765,
+        "ttft": 27.694625586504117,
+        "decode_seconds": 13.222407302353531,
+        "decode_tps": 2.345047388725602,
+        "source_seconds": 33.17254974733805,
+        "schedule_seconds": 34.864093428477645,
+        "decode_misses": 1667,
+        "peak": 21066393088
+      }
+    }
+  },
+  "aggregate": {
+    "lru": {
+      "total_e2e_seconds": 246.44493825372774,
+      "aggregate_e2e_output_tps": 0.7790786914127087,
+      "aggregate_decode_tps": 2.493669938787471,
+      "mean_source_seconds": 33.53248448035447,
+      "mean_decode_misses": 1969,
+      "peak_bytes": 21066897920
+    },
+    "lazy": {
+      "total_e2e_seconds": 247.32095995778218,
+      "aggregate_e2e_output_tps": 0.7763191604657143,
+      "aggregate_decode_tps": 2.4720241956803926,
+      "mean_source_seconds": 33.36582304448044,
+      "mean_decode_misses": 1751,
+      "peak_bytes": 21066897920
+    }
+  },
+  "comparison": {
+    "e2e_time_reduction_fraction": -0.003554634598145201,
+    "aggregate_decode_tps_increase_fraction": -0.008680275913982238,
+    "source_time_reduction_fraction": 0.004970148751479053,
+    "decode_miss_reduction_fraction": 0.11071609954291517,
+    "all_lazy_token_parity": true,
+    "all_lazy_route_parity": true
+  }
+}

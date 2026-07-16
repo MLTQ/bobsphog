@@ -204,8 +204,13 @@ confidence-conditioned bundle size plus overlapped physical transfer.
 
 B2.3 is complete in [the adaptive-retention report](b23-results.md). Lazy
 protect-on-touch retention passes the fault and exactness gates, while
-same-source background staging fails the latency gate. B2.4 should replace
-random safetensor slicing with a controlled contiguous page source.
+same-source background staging fails the latency gate.
+
+B2.4 is complete in [the contiguous-page report](b24-results.md). The exact
+fixed-offset source materially improves ordinary paging and preserves the 11.1%
+lazy fault reduction, but controlled cold-source throughput remains neutral.
+B2.5 should therefore use cost-aware superpages and batched reads, optimizing
+exposed I/O time rather than logical page count.
 
 ### B3. Decompose and reconstruct
 

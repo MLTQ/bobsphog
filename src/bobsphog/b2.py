@@ -32,6 +32,7 @@ DEFAULT_CACHE_PAGES = (2048, 1280, 640, 320)
 @dataclass(frozen=True)
 class B2Config:
     checkpoint: str
+    expert_store: str | None = None
     device: str = "cuda:0"
     cache_pages: tuple[int, ...] = DEFAULT_CACHE_PAGES
     output_tokens: int = 16
@@ -177,6 +178,7 @@ def _load_traced_paged(
     *,
     device: torch.device,
     cache_pages: int,
+    expert_store: str | None = None,
 ) -> tuple[Any, Any, TracingCudaExpertCache, Any]:
     from bobsphog.moe_checkpoint import (
         MappedExpertSource,
@@ -192,7 +194,16 @@ def _load_traced_paged(
     index = SafetensorCheckpointIndex(
         checkpoint_root / "model.safetensors.index.json"
     )
-    source = MappedExpertSource(index, spec)
+    if expert_store is None:
+        source = MappedExpertSource(index, spec)
+    else:
+        from bobsphog.page_store import ContiguousExpertSource
+
+        source = ContiguousExpertSource(
+            expert_store,
+            expected_spec=spec,
+            expected_checkpoint=checkpoint_root,
+        )
     cache = TracingCudaExpertCache(
         source,
         device=device,
@@ -216,6 +227,7 @@ def _run_capacity(
     cache_pages: int,
     output_tokens: int,
     forced_token_ids: list[int] | None,
+    expert_store: str | None = None,
 ) -> tuple[
     dict[str, Any],
     list[tuple[ExpertKey, ...]],
@@ -228,6 +240,7 @@ def _run_capacity(
         checkpoint_root,
         device=device,
         cache_pages=cache_pages,
+        expert_store=expert_store,
     )
     total_load_seconds = perf_counter() - load_started
     if forced_token_ids is not None and len(forced_token_ids) != output_tokens:
@@ -392,6 +405,7 @@ def run_b2(config: B2Config) -> dict[str, Any]:
             cache_pages=capacity,
             output_tokens=config.output_tokens,
             forced_token_ids=forced_token_ids,
+            expert_store=config.expert_store,
         )
         if forced_token_ids is None:
             forced_token_ids = list(run["selected_token_ids"])
@@ -454,6 +468,10 @@ def run_b2(config: B2Config) -> dict[str, Any]:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--checkpoint", required=True)
+    parser.add_argument(
+        "--expert-store",
+        help="optional fixed-offset expert page-store directory",
+    )
     parser.add_argument("--device", default="cuda:0")
     parser.add_argument(
         "--cache-pages", type=int, nargs="+", default=list(DEFAULT_CACHE_PAGES)

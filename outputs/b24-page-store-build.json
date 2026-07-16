@@ -1,0 +1,9 @@
+{
+  "status": "built",
+  "store": "/home/m/.cache/bobsphog/qwen3.6-35b-a3b-pages",
+  "build_seconds": 193.4421339550754,
+  "total_pages": 10240,
+  "page_bytes": 6291456,
+  "data_bytes": 64424509440,
+  "checkpoint_bytes": 71903645408
+}
